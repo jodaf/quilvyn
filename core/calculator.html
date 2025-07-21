@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Calculator</title>
+<script src="Expr.js"></script>
+<script>
+let dict = {};
+function calculate() {
+  let e = window.document.getElementById("expression").value;
+  let r = new Expr(e).eval(dict);
+  window.document.getElementById("result").innerHTML = r == null ? "null" : r;
+}
+</script>
+</head>
+<body>
+<h1>Interactive Expr.js Calculator</h1>
+<form>
+  <input type="text" id="expression" onchange="calculate();"></input>
+  <table>
+    <tr><td id="result">&nbsp;</td></tr>
+  </table>
+</form>
+<script>
+window.document.getElementById("expression").focus();
+</script>
+</body>
+</html>
