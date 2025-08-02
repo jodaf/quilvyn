@@ -1433,10 +1433,13 @@ Pathfinder2E.FEATS = {
     'Traits=Champion,Fighter ' +
     'Require=' +
       '"level >= 6",' +
-      // TODO recheck prereq
-      // Shield Ally and Tenets Of Good for Champion, Shield Block for Fighter
-      '"features.Shield Ally && features.The Tenets Of Good || ' +
-       'features.Shield Block"',
+      // As per core rules:
+      // '"features.Shield Ally && features.The Tenets Of Good || ' +
+      //  'levels.Fighter && features.Shield Block"',
+      // However, QuilvyRules validation doesn't support the && operator. All
+      // fighters receive Shield Block at level 1, so that's redundant, and
+      // the core rules defines only The Tenets Of Good, so we drop that.
+      '"features.Shield Ally || levels.Fighter"',
   'Smite Evil':
     'Traits=Champion ' +
     'Require=' +
@@ -3106,7 +3109,7 @@ Pathfinder2E.FEATURES = {
     'Note="Has R30\' imprecise scent; can use it to gain +2 Perception to locate a creature"',
   'Umbral Gnome':'Section=feature Note="Has the Darkvision feature"',
   'Wellspring Gnome':'Section=feature Note="1 selection"',
-  // TODO change innate spells from primal to chosen wellspring
+  // TODO changes innate spell tradition from primal to chosen wellspring
   'Wellspring Gnome (Arcane)':
     'Section=magic ' +
     'Note="Can cast a chosen arcane cantrip as an innate spell at will"',
@@ -3392,6 +3395,7 @@ Pathfinder2E.FEATURES = {
   'Skill Increases':'Section=skill Note="Skill Increase (Choose %V from any)"',
 
   // Alchemist
+  // TODO recheck Alchemist feature texts
   'Advanced Alchemy':
     'Section=skill ' +
     'Note="Can use a batch of infused reagents to create 2 infused alchemical items of up to level %{level} without a Crafting check during daily prep"',
@@ -3436,10 +3440,10 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Created elixirs restore the maximum number of Hit Points"',
   'Greater Field Discovery (Mutagenist)':
-    'Section=combat Note="Can use 2 polymorphic mutagens simultaneously"',
+    'Section=skill Note="Can use 2 polymorphic mutagens simultaneously"',
   'Infused Reagents':
     'Section=skill ' +
-    'Note="Can create %{level+(levels.Alchemist?intelligenceModifier:0)} batches of infused reagents each day"',
+    'Note="Can create %{level+(levels.Alchemist?intelligenceModifier:0)} batches of infused reagents during daily prep"',
   'Iron Will':'Section=save Note="Save Expert (Will)"',
   'Juggernaut':
     'Section=save,save ' +
@@ -3471,16 +3475,12 @@ Pathfinder2E.FEATURES = {
     'Section=skill Note="Has increased Perpetual Infusions effects"',
   'Powerful Alchemy':
     'Section=combat ' +
-    'Note="Increases the DC for items created with Quick Alchemy to %{classDifficultyClass.Alchemist}"',
+    'Note="Increases the DC for infused alchemical items created with Quick Alchemy to %{classDifficultyClass.Alchemist}"',
   'Quick Alchemy':
     'Action=1 ' +
     'Section=skill ' +
-    'Note="Uses batches of infused reagents to create %V consumable alchemical %{skillNotes.quickAlchemy==1?\'item\':\'items\'} of up to level %{advancedAlchemyLevel} that last for 1 turn"',
-  'Research Field':
-    'Section=feature,skill ' +
-    'Note=' +
-      '"1 selection",' +
-      '"Can use 1 batch of infused reagents to create 3 signature items"',
+    'Note="Uses batches of infused reagents to create %V consumable alchemical %{skillNotes.quickAlchemy==1?\'item\':\'items\'} of up to level %{advancedAlchemyLevel} that %{skillNotes.quickAlchemy==1?\'lasts\':\'last\'} until the %{skillNotes.enduringAlchemy?\'end\':\'start\'} of the next turn"',
+  'Research Field':'Section=feature Note="1 selection"',
   'Weapon Specialization':
     'Section=combat ' +
     'Note="Inflicts +%V, +%{combatNotes.weaponSpecialization*1.5}, or +%{combatNotes.weaponSpecialization*2} HP damage when using a weapon with expert, master, or legendary proficiency"',
@@ -3502,16 +3502,14 @@ Pathfinder2E.FEATURES = {
   'Smoke Bomb':
     'Action=Free ' +
     'Section=combat ' +
-    'Note="Creates a bomb of up to level %{level-1} that also creates smoke in a 10\'-radius burst for 1 min once per rd"',
+    'Note="Modifies a bomb of up to level %{level-1} to also create smoke in a 10\'-radius burst for 1 min once per rd"',
   'Calculated Splash':
     'Section=combat ' +
     'Note="Can throw a bomb to inflict %{intelligenceModifier} HP splash damage"',
   'Efficient Alchemy':
     'Section=skill ' +
     'Note="Can produce twice the usual number of alchemical items during downtime"',
-  'Enduring Alchemy':
-    'Section=skill ' +
-    'Note="Quick Alchemy products last until the end of the next turn"',
+  'Enduring Alchemy':'Section=skill Note="Has increased Quick Alchemy effects"',
   'Combine Elixirs':
     'Action=Free ' +
     'Section=skill ' +
@@ -3519,7 +3517,7 @@ Pathfinder2E.FEATURES = {
   'Debilitating Bomb':
     'Action=Free ' +
     'Section=combat ' +
-    'Note="Creates a bomb of up to level %{advancedAlchemyLevel-2} that also inflicts dazzled, deafened, flat-footed, or -5 Speed for 1 rd (<b>save Fortitude</b> negates) once per rd"',
+    'Note="Modifies a bomb of up to level %{advancedAlchemyLevel-2} to also inflict %{combatNotes.trueDebilitatingBomb?\'clumsy 1, stupefied 2, enfeebled 2, \':combatNotes.greaterDebilitatingBomb?\'clumsy 1, enfeebled 1, stupefied 1, \':\'\'}dazzled, deafened, flat-footed, or -%{combatNotes.trueDebilitatingBomb?15:combatNotes.greaterDebilitatingBomb?10:5} Speed (<b>save Fortitude</b> negates) until the start of the next turn once per rd"',
   'Directional Bombs':
     'Section=combat ' +
     'Note="Can restrict bomb splash effects to a 15\' cone in the direction thrown"',
@@ -3531,7 +3529,7 @@ Pathfinder2E.FEATURES = {
   'Sticky Bomb':
     'Action=Free ' +
     'Section=combat ' +
-    'Note="Creates a bomb of up to level %{advancedAlchemyLevel-2} that inflicts persistent damage equal to its splash damage once per rd"',
+    'Note="Modifies a bomb of up to level %{advancedAlchemyLevel-2} to inflict persistent damage equal to the splash damage once per rd"',
   'Elastic Mutagen':
     'Section=skill ' +
     'Note="Consuming a quicksilver mutagen allows 10\' Steps and moving through tight spaces as a creature 1 size smaller"',
@@ -3539,8 +3537,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Can throw bombs to inflict +%{intelligenceModifier} HP splash damage in a 10\' radius"',
   'Greater Debilitating Bomb':
-    'Section=combat ' +
-    'Note="Can use Debilitating Bomb to create bombs that inflict clumsy 1, enfeebled 1, stupefied 1, or -10 Speed"',
+    'Section=combat Note="Has increased Debilitating Bomb effects"',
   'Merciful Elixir':
     'Action=Free ' +
     'Section=skill ' +
@@ -3567,21 +3564,20 @@ Pathfinder2E.FEATURES = {
     'Section=skill ' +
     'Note="Can use Merciful Elixir to attempt to counteract a blinded, deafened, sickened, or slowed condition"',
   'True Debilitating Bomb':
-    'Section=combat ' +
-    'Note="Can use Debilitating Bomb to create bombs that inflict enfeebled 2, stupefied 2, or -15 Speed or a lesser condition that requires a critical success to negate"',
+    'Section=combat Note="Has increased Debilitating Bomb effects"',
   'Eternal Elixir':
     'Section=skill ' +
-    'Note="Can indefinitely extend the duration of an elixir of up to level %{level//2} that lasts at least 1 min"',
+    'Note="Can indefinitely extend the duration of 1 elixir of up to level %{level//2} that lasts at least 1 min"',
   'Exploitive Bomb':
     'Action=Free ' +
     'Section=combat ' +
-    'Note="Creates a bomb of up to level %{advancedAlchemyLevel-2} that negates resistance %{level} once per rd"',
+    'Note="Modifies a bomb of up to level %{advancedAlchemyLevel-2} to negate resistance %{level} once per rd"',
   'Genius Mutagen':
     'Section=skill ' +
     'Note="Consuming a cognitive mutagen adds its bonus to Deception, Diplomacy, Intimidation, Medicine, Nature, Performance, Religion, and Survival checks and allows R60\' telepathic communication"',
   'Persistent Mutagen':
     'Section=skill ' +
-    'Note="Extends the duration of a mutagen until next daily prep once per day"',
+    'Note="Can extend the duration of a mutagen until next daily prep once per day"',
   'Improbable Elixirs':
     'Section=skill ' +
     'Note="Can create elixirs that replicate the effects of %{intelligenceModifier>?1} potion%{intelligenceModifier>1?\'s\':\'\'} of up to level 9"',
@@ -3600,7 +3596,7 @@ Pathfinder2E.FEATURES = {
   'Mega Bomb':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Thrown bomb of up to level %{advancedAlchemyLevel-3} affects all creatures in a 30\' radius (<b>save basic Reflex</b>)"',
+    'Note="Modifies a thrown bomb of up to level %{advancedAlchemyLevel-3} to affect all creatures in a 30\' radius within 60\' (<b>save basic Reflex</b>)"',
   'Perfect Mutagen':
     'Section=skill Note="Suffers no drawbacks from consuming mutagens"',
 
@@ -3651,7 +3647,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat,combat ' +
     'Note=' +
       '"Class Master (Barbarian)",' +
-      '"Successful melee Strikes ignore 10 points of physical damage resistance"',
+      '"Successful melee Strikes ignore resistance 10 to physical damage"',
   'Draconic Rage':
     'Section=combat ' +
     'Note="Can inflict +%{combatNotes.greaterWeaponSpecialization?16:combatNotes.specializationAbility?8:4} HP %V damage instead of +%{combatNotes.rage} HP weapon damage during rage"',
@@ -3686,7 +3682,7 @@ Pathfinder2E.FEATURES = {
   'Rage':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Gains %{level+constitutionModifier} temporary Hit Points and +%V HP melee damage, or +%{combatNotes.rage//2} HP with an agile weapon, and suffers -1 Armor Class and no concentration actions for 1 min; requires 1 %{combatNotes.quickRage?\'turn\':\'min\'} between rages"',
+    'Note="Gains %{level+constitutionModifier} temporary Hit Points and +%V HP melee damage, or +%{combatNotes.rage//2} HP with an agile weapon, and suffers -1 Armor Class and loss of concentration actions for 1 min; requires 1 %{combatNotes.quickRage?\'turn\':\'min\'} between rages"',
   'Raging Resistance (Animal)':
     'Section=save ' +
     'Note="Has resistance %{3+constitutionModifier} to piercing and slashing during rage"',
@@ -3722,13 +3718,14 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Allows using concentration actions for the remainder of the turn during rage"',
   'Raging Intimidation':
-    'Section=combat,feature ' +
+    'Section=combat,feature,feature ' +
     'Note=' +
       '"Can use Demoralize and Scare To Death during rage",' +
-      '"Has the Intimidating Glare and Scare To Death features"',
+      '"Has the Intimidating Glare feature",' +
+      '"Has the Scare To Death feature"',
   'Raging Thrower':
     'Section=combat ' +
-    'Note="+%{combatNotes.rage} HP thrown weapon damage, and Brutal Critical and Devastator effects apply to thrown weapons during rage"',
+    'Note="Thrown weapons inflict +%{combatNotes.rage} HP and can apply Brutal Critical and Devastator effects during rage"',
   'Sudden Charge':
     'Action=2 ' +
     'Section=combat ' +
@@ -3761,7 +3758,7 @@ Pathfinder2E.FEATURES = {
   'Wounded Rage':
     'Action=Reaction ' +
     'Section=combat ' +
-    'Note="Enters rage upon taking damage"',
+    'Note="Enters rage upon suffering the triggering damage"',
   'Animal Skin':
     'Section=combat,combat ' +
     'Note=' +
@@ -3781,7 +3778,7 @@ Pathfinder2E.FEATURES = {
   "Dragon's Rage Breath":
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Breath inflicts %{level}d6 damage in a 30\' cone or 60\' line once per rage (<b>save basic Reflex</b>; half distance and damage for a 2nd use within 1 hr)"',
+    'Note="Breath inflicts %{level}d6 HP %{combatNotes.draconicRage} in a 30\' cone or 60\' line once per rage (<b>save basic Reflex</b>; half distance and damage for a 2nd use within 1 hr)"',
   "Giant's Stature":
     'Action=1 ' +
     'Section=combat ' +
@@ -3789,7 +3786,7 @@ Pathfinder2E.FEATURES = {
   "Spirits' Interference":
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Imposes a DC 5 flat check requirement on foe ranged Strikes until rage ends"',
+    'Note="Imposes a DC 5 flat check on foe ranged Strikes vs. self until rage ends"',
   'Animal Rage':
     'Action=1 ' +
     'Section=magic ' +
@@ -3811,15 +3808,15 @@ Pathfinder2E.FEATURES = {
   'Thrash':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Inflicts %{combatNotes.rage+strengthModifier} HP bludgeoning plus specialization damage on a grabbed foe during rage (<b>save basic Fortitude</b>)"',
+    'Note="Inflicts %{combatNotes.rage+strengthModifier} HP bludgeoning plus specialization damage on a grabbed foe (<b>save basic Fortitude</b>) during rage"',
   'Come And Get Me':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Suffers flat-footed and +2 HP foe damage until rage ends; successful attackers suffer flat-footed until the end of the next turn, and a successful Strike on a foe gives self %{constitutionModifier} temporary Hit Points, or %{constitutionModifier*2} temporary Hit Points on a critical success"',
+    'Note="Suffers flat-footed and +2 HP foe damage until rage ends; successful attackers suffer flat-footed until the end of the next turn, and a successful Strike on an attacker during that time gives self %{constitutionModifier} temporary Hit Points, or %{constitutionModifier*2} temporary Hit Points on a critical success, until the rage ends"',
   'Furious Sprint':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Strides %{speed*5}\' in a straight line, or %{speed*8}\' by using an additional action, during rage"',
+    'Note="Strides %{speed*5}\' in a straight line, or %{speed*8}\' by using 3 actions, during rage"',
   'Great Cleave':
     'Section=combat ' +
     'Note="Can continue to use Cleave on adjacent foes for as long as Strikes incapacitate"',
@@ -3831,7 +3828,7 @@ Pathfinder2E.FEATURES = {
     'Action=1 ' +
     'Section=combat ' +
     // Errata corrects "each creature" to "each enemy"
-    'Note="A successful Intimidate Demoralizes all foes in a 30\' radius during rage"',
+    'Note="Successful Intimidate checks Demoralize each foe in a 30\' radius once per target per min during rage"',
   "Dragon's Rage Wings":
     'Action=1 Section=combat Note="Gains a %{speed}\' fly Speed during rage"',
   'Furious Grab':
@@ -3845,13 +3842,13 @@ Pathfinder2E.FEATURES = {
   "Spirit's Wrath":
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Makes a R120\' +%{$\'trainingLevel.Martial Weapons\'*2+level+strengthModifier+2} spirit Strike during rage that inflicts 4d8+%{constitutionModifier} HP negative or positive damage; a critical hit also inflicts frightened 1"',
+    'Note="R120\' +%{$\'trainingLevel.Martial Weapons\'*2+level+strengthModifier+2} spirit Strike during rage inflicts 4d8+%{constitutionModifier} HP negative or positive; a critical hit also inflicts frightened 1"',
   "Titan's Stature":
     'Section=combat ' +
     'Note="Giant\'s Stature can increase size to Huge, giving +10\' reach and clumsy 1, until rage ends"',
   'Awesome Blow':
     'Section=combat ' +
-    'Note="Success or critical success on an Athletics vs. Fortitude check after using Knockback inflicts success or critical success effects of Shove and Trip"',
+    'Note="Can attempt an Athletics vs. Fortitude check after using Knockback; success or critical success inflicts the success or critical success effects of Shove and Trip"',
   "Giant's Lunge":
     'Action=1 ' +
     'Section=combat ' +
@@ -3866,7 +3863,7 @@ Pathfinder2E.FEATURES = {
     'Note="Makes individual Strikes at the current multiple attack penalty against all foes within reach"',
   'Collateral Thrash':
     'Section=combat ' +
-    'Note="Thrash affects another adjacent foe (<b>save basic Reflex</b>)"',
+    'Note="Thrash damages a second adjacent foe (<b>save basic Reflex</b>)"',
   'Dragon Transformation':
     'Action=1 ' +
     'Section=magic ' +
@@ -3874,7 +3871,7 @@ Pathfinder2E.FEATURES = {
   'Reckless Abandon':
     'Action=Free ' +
     'Section=feature ' +
-    'Note="Gives -2 Armor Class, -1 saves, and +2 attacks until rage ends when reduced to %{hitPoints//2} or fewer Hit Points"',
+    'Note="Gives -2 Armor Class, -1 saves, and +2 attacks at the start of a turn until rage ends when reduced to %{hitPoints//2} or fewer Hit Points"',
   'Brutal Critical':
     'Section=combat ' +
     // Errata limits effects to melee hits
@@ -3886,7 +3883,7 @@ Pathfinder2E.FEATURES = {
   'Vicious Evisceration':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Strike also inflicts drained 1, or drained 2 on a critical success during rage"',
+    'Note="Successful Strike also inflicts drained 1, or drained 2 on a critical success, during rage"',
   'Contagious Rage':
     'Section=combat ' +
     'Note="Can use Share Rage unlimited times, also sharing instinct and specialization abilities"',
@@ -4006,7 +4003,7 @@ Pathfinder2E.FEATURES = {
     'Note="Can have 2 composition spells active simultaneously"',
   'Steady Spellcasting':
     'Section=magic ' +
-    'Note="Successful DC 15 flat check negates spellcasting disruption"',
+    'Note="Can negate spellcasting disruption with successful DC 15 flat check"',
   'Eclectic Skill':
     'Section=skill,skill ' +
     'Note=' +
@@ -4209,6 +4206,8 @@ Pathfinder2E.FEATURES = {
     'Section=magic Note="Knows the Healer\'s Blessing divine spell"',
   "Deity's Domain (Indulgence)":
     'Section=magic Note="Knows the Overstuff divine spell"',
+  "Deity's Domain (Knowledge)":
+    'Section=magic Note="Knows the Scholarly Recollection divine spell"',
   "Deity's Domain (Luck)":
     'Section=magic Note="Knows the Bit Of Luck divine spell"',
   "Deity's Domain (Magic)":
@@ -4257,7 +4256,7 @@ Pathfinder2E.FEATURES = {
     'Note="Liberating Step target may Step normally in any terrain"',
   'Weight Of Guilt':
     'Section=combat ' +
-    'Note="Can make a Glimpse Of Redemption target stupefied instead of enfeebled"',
+    'Note="Glimpse Of Redemption can inflict stupefied instead of enfeebled"',
   'Divine Grace':
     'Action=Reaction ' +
     'Section=save ' +
@@ -4484,10 +4483,10 @@ Pathfinder2E.FEATURES = {
   'Instrument Of Zeal':
     'Section=combat ' +
     // Errata changes Smite Evil to Blade Of Justice
-    'Note="Critical hit with Blade Of Justice or Retributive Strike inflicts an additional damage die and slowed 1 for 1 rd"',
+    'Note="Critical hit with Blade Of Justice or Retributive Strike inflicts +1 damage die and slowed 1 on the target\'s next turn"',
   'Shield Of Grace':
     'Section=combat ' +
-    'Note="May redirect half of the excess damage to self when using Shield Block to protect an ally"',
+    'Note="Can redirect half of the excess damage to self when using Shield Block to protect an ally"',
   'Celestial Form':
     'Section=ability,feature ' +
     'Note=' +
@@ -4495,17 +4494,15 @@ Pathfinder2E.FEATURES = {
       '"Has the Darkvision feature"',
   'Ultimate Mercy':
     'Section=magic ' +
-    'Note="Can use <i>Lay On Hands</i> to restore life with 1 Hit Point and wounded 1 to a target who died in the previous rd"',
+    'Note="Mercy can restore life with 1 Hit Point and wounded 1 to a target who died in the previous rd"',
   'Celestial Mount':
     'Section=feature ' +
     'Note="Mount has Darkvision, +40 Hit Points, and weakness 10 to evil damage and can fly at full Speed"',
   'Radiant Blade Master':
     'Section=combat Note="Has increased Blade Ally effects"',
   'Shield Paragon':
-    'Section=combat,combat ' +
-    'Note=' +
-      '"+50% shield Hit Points",' +
-      '"Shield is always raised and is automatically remade after 1 day if destroyed"',
+    'Section=combat ' +
+    'Note="Shield is always raised and is automatically remade after 1 day if destroyed"',
 
   // Cleric
   // Alertness as above
@@ -4622,7 +4619,7 @@ Pathfinder2E.FEATURES = {
     'Note="Knows the Zeal For Battle divine spell/+1 Focus Points"',
   'Anathema':
     'Section=feature ' +
-    'Note="May not perform acts or cast spells prohibited by %V"',
+    'Note="May not perform acts or use spells prohibited by %V"',
   'Cleric Feats':'Section=feature Note="%V selections"',
   'Cleric Skills':
     'Section=skill Note="Skill Trained (Religion; Choose %V from any)"',
@@ -4695,6 +4692,9 @@ Pathfinder2E.FEATURES = {
   'Domain Initiate (Indulgence)':
     'Section=magic ' +
     'Note="Knows the Overstuff divine spell/Has a focus pool and 1 Focus Point"',
+  'Domain Initiate (Knowledge)':
+    'Section=magic ' +
+    'Note="Knows the Scholarly Recollection divine spell/Has a focus pool and 1 Focus Point"',
   'Domain Initiate (Luck)':
     'Section=magic ' +
     'Note="Knows the Bit Of Luck divine spell/Has a focus pool and 1 Focus Point"',
@@ -5197,7 +5197,7 @@ Pathfinder2E.FEATURES = {
     'Note="Attack Master (Simple Swords; Martial Swords)/Attack Expert (Advanced Swords)"',
   // Greater Weapon Specialization as above
   'Improved Flexibility':
-    'Section=combat Note="Has increased Combat Flexibility features"',
+    'Section=combat Note="Has increased Combat Flexibility effects"',
   // Juggernaut as above
   // Shield Block as below
   'Versatile Legend':
@@ -5624,15 +5624,15 @@ Pathfinder2E.FEATURES = {
       // Note: actually applies only to simple and martial monk weapons, but
       // all monk weapons in the core book fall into these categories
       '"Attack %V (Monk Weapons)",' +
-      '"Has access to uncommon monk weapons/Can use monk weapons in unarmed Strikes"',
+      '"Has access to uncommon monk weapons/Can use monk melee weapons with unarmed attack features"',
   'Mountain Stance':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Unarmored stance gives +%{4-(dexterityModifier-(combatNotes.mountainQuake?2:combatNotes.mountainStronghold?1:0)>?0)} Armor Class, +2 vs. Shove and Trip, and -5 Speed and restricts Strikes to falling stone attacks"',
+    'Note="Unarmored stance gives +%{4-(dexterityModifier-(combatNotes.mountainQuake?2:combatNotes.mountainStronghold?1:0)>?0)} Armor Class%{dexterityModifier>(combatNotes.mountainQuake?2:combatNotes.mountainStronghold?1:0)>0?\' (+4 - \'+(dexterityModifier-(combatNotes.mountainQuake?2:combatNotes.mountainStronghold?1:0))+\' due to a reduced Dex cap)\':\'\'}, +2 vs. Shove and Trip, and -5 Speed and restricts Strikes to falling stone attacks"',
   'Tiger Stance':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Unarmored stance allows 10\' Steps and tiger claw attacks that inflict +1d4 HP persistent bleed damage on a critical success"',
+    'Note="Unarmored stance allows 10\' Steps and tiger claw attacks"',
   'Wolf Stance':
     'Action=1 ' +
     'Section=combat ' +
@@ -5642,7 +5642,7 @@ Pathfinder2E.FEATURES = {
     'Note="Critical hits with a brawling%{combatNotes.monasticWeaponry?\' or trained monk\':\'\'} weapon inflict its critical specialization effect"',
   'Crushing Grab':
     'Section=combat ' +
-    'Note="Can inflict %{strengthModifier} HP bludgeoning, lethal or non-lethal, with a successful Grapple"',
+    'Note="Can inflict %{strengthModifier} HP bludgeoning, lethal or nonlethal, with a successful Grapple"',
   'Dancing Leaf':
     'Section=save,skill ' +
     'Note=' +
@@ -5653,7 +5653,7 @@ Pathfinder2E.FEATURES = {
     'Note="Can inflict electricity, bludgeoning, fire, or cold damage with <i>Ki Strike</i>"',
   'Stunning Fist':
     'Section=combat ' +
-    'Note="Can inflict stunned 1 with a successful Flurry Of Blows (<b>save Fortitude</b> negates; critical failure inflicts stunned 3)"',
+    'Note="Can inflict stunned 1 with at least 1 success on 2 Strikes from Flurry Of Blows (<b>save Fortitude</b> negates; critical failure inflicts stunned 3)"',
   'Deflect Arrow':
     'Action=Reaction ' +
     'Section=combat Note="Gives +4 Armor Class vs. a physical ranged attack"',
@@ -5678,7 +5678,7 @@ Pathfinder2E.FEATURES = {
   'Crane Flutter':
     'Action=Reaction ' +
     'Section=combat ' +
-    'Note="Crane Stance gives +3 Armor Class vs. the triggering melee Strike, and a miss allows an immediate -2 Strike"',
+    'Note="Crane Stance gives +3 Armor Class vs. the triggering melee Strike, and a miss allows an immediate -2 crane wing Strike"',
   'Dragon Roar':
     'Action=1 ' +
     'Section=combat ' +
@@ -5692,46 +5692,45 @@ Pathfinder2E.FEATURES = {
   'Tiger Slash':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="While in Tiger Stance, claw attack inflicts +%{level>14?3:2} damage dice and a 5\' push; critical success also inflicts +%{strengthModifier} HP persistent bleed damage"',
+    'Note="While in Tiger Stance, tiger claw attack inflicts +%{level>14?3:2} damage dice and a 5\' push; critical success also inflicts +%{strengthModifier} HP persistent bleed damage"',
   'Water Step':
     'Section=ability ' +
     'Note="Can Stride across liquids, but must end on a solid surface to avoid sinking"',
   'Whirling Throw':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="A successful Athletics vs. a grabbed or restrained foe\'s Fortitude DC, modified for size differences, allows throwing it %{10+5*strengthModifier}\', inflicting %{(10+5*strengthModifier)//10}d6+%{strengthModifier} HP bludgeoning"',
+    'Note="A successful Athletics vs. a grabbed or restrained foe\'s Fortitude DC allows throwing it %{10+5*strengthModifier}\', inflicting %{(10+5*strengthModifier)//10}d6+%{strengthModifier} HP bludgeoning, plus knocked prone on a critical success"',
   'Wolf Drag':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="While in Wolf Stance, piercing hand attack gains the fatal d12 trait and knocks prone"',
+    'Note="While in Wolf Stance, wolf jaw attack gains the fatal d12 trait and knocks prone"',
   'Arrow Snatching':
     'Section=combat ' +
     'Note="Successful Deflect Arrow allows an immediate ranged Strike using the deflected projectile"',
   'Ironblood Stance':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Unarmored stance gives resistance %{level//4>?(combatNotes.ironbloodSurge?strengthModifier:0)} to all damage and allows iron sweep attacks"',
+    'Note="Unarmored stance gives resistance %{level//4} to all damage and allows iron sweep attacks"',
   'Mixed Maneuver':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Uses 2 choices of Grapple, Shove, and Trip at the current multiple attack penalty"',
+    'Note="Attempts 2 choices of Grapple, Shove, and Trip at the current multiple attack penalty"',
   'Tangled Forest Stance':
     'Action=1 ' +
     'Section=combat ' +
     'Note="Unarmored stance prevents foes from moving away (<b>save Reflex, Acrobatics, or Athletics</b> negates) and allows lashing branch attacks"',
-  'Wall Run':
-    'Action=1 Section=ability Note="Strides on vertical surfaces"',
+  'Wall Run':'Action=1 Section=ability Note="Strides on vertical surfaces"',
   'Wild Winds Initiate':
     'Section=magic ' +
     'Note="Knows the Wild Winds Stance occult spell/+1 Focus Points"',
   'Knockback Strike':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="A successful unarmed Strike also allows an Athletics check to Shove"',
+    'Note="A successful unarmed Strike allows a subsequent Athletics check to Shove"',
   'Sleeper Hold':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Successful grapple also inflicts clumsy 1 for 1 turn, or unconscious for 1 min with a critical success"',
+    'Note="Successful grapple also inflicts clumsy 1 until the end of the target\'s next turn, or unconscious for 1 min with a critical success"',
   'Wind Jump':
     'Section=magic Note="Knows the Wind Jump occult spell/+1 Focus Points"',
   'Winding Flow':
@@ -5742,26 +5741,24 @@ Pathfinder2E.FEATURES = {
   'Disrupt Ki':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Unarmed Strike also inflicts %{level<18?2:3}d6 HP persistent negative damage and enfeebled 1 while the persistent damage continues"',
+    'Note="Successful unarmed Strike also inflicts %{level<18?2:3}d6 HP persistent negative and enfeebled 1 while the persistent damage continues"',
   'Improved Knockback':
     'Section=combat ' +
-    'Note="Successful Shove moves +5\' (critical success +10\') and allows following; pushing into an obstacle inflicts %{strengthModifier+(rank.Athletics>3?8:6)} HP bludgeoning"',
+    'Note="Successful Shove moves the target +5\', or +10\' on a critical success, and allows following; pushing into an obstacle inflicts %{strengthModifier+(rank.Athletics>3?8:6)} HP bludgeoning"',
   'Meditative Focus':'Section=magic Note="Refocus restores 2 Focus Points"',
   // Stance Savant as above
   'Ironblood Surge':
-    // 'Action=1 ' + // inserted into second note
-    'Section=combat,combat ' +
-    'Note=' +
-      '"Has increased Ironblood Stance effects",' +
-      '"' + Pathfinder2E.ACTION_MARKS[1] + ' While in Ironblood Stance, gains +1 Armor Class until the start of the next turn"',
+    'Action=1 ' +
+    'Section=combat ' +
+    'Note="While in Ironblood Stance, gains +1 Armor Class%{strengthModifier>(level//4)?\' and increases damage resistance to \'+strengthModifier:\'\'} until the start of the next turn"',
   'Mountain Quake':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="R20\' Stomp inflicts %{strengthModifier>?0} HP and knocked prone (<b>save basic Fortitude</b>) once per 1d4 rd"',
+    'Note="R20\' Stomp inflicts %{strengthModifier>?0} HP and knocked prone (<b>save basic Fortitude</b> also negates knocked prone) once per 1d4 rd"',
   'Tangled Forest Rake':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="While in Tangled Forest Stance, a successful lashing Strike moves the target 5\' into a space within reach"',
+    'Note="While in Tangled Forest Stance, a successful lashing branch Strike moves the target 5\' into a space within reach"',
   'Timeless Body':
     'Section=feature,save ' +
     'Note=' +
@@ -5772,7 +5769,7 @@ Pathfinder2E.FEATURES = {
   'Wild Winds Gust':
     'Action=2 ' +
     'Section=magic ' +
-    'Note="Makes a Wild Winds Stance Strike against all creatures in a 30\' cone or 60\' line at the current multiple attack penalty"',
+    'Note="Makes a wind crash Strike against all creatures in a 30\' cone or 60\' line at the current multiple attack penalty"',
   'Enlightened Presence':
     'Section=save ' +
     'Note="R15\' Gives self and allies +2 Will vs. mental effects"',
@@ -5785,7 +5782,7 @@ Pathfinder2E.FEATURES = {
   'Shattering Strike':
     'Action=2 ' +
     'Section=combat ' +
-    'Note="Unarmed Strike bypasses target resistances and ignores half of target\'s Hardness"',
+    'Note="Unarmed Strike bypasses target resistances and ignores half of the target\'s Hardness"',
   'Diamond Fists':
     'Section=combat ' +
     'Note="Unarmed Strikes gain the forceful trait or increase damage by 1 die step"',
@@ -5799,14 +5796,14 @@ Pathfinder2E.FEATURES = {
     'Note="Ends a Speed status penalty or condition at the end of a turn"',
   'Enduring Quickness':
     'Section=combat ' +
-    'Note="Permanently quickened; cane use the additional action to Stride, Leap, or Jump"',
+    'Note="Permanently quickened; can use the additional action to Stride, Leap, or Jump"',
   'Fuse Stance':
     'Section=combat ' +
     'Note="Has merged 2 known stances into a unique new stance that grants the effects of both"',
   'Impossible Technique':
     'Action=Reaction ' +
     'Section=combat ' +
-    'Note="Forces a foe reroll on a hit or gives a reroll on a failed save"',
+    'Note="Forces a foe reroll on a hit or gives self a reroll on a failed save"',
 
   // Ranger
   // Evasion as above
@@ -6333,7 +6330,11 @@ Pathfinder2E.FEATURES = {
   // Alertness as above
   'Bloodline':'Section=feature Note="1 selection"',
   'Bloodline Paragon':'Section=magic Note="Has 1 10th-level spell slot"',
-  'Bloodline Spells':'Section=magic Note="Has a focus pool and 1 Focus Point"',
+  'Bloodline Spells':
+    'Section=magic,magic ' +
+    'Note=' +
+      '"Has a focus pool and 1 Focus Point",' +
+      '"Casting a bloodline or granted spell invokes a blood magic effect"',
   'Defensive Robes':'Section=combat Note="Defense Expert (Unarmored Defense)"',
   // Expert Spellcaster as above
   // Legendary Spellcaster as above
@@ -6345,7 +6346,7 @@ Pathfinder2E.FEATURES = {
   'Sorcerer Feats':'Section=feature Note="%V selections"',
   'Sorcerer Skills':'Section=skill Note="Skill Trained (Choose %V from any)"',
   'Sorcerer Spellcasting':
-    'Section=magic Note="Can learn spells from the %V tradition"',
+    'Section=magic Note="Can learn spells from the %{bloodlineTraditionsLowered} tradition"',
   // Nethys changes Simple Weapon Expertise to Weapon Expertise
   // Weapon Expertise as above
   // Weapon Specialization as above
@@ -6354,134 +6355,134 @@ Pathfinder2E.FEATURES = {
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Occult)/Knows the Tentacular Limbs occult spell",' +
-      '"Casting a bloodline spell gives self or a target +2 Will saves for 1 rd",' +
+      '"Blood magic effect gives self or a target +2 Will saves for 1 rd",' +
       '"Skill Trained (Intimidation; Occultism)"',
   'Angelic':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Angelic Halo divine spell",' +
-      '"Casting a bloodline spell gives self or a target +1 saves for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 saves for 1 rd",' +
       '"Skill Trained (Diplomacy; Religion)"',
   'Demonic':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Glutton\'s Jaws divine spell",' +
-      '"Casting a bloodline spell gives self +1 Intimidation for 1 rd or inflicts -1 Armor Class on a target for 1 rd",' +
+      '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts -1 Armor Class on a target for 1 rd",' +
       '"Skill Trained (Intimidation; Religion)"',
   'Diabolic':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Diabolic Edict divine spell",' +
-      '"Casting a bloodline spell gives self +1 Deception for 1 rd or inflicts 1 HP fire per spell level on a target",' +
+      '"Blood magic effect gives self +1 Deception for 1 rd or inflicts 1 HP fire per spell level on a target",' +
       '"Skill Trained (Deception; Religion)"',
   'Draconic (Brass)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Bronze)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Copper)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Gold)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Silver)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Black)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Blue)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Green)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (Red)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Draconic (White)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 Armor Class for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
   'Elemental (Air)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
-      '"Casting a bloodline spell gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
+      '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
   'Elemental (Earth)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
-      '"Casting a bloodline spell gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
+      '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
   'Elemental (Fire)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
-      '"Casting a bloodline spell gives self +1 Intimidation for 1 rd or inflicts 1 HP fire per spell level on a target",' +
+      '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP fire per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
   'Elemental (Water)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
-      '"Casting a bloodline spell gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
+      '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
   'Fey':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Faerie Dust primal spell",' +
-      '"Casting a bloodline spell gives self or a target concealment for 1 rd",' +
+      '"Blood magic effect gives self or a target concealment for 1 rd",' +
       '"Skill Trained (Deception; Nature)"',
   'Hag':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Occult)/Knows the Jealous Hex occult spell",' +
-      '"Casting a bloodline spell inflicts 2 HP mental per spell level (<b>save basic Will</b>) on the first successful attacker before the end of the next turn",' +
+      '"Blood magic effect inflicts 2 HP mental per spell level (<b>save basic Will</b>) on the first successful attacker before the end of the next turn",' +
       '"Skill Trained (Deception; Occultism)"',
   'Imperial':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Ancestral Memories arcane spell",' +
-      '"Casting a bloodline spell gives self or a target +1 skill checks for 1 rd",' +
+      '"Blood magic effect gives self or a target +1 skill checks for 1 rd",' +
       '"Skill Trained (Arcana; Society)"',
   'Undead':
     'Section=magic,magic,skill ' +
     'Note=' +
       // Errata changes Touch Of Undeath to Undeath's Blessing
       '"Spell Trained (Divine)/Knows the Undeath\'s Blessing divine spell",' +
-      '"Casting a bloodline spell gives self 1 temporary HP per spell level for 1 rd or inflicts 1 HP negative per spell level on a target",' +
+      '"Blood magic effect gives self 1 temporary HP per spell level for 1 rd or inflicts 1 HP negative per spell level on a target",' +
       '"Skill Trained (Intimidation; Religion)"',
 
   'Counterspell':
@@ -6509,7 +6510,7 @@ Pathfinder2E.FEATURES = {
   'Occult Evolution':
     'Section=magic,skill ' +
     'Note=' +
-      '"Can add 1 unknown mental occult spell to repertoire each day until next daily prep",' +
+      '"Can spend 1 min to add an unknown mental occult spell to repertoire until next daily prep once per day",' +
       '"Skill Trained (Choose 1 from any)"',
   'Primal Evolution':
     'Section=magic ' +
@@ -6636,7 +6637,7 @@ Pathfinder2E.FEATURES = {
   'Interweave Dispel':
     'Action=1 ' +
     'Section=magic ' +
-    'Note="Expends a spell slot to add <i>Dispel Magic</i> effects to a successful single-target spell"',
+    'Note="Expends a spell slot to add <i>Dispel Magic</i> effects to a successful subsequent single-target spell"',
   'Reflect Spell':
     'Section=magic ' +
     'Note="Can cause a successful Counterspell to inflict the spell effects on the caster"',
@@ -6653,7 +6654,7 @@ Pathfinder2E.FEATURES = {
   'Bloodline Conduit':
     'Action=1 ' +
     'Section=magic ' +
-    'Note="Invokes an instantaneous spell of 5th level or lower without expending a spell slot once per min"',
+    'Note="Subsequent casting of an instantaneous spell of up to 5th level does not expend a spell slot once per min"',
   'Bloodline Perfection':'Section=magic Note="+1 10th level spell slot"',
   'Metamagic Mastery':
     'Section=magic ' +
@@ -11614,7 +11615,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Occult ' +
     'Cast=1 ' +
     'Description=' +
-      '"Stance gives +2 Armor Class vs. ranged attacks and R30\' unarmed strikes that ignore concealment and cover and inflict 1d6 HP bludgeoning"',
+      '"Stance gives +2 Armor Class vs. ranged attacks and allows wind crash attacks"',
   'Wind Jump':
     'Level=5 ' +
     'Traits=Focus,Uncommon,Air,Monk,Transmutation ' +
@@ -13495,7 +13496,7 @@ Pathfinder2E.classRules = function(
       );
       rules.defineRule
         ('spellModifier.' + spellType, 'spellModifier.' + name, '=', null);
-    } else if('0123456789'.includes(firstChar)) {
+    } else if('C0123456789'.includes(firstChar)) {
       // Sorcerer slots depend on bloodline. Generate rules here based on a
       // tradition-specific level that is set by featureRules.
       ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
@@ -13618,14 +13619,12 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'features.Dragon Instinct (Silver)', '=', '"cold"'
     );
     rules.defineRule('combatNotes.furyInstinct',
-      'combatNotes.specializationAbility', '=', 'null', // italics
       'features.Weapon Specialization', '=', '6',
       'features.Greater Weapon Specialization', '=', '12'
     );
     rules.defineRule('combatNotes.rage',
       '', '=', '2',
-      'combatNotes.furyInstinct', '^', null,
-      'combatNotes.quickRage', '=', 'null' // italics
+      'combatNotes.furyInstinct', '^', null
     );
     let allSelectables = rules.getChoices('selectableFeatures');
     let instincts =
@@ -13682,7 +13681,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('combatNotes.shieldAlly.1',
       'combatNotes.shieldAlly', '=', '1.5',
-      'combatNotes.shieldParagon', '^', '2'
+      'features.Shield Paragon', '^', '2'
     );
     rules.defineRule('featureNotes.divineAlly',
       '', '=', '1',
@@ -13828,9 +13827,6 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
         'features.' + g, '=', '1'
       );
     });
-    rules.defineRule('combatNotes.combatFlexibility',
-      'combatNotes.improvedFlexibility', '=', 'null' // italics
-    )
     rules.defineRule('selectableFeatureCount.Fighter (Key Ability)',
       'featureNotes.fighterKeyAbility', '=', '1'
     );
@@ -13912,9 +13908,6 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule
       ('weaponDieSides.Fist', 'combatNotes.powerfulFist', '^', '6');
   } else if(name == 'Ranger') {
-    rules.defineRule('combatNotes.monsterHunter',
-      'combatNotes.legendaryMonsterHunter', '+', 'null' // italics
-    );
     rules.defineRule("selectableFeatureCount.Ranger (Hunter's Edge)",
       "featureNotes.hunter'sEdge", '=', '1'
     );
@@ -13930,19 +13923,9 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule
       ('skillNotes.rangerSkills', 'intelligenceModifier', '=', '4 + source');
   } else if(name == 'Rogue') {
-    rules.defineRule('combatNotes.debilitatingStrike',
-      'combatNotes.criticalDebilitation', '=', 'null', // italics
-      'combatNotes.doubleDebilitation', '=', 'null', // italics
-      'combatNotes.preciseDebilitations', '=', 'null', // italics
-      'combatNotes.tacticalDebilitations', '=', 'null', // italics
-      'combatNotes.viciousDebilitations', '=', 'null' // italics
-    );
     rules.defineRule('combatNotes.ruffian',
       '', '=', '"Trained"',
       'rank.Light Armor', '=', 'source>=3 ? "Master" : source==2 ? "Expert" : null'
-    );
-    rules.defineRule('combatNotes.slyStriker',
-      'combatNotes.impossibleStriker', '+', 'null' // italics
     );
     rules.defineRule('combatNotes.thief',
       'dexterityModifier', '=', null,
@@ -14005,9 +13988,6 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule
       ('magicNotes.masterSpellcaster', 'bloodlineTraditions', '=', null);
     rules.defineRule('magicNotes.primalEvolution', 'maxSpellLevel', '=', null);
-    rules.defineRule('magicNotes.sorcererSpellcasting',
-      'bloodlineTraditionsLowered', '=', null
-    );
     ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
       rules.defineRule('trainingLevel.' + t,
         'magicNotes.expertSpellcaster', '^=', 'source.includes("' + t + '") ? 2 : null',
@@ -14391,10 +14371,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
         'features.' + s, '=', '1'
       );
     });
-  } else if(name == 'Affliction Mercy') {
-    rules.defineRule('magicNotes.mercy',
-       'magicNotes.afflictionMercy', '=', 'null' // italics
-    );
   } else if(name == 'Alchemist Dedication') {
     rules.defineRule
       ('advancedAlchemyLevel', 'featureNotes.alchemistDedication', '=', '1');
@@ -14693,9 +14669,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('featureNotes.expertAlchemy', 'level', '=', 'source>=10 ? 5 : 3');
   } else if(name == 'Extend Armament Alignment') {
-    rules.defineRule('combatNotes.alignArmament(Chaotic)',
-      'combatNotes.extendArmamentAlignment', '=', 'null' // italics
-    );
     rules.defineRule('features.Align Armament',
       'features.Align Armament (Chaotic)', '=', '1',
       'features.Align Armament (Evil)', '=', '1',
@@ -14743,6 +14716,10 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule('skillNotes.gnomeObsession',
       'level', '=', 'source<2 ? "Trained" : source<7 ? "Expert" : source<15 ? "Master" : "Legendary"'
     );
+  } else if(name.match(/^(Greater|True) Debilitating Bomb/)) {
+    rules.defineRule('combatNotes.debilitatingBomb',
+      'combatNotes.' + prefix, '=', 'null' // italics
+    );
   } else if(name == 'Greater Mercy') {
     rules.defineRule
       ('magicNotes.mercy', 'magicNotes.greaterMercy', '=', 'null'); // italics
@@ -14786,10 +14763,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     );
     rules.defineRule
       ('weapons.Iron Sweep', 'features.Ironblood Stance', '=', '1');
-  } else if(name == 'Ironblood Surge') {
-    rules.defineRule('combatNotes.ironbloodStance',
-      'combatNotes.ironbloodSurge', '=', 'null' // italics
-    );
   } else if(name == 'Ki Rush') {
     rules.defineRule('features.Ki Spells', 'features.Ki Rush', '=', '1');
   } else if(name == 'Ki Strike') {
@@ -14799,10 +14772,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       ('advancedAlchemyLevel', 'featureNotes.masterAlchemy', '^', null);
     rules.defineRule
       ('featureNotes.masterAlchemy', 'level', '=', 'source - 5');
-  } else if(name == 'Master Monster Hunter') {
-    rules.defineRule('combatNotes.monsterHunter',
-      'combatNotes.masterMonsterHunter', '=', 'null' // italics
-    );
   } else if((matchInfo = name.match(/^Minor Magic \((.*)\)$/)) != null) {
     let trad = matchInfo[1];
     let note = 'magicNotes.minorMagic(' + trad + ')';
@@ -14859,10 +14828,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       'features.Multitalented', '?', null,
       'features.Half-Elf', '=', '1'
     );
-  } else if(name == 'Orc Ferocity') {
-    rules.defineRule('combatNotes.orcFerocity',
-      'combatNotes.incredibleFerocity', '=', 'null' // italics
-    );
   } else if(name.match(/^Order Explorer/)) {
     let order = name.replace('Order Explorer (', '').replace(')', '');
     rules.defineRule('features.Order Explorer', 'features.' + name, '=', '1');
@@ -14907,10 +14872,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     );
     rules.defineRule('classDifficultyClass.Rogue.1',
       'features.Rogue Dedication', '=', '"dexterity"'
-    );
-  } else if(name == 'Skittering Scuttle') {
-    rules.defineRule('combatNotes.goblinScuttle',
-      'combatNotes.skitteringScuttle', '=', 'null' // italics
     );
   } else if(name == 'Sorcerer Dedication') {
     rules.defineRule('bloodlineTraditions',
@@ -14969,13 +14930,9 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
   } else if(name == 'Tiger Stance') {
     Pathfinder2E.weaponRules(
       rules, 'Tiger Claw', 'Unarmed', 0, '1d8 S', 0, 0, 'Brawling',
-      ['Agile', 'Finesse', 'Nonlethal', 'Unarmed'], null
+      ['Agile', 'Finesse', 'Nonlethal', 'Unarmed', 'Deadly 1d4 persistent bleed'], null
     );
     rules.defineRule('weapons.Tiger Claw', 'features.Tiger Stance', '=', '1');
-  } else if(name == 'Ubiquitous Snares') {
-    rules.defineRule('skillNotes.snareSpecialist',
-      'skillNotes.ubiquitousSnares', '=', 'null' // italics
-    );
   } else if(name == 'Unburdened Iron') {
     rules.defineRule('abilityNotes.armorSpeedPenalty',
       'abilityNotes.unburdenedIron', '^', '0'
@@ -15000,6 +14957,13 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     );
     rules.defineRule
       ('features.Unconventional Weaponry', 'features.' + name, '=', '1');
+  } else if(name == 'Wild Winds Initiate') {
+    Pathfinder2E.weaponRules(
+      rules, 'Wind Crash', 'Unarmed', 0, '1d6 B', 0, 0, 'Brawling',
+      ['Agile', 'Nonlethal', 'Propulsive', 'Unarmed'], 30
+    );
+    rules.defineRule
+      ('weapons.Wind Crash', 'features.Wild Winds Initiate', '=', '1');
   } else if(name == 'Wizard Dedication') {
     rules.defineRule('spellModifier.' + name,
       'magicNotes.wizardDedication', '?', null,
@@ -15315,6 +15279,8 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
       }
       if(n.match(/^Can learn spells from the .* tradition$/))
         rules.defineRule('features.Spellcasting', 'features.' + name, '=', '1');
+      if(n.match(/^Has increased .* effects$/))
+        rules.defineRule('italics', note, '=', 'null');
     });
   }
 };
@@ -15608,8 +15574,8 @@ Pathfinder2E.weaponRules = function(
   }
 
   let isFinesse = traits.includes('Finesse');
-  let isRanged = group.match(/Bomb|Bow|Crossbow|Dart|Sling/);
   let isPropulsive = traits.includes('Propulsive');
+  let isRanged = group.match(/Bomb|Bow|Crossbow|Dart|Sling/);
   let isSplash = traits.includes('Splash');
   let isThrown = traits.includes('Thrown');
   let specialDamage =
@@ -15699,12 +15665,12 @@ Pathfinder2E.weaponRules = function(
   );
   if(damage == '0')
     ; // empty
-  else if(!isRanged || (isThrown && !isSplash))
-    rules.defineRule('damageBonus.' + name, 'strengthModifier', '+', null);
   else if(isPropulsive)
     rules.defineRule('damageBonus.' + name,
       'strengthModifier', '+', 'source<0 ? source : Math.floor(source / 2)'
     );
+  else if(!isRanged || (isThrown && !isSplash))
+    rules.defineRule('damageBonus.' + name, 'strengthModifier', '+', null);
   if(isFinesse)
     rules.defineRule('damageBonus.' + name, 'combatNotes.thief', '+', null);
 
