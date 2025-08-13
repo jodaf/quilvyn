@@ -508,9 +508,6 @@ Pathfinder2E.CLASSES = {
       '"17:Heightened Senses","17:Quick Rage","19:Armor Of Fury",' +
       '"19:Devastator" ' +
     'Selectables=' +
-      '"1:Fury Instinct:Instinct",' +
-      '"1:Giant Instinct:Instinct",' +
-      '"1:Spirit Instinct:Instinct",' +
       '"1:Animal Instinct (Ape):Instinct",' +
       '"1:Animal Instinct (Bear):Instinct",' +
       '"1:Animal Instinct (Bull):Instinct",' +
@@ -529,7 +526,10 @@ Pathfinder2E.CLASSES = {
       '"1:Dragon Instinct (Bronze):Instinct",' +
       '"1:Dragon Instinct (Copper):Instinct",' +
       '"1:Dragon Instinct (Gold):Instinct",' +
-      '"1:Dragon Instinct (Silver):Instinct"',
+      '"1:Dragon Instinct (Silver):Instinct",' +
+      '"1:Fury Instinct:Instinct",' +
+      '"1:Giant Instinct:Instinct",' +
+      '"1:Spirit Instinct:Instinct"',
   'Bard':
     'Ability=charisma HitPoints=8 ' +
     'Features=' +
@@ -622,8 +622,8 @@ Pathfinder2E.CLASSES = {
       '"3:Skill Increases","5:Alertness","9:Resolve","11:Lightning Reflexes",' +
       '"13:Divine Defense","13:Weapon Specialization","19:Miraculous Spell" ' +
     'Selectables=' +
-      '"1:Healing Font:Divine Font",' +
-      '"1:Harmful Font:Divine Font",' +
+      '"deityFont==\'Either\' ? 1:Healing Font:Divine Font",' +
+      '"deityFont==\'Either\' ? 1:Harmful Font:Divine Font",' +
       '"1:Cloistered Cleric:Doctrine",' +
       '"1:Warpriest:Doctrine" ' +
     'SpellSlots=' +
@@ -1436,7 +1436,7 @@ Pathfinder2E.FEATS = {
       // As per core rules:
       // '"features.Shield Ally && features.The Tenets Of Good || ' +
       //  'levels.Fighter && features.Shield Block"',
-      // However, QuilvyRules validation doesn't support the && operator. All
+      // However, QuilvynRules validation doesn't support the && operator. All
       // fighters receive Shield Block at level 1, so that's redundant, and
       // the core rules defines only The Tenets Of Good, so we drop that.
       '"features.Shield Ally || levels.Fighter"',
@@ -2189,17 +2189,17 @@ Pathfinder2E.FEATS = {
   // Enhanced Familiar as above
   'Arcane Evolution':
     'Traits=Sorcerer,Arcane ' +
-    'Require="level >= 4","bloodlineTraditions =~ \'Arcane\'"',
+    'Require="level >= 4","sorcererTraditions =~ \'Arcane\'"',
   'Bespell Weapon':'Traits=Sorcerer,Wizard Require="level >= 4"',
   'Divine Evolution':
     'Traits=Sorcerer,Divine ' +
-    'Require="level >= 4","bloodlineTraditions =~ \'Divine\'"',
+    'Require="level >= 4","sorcererTraditions =~ \'Divine\'"',
   'Occult Evolution':
     'Traits=Sorcerer,Occult ' +
-     'Require="level >= 4","bloodlineTraditions =~ \'Occult\'"',
+     'Require="level >= 4","sorcererTraditions =~ \'Occult\'"',
   'Primal Evolution':
     'Traits=Sorcerer,Primal ' +
-    'Require="level >= 4","bloodlineTraditions =~ \'Primal\'"',
+    'Require="level >= 4","sorcererTraditions =~ \'Primal\'"',
   'Advanced Bloodline':
     'Traits=Sorcerer ' +
     'Require=' +
@@ -2546,7 +2546,8 @@ Pathfinder2E.FEATS = {
     'Traits=Archetype ' +
     'Require=' +
       '"level >= 12",' +
-      '"maxWeaponTraining >= 2"',
+      '"features.Fighter Dedication",' +
+      '"maxWeaponTraining >= 2 || rank.Unarmed Attacks >= 2"',
 
   'Monk Dedication':
     'Traits=Archetype,Dedication,Multiclass ' +
@@ -2673,7 +2674,7 @@ Pathfinder2E.FEATS = {
     'Traits=Archetype ' +
     'Require=' +
       '"level >= 18",' +
-      '"features.Master Sorcerer Spellcasting",' +
+      '"features.Expert Sorcerer Spellcasting",' +
       '"rank.Arcana >= 4 || ' +
        'rank.Nature >= 4 || ' +
        'rank.Occultism >= 4 || ' +
@@ -3699,7 +3700,7 @@ Pathfinder2E.FEATURES = {
     'Section=save ' +
     'Note="Has resistance %{3+constitutionModifier} to negative and undead during rage"',
   'Specialization Ability':
-    'Section=combat Note="Has increased instinct ability rage effects"',
+    'Section=combat Note="Has increased Instinct Ability Rage effects"',
   'Spirit Rage':
     'Section=combat ' +
     'Note="May inflict +%{combatNotes.greaterWeaponSpecialization?13:combatNotes.specializationAbility?7:3} HP positive or negative damage, along with <i>ghost touch</i>, instead of +%{combatNotes.rage} HP weapon damage during rage"',
@@ -4093,10 +4094,7 @@ Pathfinder2E.FEATURES = {
       '"Has the Anathema feature/1 selection",' +
       '"Skill Trained (%V)"',
   'Deific Weapon':
-    'Section=combat,combat ' +
-    'Note=' +
-      '"%{deityWeapon} inflicts +1 damage die step",' +
-      '"Has access to %{deityWeaponLowered}"',
+    'Section=combat Note="%{deityWeapon} inflicts +1 damage die step"',
   'Devotion Spells':'Section=magic Note="Has a focus pool and 1 Focus Point"',
   'Divine Ally':
     'Section=feature ' +
@@ -4640,7 +4638,9 @@ Pathfinder2E.FEATURES = {
       '"Has access to %V spells",' +
       '"Skill Trained (%V)"',
   'Divine Defense':'Section=combat Note="Defense Expert (Unarmored Defense)"',
-  'Divine Font':'Section=feature Note="1 selection"',
+  'Divine Font':
+    'Section=feature ' +
+    'Note="%{deityFont==\'Harm\'?\'Has the Harmful Font feature\':deityFont==\'Heal\'?\'Has the Healing Font feature\':\'1 selection\'}"',
   'Divine Spellcasting':
     'Section=magic Note="Can learn spells from the divine tradition"',
   'Doctrine':'Section=feature Note="1 selection"',
@@ -5066,7 +5066,7 @@ Pathfinder2E.FEATURES = {
   'Healing Transformation':
     'Action=1 ' +
     'Section=magic ' +
-    'Note="Subsequent non-cantrip polymorph spell restores 1d6 Hit Poins per spell level"',
+    'Note="Subsequent non-cantrip polymorph spell restores 1d6 Hit Points per spell level"',
   'Overwhelming Energy':
     'Action=1 ' +
     'Section=magic ' +
@@ -5351,7 +5351,7 @@ Pathfinder2E.FEATURES = {
   "Guardian's Deflection":
     'Action=Reaction ' +
     'Section=combat ' +
-    'Note="Gives an adjacent ally +2 Armor Class vs. the triggering hit when wielding a one-handed weapon with the other hand free"',
+    'Note="When wielding a one-handed weapon with the other hand free, gives an ally within reach +2 Armor Class vs. the triggering attack"',
   'Reflexive Shield':
     'Section=save Note="Raised shield adds its bonus to Reflex saves"',
   'Revealing Stab':
@@ -6080,7 +6080,7 @@ Pathfinder2E.FEATURES = {
   'Debilitating Strike':
     'Action=Free ' +
     'Section=combat ' +
-    'Note="Successful Strike against a flat-footed foe also inflicts %{combatNotes.doubleDebilitation?\'2 choices\':\'a choice\'} from: %{combatNotes.preciseDebilitations?\'+2d6 HP precision; flat-footed; \':\'\'}%{combatNotes.viciousDebilitations?\'weakness 5 to a choice of damage type; clumsy 1; \':\'\'}%{combatNotes.tacticalDebilitations?\'prevent reactions; prevent flanking; \':\'\'}%{combatNotes.criticalDebilitation?\'slowed 2 until the end of the next turn (<b>save Fortitude</b> inflicts slowed 1, critical success negates, and critical failure inflicts paralyzed); \':\'\'}-10 Speed unti the end of the next turn; enfeebled 1 until the end of the next turn"',
+    'Note="Successful Strike against a flat-footed foe also inflicts %{combatNotes.doubleDebilitation?\'2 choices\':\'a choice\'} from: %{combatNotes.preciseDebilitations?\'+2d6 HP precision; flat-footed; \':\'\'}%{combatNotes.viciousDebilitations?\'weakness 5 to a choice of damage type; clumsy 1; \':\'\'}%{combatNotes.tacticalDebilitations?\'prevent reactions; prevent flanking; \':\'\'}%{combatNotes.criticalDebilitation?\'slowed 2 until the end of the next turn (<b>save Fortitude</b> inflicts slowed 1, critical success negates, and critical failure inflicts paralyzed); \':\'\'}-10 Speed until the end of the next turn; enfeebled 1 until the end of the next turn"',
   // Deny Advantage as above
   'Double Debilitation':
     'Section=combat Note="Has increased Debilitating Strike effects"',
@@ -6346,7 +6346,7 @@ Pathfinder2E.FEATURES = {
   'Sorcerer Feats':'Section=feature Note="%V selections"',
   'Sorcerer Skills':'Section=skill Note="Skill Trained (Choose %V from any)"',
   'Sorcerer Spellcasting':
-    'Section=magic Note="Can learn spells from the %{bloodlineTraditionsLowered} tradition"',
+    'Section=magic Note="Can learn spells from the %{sorcererTraditionsLowered} tradition"',
   // Nethys changes Simple Weapon Expertise to Weapon Expertise
   // Weapon Expertise as above
   // Weapon Specialization as above
@@ -6711,42 +6711,42 @@ Pathfinder2E.FEATURES = {
   'Abjuration':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Protective Ward arcane spell",' +
+      '"+1 spell slot each level/Knows the Protective Ward arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level abjuration spell"',
   'Conjuration':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Augment Summoning arcane spell",' +
+      '"+1 spell slot each level/Knows the Augment Summoning arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level conjuration spell"',
   'Divination':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Diviner\'s Sight arcane spell",' +
+      '"+1 spell slot each level/Knows the Diviner\'s Sight arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level divination spell"',
   'Enchantment':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Charming Words arcane spell",' +
+      '"+1 spell slot each level/Knows the Charming Words arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level enchantment spell"',
   'Evocation':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Force Bolt arcane spell",' +
+      '"+1 spell slot each level/Knows the Force Bolt arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level evocation spell"',
   'Illusion':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Warped Terrain arcane spell",' +
+      '"+1 spell slot each level/Knows the Warped Terrain arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level illusion spell"',
   'Necromancy':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Call Of The Grave arcane spell",' +
+      '"+1 spell slot each level/Knows the Call Of The Grave arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level necromancy spell"',
   'Transmutation':
     'Section=magic,magic ' +
     'Note=' +
-      '"+1 spell slot each level/Has a focus pool and 1 Focus Point/Knows the Physical Boost arcane spell",' +
+      '"+1 spell slot each level/Knows the Physical Boost arcane spell/Has a focus pool and 1 Focus Point",' +
       '"Knows 1 additional 1st-level transmutation spell"',
 
   // Counterspell as above
@@ -6852,7 +6852,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level alchemist)"',
   // Quick Alchemy as above
   'Advanced Concoction':
-    'Section=feature Note="+1 Class Feat (alchemist up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (alchemist up to level %{level//2})"',
   'Expert Alchemy':'Section=feature Note="Raises advanced alchemy level to %V"',
   'Master Alchemy':'Section=feature Note="Raises advanced alchemy level to %V"',
 
@@ -6867,9 +6867,48 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level barbarian)"',
   'Advanced Fury':
     'Section=feature Note="+%V Class Feat (barbarian up to level %{level//2})"',
-  'Instinct Ability':
-    'Section=feature ' +
-    'Note="Has the instinct ability for the chosen barbarian instinct"',
+  'Instinct Ability (Animal Instinct (Ape))':
+    'Section=feature Note="Has the Bestial Rage (Ape) feature"',
+  'Instinct Ability (Animal Instinct (Bear))':
+    'Section=feature Note="Has the Bestial Rage (Bear) feature"',
+  'Instinct Ability (Animal Instinct (Bull))':
+    'Section=feature Note="Has the Bestial Rage (Bull) feature"',
+  'Instinct Ability (Animal Instinct (Cat))':
+    'Section=feature Note="Has the Bestial Rage (Cat) feature"',
+  'Instinct Ability (Animal Instinct (Deer))':
+    'Section=feature Note="Has the Bestial Rage (Deer) feature"',
+  'Instinct Ability (Animal Instinct (Frog))':
+    'Section=feature Note="Has the Bestial Rage (Frog) feature"',
+  'Instinct Ability (Animal Instinct (Shark))':
+    'Section=feature Note="Has the Bestial Rage (Shark) feature"',
+  'Instinct Ability (Animal Instinct (Snake))':
+    'Section=feature Note="Has the Bestial Rage (Snake) feature"',
+  'Instinct Ability (Animal Instinct (Wolf))':
+    'Section=feature Note="Has the Bestial Rage (Wolf) feature"',
+  'Instinct Ability (Dragon Instinct (Black))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Blue))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Green))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Red))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (White))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Brass))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Bronze))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Copper))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Gold))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Dragon Instinct (Silver))':
+    'Section=feature Note="Has the Draconic Rage feature"',
+  'Instinct Ability (Giant Instinct)':
+    'Section=feature Note="Has the Titan Mauler feature"',
+  'Instinct Ability (Spirit Instinct)':
+    'Section=feature Note="Has the Spirit Rage feature"',
   "Juggernaut's Fortitude":'Section=save Note="Save Master (Fortitude)"',
 
   'Bard Dedication':
@@ -6884,7 +6923,7 @@ Pathfinder2E.FEATURES = {
   "Basic Muse's Whispers":
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level bard)"',
   "Advanced Muse's Whispers":
-    'Section=feature Note="+1 Class Feat (bard up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (bard up to level %{level//2})"',
   'Counter Perform':
     'Section=magic ' +
     'Note="Knows the Counter Performance occult spell/Has a focus pool and at least 1 Focus Point"',
@@ -6913,7 +6952,7 @@ Pathfinder2E.FEATURES = {
     'Section=magic ' +
     'Note="Knows the Lay On Hands divine spell/Has a focus pool and at least 1 Focus Point"',
   'Advanced Devotion':
-    'Section=feature Note="+1 Class Feat (champion up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (champion up to level %{level//2})"',
   // Champion's Reaction as above
   // Divine Ally as above
   'Diverse Armor Expert':
@@ -6932,7 +6971,7 @@ Pathfinder2E.FEATURES = {
   'Basic Dogma':
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level cleric)"',
   'Advanced Dogma':
-    'Section=feature Note="+1 Class Feat (cleric up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (cleric up to level %{level//2})"',
   'Divine Breadth':
     'Section=magic Note="+1 divine spell slot of each level up to %V"',
   'Expert Cleric Spellcasting':
@@ -6966,7 +7005,7 @@ Pathfinder2E.FEATURES = {
     'Section=magic ' +
     'Note="Knows the Wild Morph primal spell/Has a focus pool and at least 1 Focus Point"',
   'Advanced Wilding':
-    'Section=feature Note="+1 Class Feat (druid up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (druid up to level %{level//2})"',
   'Primal Breadth':
     'Section=magic Note="+1 primal spell slot of each level up to %V"',
   'Expert Druid Spellcasting':
@@ -6986,7 +7025,7 @@ Pathfinder2E.FEATURES = {
   'Fighter Resiliency':'Section=combat Note="+%V Hit Points"',
   'Opportunist':'Section=feature Note="Has the Attack Of Opportunity feature"',
   'Advanced Maneuver':
-    'Section=feature Note="+1 Class Feat (fighter up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (fighter up to level %{level//2})"',
   'Diverse Weapon Expert':
     'Section=combat ' +
     'Note="Attack Expert (Simple Weapons; Martial Weapons)/Attack Trained (Advanced Weapons)"',
@@ -7001,7 +7040,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level monk)"',
   'Monk Resiliency':'Section=combat Note="+%V Hit Points"',
   'Advanced Kata':
-    'Section=feature Note="+1 Class Feat (monk up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (monk up to level %{level//2})"',
   'Monk Moves':'Section=ability Note="+10 Speed in no armor"',
   "Monk's Flurry":'Section=feature Note="Has the Flurry Of Blows feature"',
   "Perfection's Path (Fortitude)":'Section=save Note="Save Master (Fortitude)"',
@@ -7018,7 +7057,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level ranger)"',
   'Ranger Resiliency':'Section=combat Note="+%V Hit Points"',
   "Advanced Hunter's Trick":
-    'Section=feature Note="+1 Class Feat (ranger up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (ranger up to level %{level//2})"',
   'Master Spotter':'Section=skill Note="Perception Master"',
 
   'Rogue Dedication':
@@ -7031,12 +7070,12 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level rogue)"',
   'Sneak Attacker':'Section=feature Note="Has the Sneak Attack feature"',
   'Advanced Trickery':
-    'Section=feature Note="+1 Class Feat (rogue up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (rogue up to level %{level//2})"',
   'Skill Mastery':
     'Section=feature,skill ' +
     'Note=' +
-      '"+1 Skill Feat",' +
-      '"Skill Expert (Choose 1 from any)/Skill Master (Choose 1 from any)"',
+      '"+%V Skill Feat",' +
+      '"Skill Expert (Choose %V from any)/Skill Master (Choose %V from any)"',
   'Uncanny Dodge':'Section=feature Note="Has the Deny Advantage feature"',
   'Evasiveness':'Section=save Note="Save Master (Reflex)"',
 
@@ -7047,7 +7086,7 @@ Pathfinder2E.FEATURES = {
       '"Spell Trained (%V)/Knows 2 %1 cantrips"',
   'Basic Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} %{bloodlineTraditionsLowered} spell"',
+    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} %{sorcererTraditionsLowered} spell"',
   'Basic Blood Potency':
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level sorcerer)"',
   'Basic Bloodline Spell (Aberrant)':
@@ -7118,16 +7157,16 @@ Pathfinder2E.FEATURES = {
     // Errata changes Touch Of Undeath to Undeath's Blessing
     'Note="Knows the Undeath\'s Blessing divine spell/Has a focus pool and at least 1 Focus Point"',
   'Advanced Blood Potency':
-    'Section=feature Note="+1 Class Feat (sorcerer up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (sorcerer up to level %{level//2})"',
   'Bloodline Breadth':
     'Section=magic ' +
-    'Note="+1 %{bloodlineTraditionsLowered} spell slot of each level up to %V"',
+    'Note="+1 %{sorcererTraditionsLowered} spell slot of each level up to %V"',
   'Expert Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (%{bloodlineTraditions})/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} %{bloodlineTraditionsLowered} spell"',
+    'Note="Spell Expert (%{sorcererTraditions})/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} %{sorcererTraditionsLowered} spell"',
   'Master Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (%{bloodlineTraditions})/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} %{bloodlineTraditionsLowered} spell"',
+    'Note="Spell Master (%{sorcererTraditions})/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} %{sorcererTraditionsLowered} spell"',
 
   'Wizard Dedication':
     'Section=feature,magic,magic,skill ' +
@@ -7167,7 +7206,7 @@ Pathfinder2E.FEATURES = {
     'Section=magic ' +
     'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} arcane spell"',
   'Advanced Arcana':
-    'Section=feature Note="+1 Class Feat (wizard up to level %{level//2})"',
+    'Section=feature Note="+%V Class Feat (wizard up to level %{level//2})"',
   'Arcane Breadth':
     'Section=magic Note="+1 arcane spell slot of each level up to %V"',
   'Expert Wizard Spellcasting':
@@ -7224,7 +7263,7 @@ Pathfinder2E.FEATURES = {
   'Canny Acumen (Reflex)':'Section=save Note="Save %V (Reflex)"',
   'Canny Acumen (Will)':'Section=save Note="Save %V (Will)"',
   'Cat Fall':
-    'Section=ability ' +
+    'Section=save ' +
     'Note="Suffers %{rank.Acrobatics>=4?\'no\':rank.Acrobatics==3?\\"50\' less\\":rank.Acrobatics==2?\\"25\' less\\":\\"10\' less\\"} damage from falling"',
   'Charming Liar':
     'Section=skill ' +
@@ -7408,7 +7447,7 @@ Pathfinder2E.FEATURES = {
     'Section=skill ' +
     'Note="Successful roll of the connected skill gives recognition of a spell; critical success also gives +1 against effects, and critical failure misidentifies it; trained, expert, master, or legendary proficiency guarantees success on spells up to level 2, 4, 6, or 10"',
   'Ride':
-    'Section=feature ' +
+    'Section=skill ' +
     'Note="Automatically succeeds when using Command An Animal to move/Mount acts on self turn"',
   'Robust Recovery':
     'Section=skill ' +
@@ -7466,7 +7505,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Critical success on Demoralize causes a lower-level target to flee for 1 rd"',
   'Titan Wrestler':
-    'Section=skill ' +
+    'Section=combat ' +
     'Note="Can use Disarm, Grapple, Shove, and Trip on creatures up to %{rank.Athletics>=4?3:2} sizes larger"',
   'Toughness':
     'Section=combat,save ' +
@@ -11628,7 +11667,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Auditory,Enchantment,Mental,Sorcerer ' +
     'School=Enchantment ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=1 ' +
     'Description=' +
       '"5\' emanation (2 or 3 actions give a 10\' or 15\' emanation) inflicts stupefied 2 (<b>save Will</b> negates; critical failure inflicts confused) (<b>heightened +3</b> increases the radius by 5\')"',
@@ -11636,7 +11675,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Evocation,Sorcerer ' +
     'School=Evocation ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=2 ' +
     'Description=' +
       '"60\' cone inflicts 4d6 HP each of a random pair of damage types: bludgeoning and electricity; acid and slashing; bludgeoning and cold; fire and piercing (<b>save basic Reflex</b>) (<b>heightened +1</b> inflicts +1d6 HP each)"',
@@ -11644,7 +11683,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Divination,Sorcerer ' +
     'School=Divination ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=1 ' +
     'Description=' +
       '"Self becomes trained in a non-Lore or ancestral Lore skill for 1 min (<b>heightened 6th</b> becomes expert in the skill)"',
@@ -11652,7 +11691,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Abjuration,Aura,Good,Sorcerer ' +
     'School=Abjuration ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=1 ' +
     'Description=' +
       '"15\' emanation increases the HP restored by <i>Heal</i> by double the <i>Heal</i> spell\'s level for 1 min"',
@@ -11660,7 +11699,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Evocation,Light,Sorcerer ' +
     'School=Evocation ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=2 ' +
     'Description=' +
       '"Self gains a %{speed}\' fly Speed and shines a 30\' radius bright light for 3 rd (<b>heightened 5th</b> effects last for 1 min)"',
@@ -11668,7 +11707,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Abjuration,Sorcerer ' +
     'School=Abjuration ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=Reaction ' +
     'Description=' +
       '"R120\' Reduces the triggering spell\'s heightened level by 1 and gives the spell\'s targets +2 saves, skill checks, Armor Class, and DC against it"',
@@ -11676,7 +11715,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Curse,Necromancy,Sorcerer ' +
     'School=Necromancy ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=1 ' +
     'Description=' +
       '"R30\' Self and allies gain +1 attacks and skill checks vs. the evil target, and attacks by good creatures inflict +1d4 HP good, for 1 rd (<b>heightened +2</b> good creature attacks inflict +1 HP)"',
@@ -11692,7 +11731,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Evocation,Sorcerer ' +
     'School=Evocation ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=2 ' +
     'Description=' +
       '"%{draconicColor<\'Green\'?\\"60\' line\\":\\"30\' cone\\"} inflicts 5d6 HP %{bloodlineDamage||\'fire\'} (<b>save basic %{draconicColor==\'Green\'?\'Fortitude\':\'Reflex\'}</b>) (<b>heightened +1</b> inflicts +2d6 HP)"',
@@ -11700,7 +11739,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Morph,Sorcerer,Transmutation ' +
     'School=Transmutation ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=1 ' +
     'Description=' +
       '"Claws inflict 1d6 HP slashing and 1d6 HP %{bloodlineDamage||\'fire\'}, and self gains resistance 5 to %{bloodlineDamage||\'fire\'}, for 1 min (<b>heightened 5th</b> claws inflict 2d6 HP, and self gains resistance 10; <b>9th</b> claws inflict 3d6 HP, and self gains resistance 15)"',
@@ -11708,7 +11747,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Morph,Sorcerer,Transmutation ' +
     'School=Transmutation ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=2 ' +
     'Description=' +
       '"Self gains a %{Speed>?60}\' fly Speed for 1 min (<b>heightened 8th</b> effects last for 10 min)"',
@@ -11756,7 +11795,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Divination,Metamagic,Sorcerer ' +
     'School=Divination ' +
-    'Traditions=Primal ' +
+    'Traditions=Arcane ' +
     'Cast=1 ' +
     'Description=' +
       '"Increases the duration of a subsequent targeted spell of less than maximum spell level from 1 min to 10 min"',
@@ -11787,7 +11826,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Morph,Necromancy,Sorcerer ' +
     'School=Necromancy ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=1 ' +
     'Description=' +
       '"Bite inflicts 1d8 HP piercing, giving self 1d6 temporary HP, for 1 min (<b>heightened +2</b> gives +1d6 temporary HP</b>)"',
@@ -11811,7 +11850,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Emotion,Fear,Illusion,Mental,Sorcerer,Visual ' +
     'School=Illusion ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=2 ' +
     'Description=' +
       '"30\' radius inflicts frightened 1 (<b>save Will</b> negates; critical failure inflicts frightened 2) (<b>heightened 5th</b> inflicts frightened 1, 2, or 3 and fleeing for 1 rd on save success, failure, or critical failure)"',
@@ -11819,7 +11858,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Curse,Necromancy,Sorcerer ' +
     'School=Necromancy ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=1 ' +
     'Description=' +
       '"R30\' Inflicts enfeebled 1, clumsy 1, drained 1, or stupefied 1, based on the target\'s highest ability modifier, until the target saves or for 1 min (<b>save Will</b> negates; critical failure inflicts condition level 2)"',
@@ -11827,7 +11866,7 @@ Pathfinder2E.SPELLS = {
     'Level=3 ' +
     'Traits=Focus,Uncommon,Conjuration,Olfactory,Sorcerer ' +
     'School=Conjuration ' +
-    'Traditions=Primal ' +
+    'Traditions=Divine ' +
     'Cast=1 ' +
     'Description=' +
       '"R120\' 5\' burst (2 or 3 actions give a 10\' or 15\' burst) inflicts difficult terrain and 1d6 HP poison for 1 min (<b>save basic Fortitude</b>) (<b>heightened +2</b> increases radius by 5\' and inflicts +1d6 HP)"',
@@ -11835,7 +11874,7 @@ Pathfinder2E.SPELLS = {
     'Level=1 ' +
     'Traits=Focus,Uncommon,Morph,Sorcerer,Transmutation ' +
     'School=Transmutation ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=1 ' +
     'Description=' +
       '"Extends reach for touch spells and unarmed Strikes to 10\' for 1 min; adding an action to touch spells extends reach to 20\' (<b>heightened +2</b> adding an action gives +10\' touch spell reach)"',
@@ -11851,7 +11890,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Polymorph,Sorcerer,Transmutation ' +
     'School=Transmutation ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=1 ' +
     'Description=' +
       '"Self gains darkvision and resistance 10 to precision and critical damage and inflicts 2d6 HP acid on successful non-reach melee attackers for 1 min (<b>heightened +2</b> gives +5 resistances and inflicts +1d6 HP)"',
@@ -11859,7 +11898,7 @@ Pathfinder2E.SPELLS = {
     'Level=5 ' +
     'Traits=Focus,Uncommon,Emotion,Enchantment,Incapacitation,Mental,Sorcerer ' +
     'School=Enchantment ' +
-    'Traditions=Primal ' +
+    'Traditions=Occult ' +
     'Cast=2 ' +
     'Description=' +
       '"R30\' Inflicts stunned 1 for 1 rd and allows self to direct 1 target action (<b>save Will</b> inflicts stunned only; critical success negates; critical failure gives control for 1 rd) (<b>heightened 7th</b> gives control for 1 rd; critical failure gives control for 1 min or until the target succeeds on a save at the end of each turn)"',
@@ -13751,6 +13790,14 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule('featureNotes.warpriest-1',
       'deityWeaponCategory', '?', 'source.match(/Simple|Unarmed/)'
     );
+    rules.defineRule('features.Harmful Font',
+      'featureNotes.divineFont', '?', null,
+      'deityFont', '=', 'source=="Harm" ? 1 : null'
+    );
+    rules.defineRule('features.Healing Font',
+      'featureNotes.divineFont', '?', null,
+      'deityFont', '=', 'source=="Heal" ? 1 : null'
+    );
     rules.defineRule('magicNotes.cloisteredCleric',
       'level', '=', 'source<7 ? "Trained" : source<15 ? "Expert" : source<19 ? "Master" : "Legendary"'
     );
@@ -13778,7 +13825,8 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       ('saveNotes.warpriest', 'level', '=', 'source<15 ? "Expert" : "Master"');
     rules.defineRule('saveNotes.warpriest-1', 'level', '?', 'source>=15');
     rules.defineRule('selectableFeatureCount.Cleric (Divine Font)',
-      'featureNotes.divineFont', '=', '1'
+      'featureNotes.divineFont', '?', null,
+      'deityFont', '=', 'source=="Either" ? 1 : null'
     );
     rules.defineRule('selectableFeatureCount.Cleric (Doctrine)',
       'featureNotes.doctrine', '=', '1'
@@ -13951,11 +13999,11 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'combatNotes.ruffian', '^=', 'source=="Master" ? 3 : source=="Expert" ? 2 : 1'
     );
   } else if(name == 'Sorcerer') {
-    rules.defineRule('bloodlineTraditions',
-      classLevel, '=', 'Pathfinder2E.bloodlineTraditions = ""'
+    rules.defineRule('sorcererTraditions',
+      classLevel, '=', 'Pathfinder2E.sorcererTraditions = ""'
     );
-    rules.defineRule('bloodlineTraditionsLowered',
-      'bloodlineTraditions', '=', 'source.toLowerCase()'
+    rules.defineRule('sorcererTraditionsLowered',
+      'sorcererTraditions', '=', 'source.toLowerCase()'
     );
     rules.defineRule('bloodlineDamage',
       'draconicColor', '=', '{Black:"acid", Blue:"electricity", Bronze:"electricity", Copper:"acid", Green:"poison", Silver:"cold", White:"cold"}[source] || "fire"',
@@ -13982,11 +14030,11 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       ('combatNotes.weaponExpertise', '', '=', '"Simple Weapons"');
     rules.defineRule('magicNotes.divineEvolution', 'maxSpellLevel', '=', null);
     rules.defineRule
-      ('magicNotes.expertSpellcaster', 'bloodlineTraditions', '=', null);
+      ('magicNotes.expertSpellcaster', 'sorcererTraditions', '=', null);
     rules.defineRule
-      ('magicNotes.legendarySpellcaster', 'bloodlineTraditions', '=', null);
+      ('magicNotes.legendarySpellcaster', 'sorcererTraditions', '=', null);
     rules.defineRule
-      ('magicNotes.masterSpellcaster', 'bloodlineTraditions', '=', null);
+      ('magicNotes.masterSpellcaster', 'sorcererTraditions', '=', null);
     rules.defineRule('magicNotes.primalEvolution', 'maxSpellLevel', '=', null);
     ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
       rules.defineRule('trainingLevel.' + t,
@@ -14335,8 +14383,8 @@ Pathfinder2E.featRules.traits = [
   'Hobgoblin', 'Illusion', 'Investigator', 'Kholo', 'Kobold', 'Leshy', 'Light',
   'Lineage', 'Linguistic', 'Lizardfolk', 'Misfortune', 'Nephilim', 'Oracle',
   'Poison', 'Prediction', 'Ratfolk', 'Revelation', 'Sonic', 'Spellshape',
-  'Spirit', 'Swashbuckler', 'Teleportation', 'Tengu', 'Tripkee', 'Vitality',
-  'Void', 'Water', 'Witch'
+  'Spirit', 'Swashbuckler', 'Teleportation', 'Tengu', 'Tripkee', 'Vigilante',
+  'Vitality', 'Void', 'Water', 'Witch'
 ];
 
 /*
@@ -14356,11 +14404,10 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule('trainingLevel.' + matchInfo[1],
       'skillNotes.' + prefix, '^=', 'source=="Trained" ? 1 : source=="Expert" ? 2 : source=="Master" ? 3 : 4'
     );
+  } else if(name.match(/^Advanced (Arcana|Blood Potency|Concoction|Devotion|Dogma|Fury|Hunter's Trick|Kata|Maneuver|Muse's Whispers|Trickery|Wilding)$/)) {
+    rules.defineRule('featureNotes.' + prefix, 'feats.' + name, '=', null);
   } else if(name.startsWith('Advanced Domain')) {
     rules.defineRule('features.Advanced Domain', 'features.' + name, '=', '1');
-  } else if(name == 'Advanced Fury') {
-    rules.defineRule
-      ('featureNotes.advancedFury', 'feats.Advanced Fury', '=', null);
   } else if(name == 'Advanced School Spell') {
     let schools =
       rules.plugin.CLASSES.Wizard.match(/([\s\w]*:Arcane School)/g)
@@ -14374,20 +14421,25 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
   } else if(name == 'Alchemist Dedication') {
     rules.defineRule
       ('advancedAlchemyLevel', 'featureNotes.alchemistDedication', '=', '1');
-  } else if((matchInfo = name.match(/^(Arcane|Bloodline|Divine|Occult|Primal) Breadth$/)) != null) {
-    let trad = matchInfo[1];
-    let c = {'Arcane':'Wizard', 'Bloodline':'Sorcerer', 'Divine':'Cleric', 'Occult':'Bard', 'Primal':'Druid'}[trad];
-    let note = 'magicNotes.' + trad.toLowerCase() + 'Breadth';
+  } else if((matchInfo = name.match(/^(.*) Breadth$/)) != null) {
+    // TODO homebrew
+    let attrs = rules.plugin.FEATS[name] || Pathfinder2E.FEATS[name] || '';
+    let c = attrs.match(/Basic (.*) Spellcasting/)[1] || 'Wizard';
+    let trad =
+      (QuilvynUtils.getAttrValue(rules.plugin.CLASSES[c] || Pathfinder2E.CLASSES[c], 'SpellSlots') || 'A').charAt(0);
+    let note = 'magicNotes.' + prefix;
     rules.defineRule(note,
       'level', '?', null, // recomputation trigger
       'magicNotes.basic' + c + 'Spellcasting', '=', '1',
       'magicNotes.expert' + c + 'Spellcasting', '^', 'dict.level>=16 ? 4 : dict.level>=14 ? 3 : 2',
       'magicNotes.master' + c + 'Spellcasting', '^', 'dict.level>=20 ? 6 : 5'
     );
-    if(c == 'Sorcerer') {
+    if(trad.match(/^\d/)) {
+      let traditions =
+        c.charAt(0).toLowerCase() + c.substring(1).replaceAll(' ', '') + 'Traditions';
       ['A', 'D', 'O', 'P'].forEach(t => {
         rules.defineRule(note + '.' + t + '.1',
-          'bloodlineTraditions', '?', 'source && source.includes("' + t + '")',
+          traditions, '?', 'source && source.includes("' + t + '")',
            note, '=', null
         );
         [1, 2, 3, 4, 5, 6].forEach(l => {
@@ -14397,15 +14449,14 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
         });
       });
     } else {
-      let t = trad.charAt(0);
       [1, 2, 3, 4, 5, 6].forEach(l => {
         rules.defineRule
-          ('spellSlots.' + t + l, note, '+', 'source>=' + l + ' ? 1 : null');
+          ('spellSlots.' + trad + l, note, '+', 'source>=' + l + ' ? 1 : null');
       });
     }
   } else if(name == 'Arcane School Spell') {
     let schools =
-      Pathfinder2E.CLASSES.Wizard.match(/([\s\w]*:Arcane School)/g)
+      (rules.plugin.CLASSES.Wizard || Pathfinder2E.CLASSES.Wizard).match(/([\s\w]*:Arcane School)/g)
       .map(x => x.replace(':Arcane School', ''))
       .filter(x => x != 'Universalist');
     schools.forEach(s => {
@@ -14493,17 +14544,19 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       level=='Basic' ? {'1':0, '2':6, '3':8} :
       level=='Expert' ? {'4':0, '5':14, '6':16} : {'7':0, '8':20};
     let trad =
-      (QuilvynUtils.getAttrValue(Pathfinder2E.CLASSES[c], 'SpellSlots') || 'A').charAt(0);
+      (QuilvynUtils.getAttrValue(rules.plugin.CLASSES[c] || Pathfinder2E.CLASSES[c], 'SpellSlots') || 'A').charAt(0);
     let note =
       'magicNotes.' + level.toLowerCase() + c.replaceAll(' ', '') + 'Spellcasting';
-    if(c == 'Sorcerer') {
+    if(trad.match(/^\d/)) {
+      let traditions =
+        c.charAt(0).toLowerCase() + c.substring(1).replaceAll(' ', '') + 'Traditions';
       ['A', 'D', 'O', 'P'].forEach(trad => {
         for(let s in slots) {
           if(slots[s] > 0)
             rules.defineRule
               (note + '.' + trad + '.' + s, 'level', '?', 'source>' + slots[s]);
           rules.defineRule(note + '.' + trad + '.' + s,
-            'bloodlineTraditions', '?', 'source && source.includes("' + trad + '")',
+            traditions, '?', 'source && source.includes("' + trad + '")',
              note, '=', '1'
           );
           rules.defineRule
@@ -14531,7 +14584,7 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     let allSelectables = rules.getChoices('selectableFeatures');
     let abilities =
       Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Champion (Key Ability)'))
+      .filter(x => allSelectables[x].match(/Champion .Key/))
       .map(x => x.replace('Champion - ', ''));
     abilities.forEach(a => {
       rules.defineRule('validationNotes.champion-' + a + 'SelectableFeature',
@@ -14731,22 +14784,15 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('spellSlots.P10', "magicNotes.hierophant'sPower", '+', '1');
   } else if(name == 'Instinct Ability') {
-    // Extend test rules to allow characters with the Instinct Ability
-    // archetype feature to acquire barbarian instinct abilities.
-    // NOTE: Because this code is run only when the feat is processed, any
-    // homebrew instincts will still generate validation errors if selected by
-    // a non-barbarian.
-    let instinctAbilities =
-      QuilvynUtils.getAttrValueArray
-        (rules.getChoices('levels').Barbarian, 'Features')
-        .filter(x => x.match(/Instinct\s*(\(.*\)\s*)?\?\s*[A-Z1]/))
-        .map(x => x.replace(/^.*\?\s*(1:)?/, ''))
-        .filter(x => x != 'Anathema');
-    instinctAbilities.forEach(ia => {
-      rules.defineRule
-        ('barbarianFeatures.' + ia, 'featureNotes.instinctAbility', '=', '1');
-      rules.defineRule('testNotes.barbarianFeatures.' + ia,
-        'featureNotes.instinctAbility', '=', '-1'
+    let allSelectables = rules.getChoices('selectableFeatures');
+    let instincts =
+      Object.keys(allSelectables)
+      .filter(x => allSelectables[x].includes('Barbarian (Instinct)'))
+      .map(x => x.replace('Barbarian - ', ''));
+    instincts.forEach(i => {
+      rules.defineRule('features.Instinct Ability (' + i + ')',
+        'features.Instinct Ability', '?', null,
+        'features.' + i, '=', '1'
       );
     });
   } else if(name == 'Interweave Dispel') {
@@ -14873,14 +14919,19 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule('classDifficultyClass.Rogue.1',
       'features.Rogue Dedication', '=', '"dexterity"'
     );
+  } else if(name == 'Skill Mastery') {
+    rules.defineRule
+      ('featureNotes.skillMastery', 'feats.Skill Mastery', '=', null);
+    rules.defineRule
+      ('skillNotes.skillMastery', 'feats.Skill Mastery', '=', null);
   } else if(name == 'Sorcerer Dedication') {
-    rules.defineRule('bloodlineTraditions',
-      'feats.' + name, '=', 'Pathfinder2E.bloodlineTraditions = ""'
+    rules.defineRule('sorcererTraditions',
+      'feats.' + name, '=', 'Pathfinder2E.sorcererTraditions = ""'
     );
     rules.defineRule
-      ('magicNotes.sorcererDedication', 'bloodlineTraditions', '=', null);
+      ('magicNotes.sorcererDedication', 'sorcererTraditions', '=', null);
     rules.defineRule('magicNotes.sorcererDedication.1',
-      'bloodlineTraditionsLowered', '=', null
+      'sorcererTraditionsLowered', '=', null
     );
     ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
       rules.defineRule('trainingLevel.' + t,
@@ -14891,7 +14942,7 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       );
       rules.defineRule('spellModifier' + t + '.' + name,
         'features.Sorcerer Dedication', '?', null,
-        'bloodlineTraditions', '?', 'source && source.includes("' + t + '")',
+        'sorcererTraditions', '?', 'source && source.includes("' + t + '")',
         'charismaModifier', '=', null
       );
       rules.defineRule
@@ -15243,11 +15294,11 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
       if(matchInfo && ((rules.getChoices('levels') || {}).Sorcerer || '').includes(name + ':Bloodline')) {
         let trad = matchInfo[1];
         rules.defineRule('sorcerer' + trad + 'Level',
-          'bloodlineTraditions', '?', 'source && source.includes("' + trad + '")',
+          'sorcererTraditions', '?', 'source && source.includes("' + trad + '")',
           'levels.Sorcerer', '=', null
         );
-        rules.defineRule('bloodlineTraditions',
-          'features.' + name, '=', 'Pathfinder2E.bloodlineTraditions = !Pathfinder2E.bloodlineTraditions ? "' + trad + '" : !Pathfinder2E.bloodlineTraditions.includes("' + trad + '") ? Pathfinder2E.bloodlineTraditions + "; ' + trad + '" : Pathfinder2E.bloodlineTraditions'
+        rules.defineRule('sorcererTraditions',
+          'features.' + name, '=', 'Pathfinder2E.sorcererTraditions = !Pathfinder2E.sorcererTraditions ? "' + trad + '" : !Pathfinder2E.sorcererTraditions.includes("' + trad + '") ? Pathfinder2E.sorcererTraditions + "; ' + trad + '" : Pathfinder2E.sorcererTraditions'
         );
         rules.defineRule('features.Advanced Bloodline (' + name + ')',
           'features.Advanced Bloodline', '?', null,
@@ -15516,8 +15567,9 @@ Pathfinder2E.spellRules.traits = [
   'Bard', 'Composition', 'Metamagic', 'Champion', 'Litany', 'Cleric', 'Druid',
   'Monk', 'Stance', 'Sorcerer', 'Wizard', 'Arcane', 'Concentrate',
   // Renewed
-  'Hex', 'Holy', 'Manipulate', 'Metal', 'Ranger', 'Sanctified', 'Spellshape',
-  'Spirit', 'Subtle', 'Summon', 'Unholy', 'Vitality', 'Void', 'Witch', 'Wood'
+  'Hex', 'Holy', 'Manipulate', 'Metal', 'Oracle', 'Ranger', 'Sanctified',
+  'Spellshape', 'Spirit', 'Subtle', 'Summon', 'Unholy', 'Vitality', 'Void',
+  'Witch', 'Wood'
 ];
 
 /*
