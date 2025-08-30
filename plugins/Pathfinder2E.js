@@ -31,7 +31,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 function Pathfinder2E() {
 
-  let rules = new QuilvynRules('Pathfinder 2E (Legacy)', Pathfinder2E.VERSION);
+  let rules = new QuilvynRules('Pathfinder 2E Legacy', Pathfinder2E.VERSION);
   rules.plugin = Pathfinder2E;
   Pathfinder2E.rules = rules;
 
@@ -460,12 +460,10 @@ Pathfinder2E.CLASSES = {
       '"5:Powerful Alchemy","7:Alchemical Weapon Expertise","7:Iron Will",' +
       '"7:Perpetual Infusions","9:Alchemical Expertise","9:Alertness",' +
       '"9:Double Brew","11:Juggernaut","11:Perpetual Potency",' +
-      '"features.Bomber ? 13:Greater Field Discovery (Bomber)",' +
-      '"features.Chirurgeon ? 13:Greater Field Discovery (Chirurgeon)",' +
-      '"features.Mutagenist ? 13:Greater Field Discovery (Mutagenist)",' +
-      '"13:Medium Armor Expertise","13:Weapon Specialization",' +
-      '"15:Alchemical Alacrity","15:Evasion","17:Alchemical Mastery",' +
-      '"17:Perpetual Perfection","19:Medium Armor Mastery" ' +
+      '"13:Greater Field Discovery","13:Medium Armor Expertise",' +
+      '"13:Weapon Specialization","15:Alchemical Alacrity","15:Evasion",' +
+      '"17:Alchemical Mastery","17:Perpetual Perfection",' +
+      '"19:Medium Armor Mastery" ' +
     'Selectables=' +
       '"1:Bomber:Research Field",' +
       '"1:Chirurgeon:Research Field",' +
@@ -540,7 +538,7 @@ Pathfinder2E.CLASSES = {
       '"1:Attack Trained (Simple Weapons; Longsword; Rapier; Sap; Shortbow; Shortsword; Whip; Unarmed Attacks)",' +
       '"1:Defense Trained (Light Armor; Unarmored Defense)",' +
       '"1:Spell Trained (Occult)",' +
-      '"1:Occult Spellcasting","1:Composition Spells","1:Muses",' +
+      '"1:Occult Spellcasting","1:Composition Spells","1:Muse",' +
       '"2:Bard Feats","2:Skill Feats","3:General Feats",' +
       '"3:Lightning Reflexes","3:Signature Spells","3:Skill Increases",' +
       '"7:Expert Spellcaster","9:Great Fortitude","9:Resolve",' +
@@ -586,14 +584,8 @@ Pathfinder2E.CLASSES = {
       '"1:Devotion Spells","1:Shield Block","1:Champion Feats",' +
       '"2:Skill Feats","3:Divine Ally","3:General Feats","3:Skill Increases",' +
       '"5:Weapon Expertise","7:Armor Expertise","7:Weapon Specialization",' +
-      '"9:Champion Expertise",' +
-      '"features.Liberator ? 9:Divine Smite (Liberator)",' +
-      '"features.Paladin ? 9:Divine Smite (Paladin)",' +
-      '"features.Redeemer ? 9:Divine Smite (Redeemer)",' +
-      '"9:Juggernaut","9:Lightning Reflexes","11:Alertness","11:Divine Will",' +
-      '"features.Liberator ? 11:Exalt (Liberator)",' +
-      '"features.Paladin ? 11:Exalt (Paladin)",' +
-      '"features.Redeemer ? 11:Exalt (Redeemer)",' +
+      '"9:Champion Expertise","9:Divine Smite","9:Juggernaut",' +
+      '"9:Lightning Reflexes","11:Alertness","11:Divine Will","11:Exalt",' +
       '"13:Armor Mastery","13:Weapon Mastery",' +
       '"15:Greater Weapon Specialization","17:Champion Mastery",' +
       '"17:Legendary Armor","19:Hero\'s Defiance" ' +
@@ -849,7 +841,7 @@ Pathfinder2E.CLASSES = {
       '"1:Undead:Bloodline" ' +
     // SpellSlots tradition depends on bloodline--see classRules
     'SpellSlots=' +
-      '0:5@1,' +
+      'C1:5@1,' +
       '1:3@1;4@2,' +
       '2:3@3;4@4,' +
       '3:3@5;4@6,' +
@@ -1098,7 +1090,7 @@ Pathfinder2E.FEATS = {
   'Titan Slinger':'Traits=Halfling',
   'Unfettered Halfling':'Traits=Halfling',
   'Watchful Halfling':'Traits=Halfling',
-  // TODO Remove Halfling from the list
+  // Note: Cultural Adaptability (Halfling) seems useless but not forbidden
   'Cultural Adaptability (%ancestry)':'Traits=Halfling Require="level >= 5"',
   'Halfling Weapon Trickster':
     'Traits=Halfling ' +
@@ -1780,7 +1772,8 @@ Pathfinder2E.FEATS = {
   'Shielded Stride':'Traits=Fighter Require="level >= 4"',
   // Swipe as above
   'Twin Parry':'Traits=Fighter,Ranger Require="level >= 4"',
-  'Advanced Weapon Training':'Traits=Fighter Require="level >= 6"',
+  'Advanced Weapon Training (%weaponGroup)':
+    'Traits=Fighter Require="level >= 6"',
   'Advantageous Assault':'Traits=Fighter,Press Require="level >= 6"',
   'Disarming Stance':
     'Traits=Fighter,Stance Require="level >= 6","rank.Athletics >= 1"',
@@ -2571,11 +2564,14 @@ Pathfinder2E.FEATS = {
   "Monk's Flurry":
     'Traits=Archetype Require="level >= 10","feats.Monk Dedication"',
   "Perfection's Path (Fortitude)":
-    'Traits=Archetype Require="level >= 12","rank.Fortitude >= 2"',
+    'Traits=Archetype ' +
+     'Require="level >= 12","feats.Monk Dedication","rank.Fortitude >= 2"',
   "Perfection's Path (Reflex)":
-    'Traits=Archetype Require="level >= 12","rank.Fortitude >= 2"',
+    'Traits=Archetype ' +
+     'Require="level >= 12","feats.Monk Dedication","rank.Fortitude >= 2"',
   "Perfection's Path (Will)":
-    'Traits=Archetype Require="level >= 12","rank.Fortitude >= 2"',
+    'Traits=Archetype ' +
+     'Require="level >= 12","feats.Monk Dedication","rank.Fortitude >= 2"',
 
   'Ranger Dedication':
     'Traits=Archetype,Dedication,Multiclass ' +
@@ -3020,7 +3016,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Critical hits with a battle axe, pick, warhammer, or dwarf weapon inflict its critical specialization effect"',
   "Mountain's Stoutness":
-    'Section=combat,combat ' +
+    'Section=combat,save ' +
     'Note=' +
       '"+%{level} Hit Points",' +
       '"-%{features.Toughness?4:1} dying recovery DC"',
@@ -3110,7 +3106,6 @@ Pathfinder2E.FEATURES = {
     'Note="Has R30\' imprecise scent; can use it to gain +2 Perception to locate a creature"',
   'Umbral Gnome':'Section=feature Note="Has the Darkvision feature"',
   'Wellspring Gnome':'Section=feature Note="1 selection"',
-  // TODO changes innate spell tradition from primal to chosen wellspring
   'Wellspring Gnome (Arcane)':
     'Section=magic ' +
     'Note="Can cast a chosen arcane cantrip as an innate spell at will"',
@@ -3131,7 +3126,7 @@ Pathfinder2E.FEATURES = {
       '"+2 Perception (fey)/Can make a%{$\'features.Glad-Hand\'?\'\':\' -5\'} Diplomacy check to Make An Impression upon meeting fey and retry a failure after 1 min of conversation"',
   'First World Magic':
     'Section=magic ' +
-    'Note="Can cast a chosen primal cantrip as an innate spell at will"',
+    'Note="Can cast a chosen %{gnomeTradition} cantrip as an innate spell at will"',
   'Gnome Obsession':
     'Section=skill ' +
     // NOTE: would like to replace "background Lore skill" with the actual
@@ -3149,10 +3144,9 @@ Pathfinder2E.FEATURES = {
       '"+1 Will vs. illusions/R10\' Automatically attempts to disbelieve illusions",' +
       '"+1 Perception (illusions)"',
   'Animal Elocutionist':
-    'Section=magic,skill ' +
+    'Section=skill ' +
     'Note=' +
-      '"Can speak with all animals",' +
-      '"+1 to Make An Impression on animals"',
+      '"Can speak with all animals and gains +1 to Make An Impression on them"',
   'Energized Font':
     'Action=1 Section=magic Note="Regains 1 Focus Point once per day"',
   'Gnome Weapon Innovator':
@@ -3160,7 +3154,7 @@ Pathfinder2E.FEATURES = {
     'Note="Critical hits with a glaive, kukri, or gnome weapon inflict its critical specialization effect"',
   'First World Adept':
     'Section=magic ' +
-     'Note="Knows the Faerie Fire and Invisibility primal spells; can cast each once per day"',
+     'Note="Knows the Faerie Fire and Invisibility %V innate spells; can cast each once per day"',
   'Vivacious Conduit':
     'Section=combat ' +
     'Note="10 min rest restores %{constitutionModifier*(level/2)//1} HP"',
@@ -3276,7 +3270,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Successes to Escape and vs. grabbed or restrained are critical successes/Foe Grapple fails are critical fails/Foe Grab requires a successful Athletics check"',
   'Watchful Halfling':
-    'Section=combat,skill ' +
+    'Section=save,skill ' +
     'Note=' +
       '"Can use Aid to help another overcome enchantment or possession",' +
       '"+2 Sense Motive to notice enchantment or possession, and automatically attempts a -2 check to notice these"',
@@ -3295,7 +3289,7 @@ Pathfinder2E.FEATURES = {
     'Note=' +
       '"Successful saves vs. emotion are critical successes%{$\'features.Gutsy Halfling\'?\', and critical failures vs. emotion are normal failures\':\'\'}"',
   'Ceaseless Shadows':
-    'Section=combat ' +
+    'Section=skill ' +
     'Note="Can use Hide and Sneak without cover and gains 1 degree better cover from larger creatures"',
   'Halfling Weapon Expertise':
     'Section=combat ' +
@@ -3318,7 +3312,7 @@ Pathfinder2E.FEATURES = {
 
   'Adapted Cantrip':
     'Section=magic Note="Knows a cantrip from a second tradition"',
-  'Cooperative Nature':'Section=skill Note="+4 Aid checks"',
+  'Cooperative Nature':'Section=feature Note="+4 Aid checks"',
   'General Training':
     'Section=feature Note="+%{$\'feats.General Training\'} General Feat"',
   'Haughty Obstinacy':
@@ -3341,9 +3335,10 @@ Pathfinder2E.FEATURES = {
     'Note="Failures and critical failures to Aid with expert skills are successes"',
   'Incredible Improvisation':
     'Action=Free ' +
-    'Section=combat ' +
-    'Note="Gives +4 on an untrained skill check once per day"',
-  'Multitalented':'Section=combat Note="+1 Class Feat (multiclass dedication)"',
+    'Section=skill ' +
+    'Note="Gains +4 on an untrained skill check once per day"',
+  'Multitalented':
+    'Section=feature Note="+1 Class Feat (multiclass dedication)"',
   'Unconventional Expertise (%weapon)':
     'Section=combat Note="Attack %V (%weapon)"',
 
@@ -3396,7 +3391,6 @@ Pathfinder2E.FEATURES = {
   'Skill Increases':'Section=skill Note="Skill Increase (Choose %V from any)"',
 
   // Alchemist
-  // TODO recheck Alchemist feature texts
   'Advanced Alchemy':
     'Section=skill ' +
     'Note="Can use a batch of infused reagents to create 2 infused alchemical items of up to level %{level} without a Crafting check during daily prep"',
@@ -3586,7 +3580,7 @@ Pathfinder2E.FEATURES = {
     'Section=save ' +
     'Note="Consuming a serene mutagen gives immunity to detection, revelation, and scrying up to level 9"',
   'Miracle Worker':
-    'Section=combat ' +
+    'Section=skill ' +
     'Note="Can administer a true elixir of life that restores life with 1 HP and wounded 1 to a creature dead for up to 2 rd once per 10 min"',
   'Perfect Debilitation':
     'Section=combat ' +
@@ -3643,7 +3637,7 @@ Pathfinder2E.FEATURES = {
       '"Critical hits with a melee weapon or unarmed attack inflict its critical specialization effect during rage"',
   'Deny Advantage':
     'Section=combat ' +
-    'Note="Does not suffer flat-footed vs. hidden, undetected, flanking, or surprising foes of equal or lower level"',
+    'Note="Does not suffer flat-footed vs. hidden, undetected, flanking, or surprising foes of up to level %{level}"',
   'Devastator':
     'Section=combat,combat ' +
     'Note=' +
@@ -3703,7 +3697,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat Note="Has increased Instinct Ability Rage effects"',
   'Spirit Rage':
     'Section=combat ' +
-    'Note="May inflict +%{combatNotes.greaterWeaponSpecialization?13:combatNotes.specializationAbility?7:3} HP positive or negative damage, along with <i>ghost touch</i>, instead of +%{combatNotes.rage} HP weapon damage during rage"',
+    'Note="May inflict +%{combatNotes.greaterWeaponSpecialization?13:combatNotes.specializationAbility?7:3} HP positive or negative damage, along with <i>ghost touch</i> effects, instead of +%{combatNotes.rage} HP weapon damage during rage"',
   'Titan Mauler':
     'Section=combat ' +
     'Note="Can use weapons made for a larger creature, suffering clumsy 1 and gaining +%{combatNotes.greaterWeaponSpecialization?18:combatNotes.specializationAbility?10:6} HP weapon damage, instead of gaining +%{combatNotes.rage} HP weapon damage during rage"',
@@ -3742,16 +3736,18 @@ Pathfinder2E.FEATURES = {
     'Note="Stride keeps pace with a retreating foe during rage"',
   'Second Wind':
     'Section=combat ' +
-    'Note="Can rage again immediately after ending rage, suffering fatigue afterwards until 10 min rest"',
+    'Note="Can rage again immediately after ending rage, suffering fatigue afterwards until after a 10 min rest"',
   'Shake It Off':
     'Action=1 ' +
-    'Section=combat ' +
+    'Section=save ' +
     'Note="Reduces a frightened condition by 1 and a sickened condition by 1, 2, or 3 with a fail, success, or critical success on a Fortitude save during rage"',
-  'Fast Movement':'Section=combat Note="Gains +10 Speed during rage"',
+  'Fast Movement':'Section=ability Note="Gains +10 Speed during rage"',
   'Raging Athlete':
-    'Section=skill ' +
+    'Section=ability,skill ' +
     // Errata changes the jump distance
-    'Note="Has a %{speed}\' climb and swim Speed, -10 jump DC, and 5\' and %{speed>=30?20:15}\' vertical and horizontal Leaps during rage"',
+    'Note=' +
+      '"Has a %{speed}\' climb and swim Speed during rage",' +
+      '"Has -10 jump DC and 5\' and %{speed>=30?20:15}\' vertical and horizontal Leaps during rage"',
   'Swipe':
     'Action=2 ' +
     'Section=combat ' +
@@ -3787,7 +3783,7 @@ Pathfinder2E.FEATURES = {
   "Spirits' Interference":
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Imposes a DC 5 flat check on foe ranged Strikes vs. self until rage ends"',
+    'Note="Requires ranged Strikes vs. self to succeed on an additional DC 5 flat check until rage ends"',
   'Animal Rage':
     'Action=1 ' +
     'Section=magic ' +
@@ -3831,7 +3827,7 @@ Pathfinder2E.FEATURES = {
     // Errata corrects "each creature" to "each enemy"
     'Note="Successful Intimidate checks Demoralize each foe in a 30\' radius once per target per min during rage"',
   "Dragon's Rage Wings":
-    'Action=1 Section=combat Note="Gains a %{speed}\' fly Speed during rage"',
+    'Action=1 Section=ability Note="Gains a %{speed}\' fly Speed during rage"',
   'Furious Grab':
     'Action=1 ' +
     'Section=combat ' +
@@ -3871,7 +3867,7 @@ Pathfinder2E.FEATURES = {
     'Note="Transforms into a Large dragon, as with 6th-level <i>Dragon Form</i>,%{level>=18?\' with +20 fly Speed, +12 dragon Strikes, and +14 HP breath weapon damage \':\'\'} during rage"',
   'Reckless Abandon':
     'Action=Free ' +
-    'Section=feature ' +
+    'Section=combat ' +
     'Note="Gives -2 Armor Class, -1 saves, and +2 attacks at the start of a turn until rage ends when reduced to %{hitPoints//2} or fewer Hit Points"',
   'Brutal Critical':
     'Section=combat ' +
@@ -3930,7 +3926,7 @@ Pathfinder2E.FEATURES = {
       '"Knows the Soothe occult spell"',
   'Magnum Opus':'Section=magic Note="Knows 2 10th-level occult spells"',
   'Master Spellcaster':'Section=magic Note="Spell Master (%V)"',
-  'Muses':'Section=feature Note="1 selection"',
+  'Muse':'Section=feature Note="1 selection"',
   'Occult Spellcasting':
     'Section=magic Note="Can learn spells from the occult tradition"',
   'Polymath':
@@ -4281,7 +4277,7 @@ Pathfinder2E.FEATURES = {
       '"Can use <i>Lay On Hands</i> to inflict good damage on creatures seen harming innocents or good allies"',
   'Aura Of Courage':
     'Section=save ' +
-    'Note="Reduces the initial value of any frightened condition by 1, and reduction of a frightened condition at the end of a turn also reduces the fright of allies within 15\'"',
+    'Note="R15\' Reduces the initial value of any self frightened condition by 1, and reduction of a frightened condition at the end of a turn also reduces the fright of allies"',
   'Divine Health':
     'Section=save ' +
     'Note="+1 vs. disease, and successes vs. disease are critical successes"',
@@ -4415,7 +4411,7 @@ Pathfinder2E.FEATURES = {
   'Greater Mercy':'Section=magic Note="Has increased Mercy effects"',
   'Heal Mount':
     'Section=magic ' +
-    'Note="<i>Lay On Hands</i> cast on mount restores 10 HP + 10 HP per heightened level"',
+    'Note="<i>Lay On Hands</i> cast on mount restores 10 Hit Points + 10 Hit Points per heightened level"',
   'Quick Shield Block':
     'Section=combat ' +
     'Note="Can use an additional reaction for a Shield Block once per turn"',
@@ -4789,7 +4785,7 @@ Pathfinder2E.FEATURES = {
     'Section=magic ' +
     'Note="Casting <i>Heal</i> on a single target restores HP equal to the spell level to self"',
   'Emblazon Armament':
-    'Section=magic ' +
+    'Section=combat ' +
     'Note="10 min process gives a shield +1 Hardness or a weapon +1 HP damage for 1 year"',
   'Sap Life':
     'Section=magic ' +
@@ -4824,7 +4820,7 @@ Pathfinder2E.FEATURES = {
     'Note="Subsequent single-target damaging <i>Harm</i> or <i>Heal</i> also inflicts knocked prone (save negates; critical failure also inflicts -10 Speed for 1 min)"',
   'Divine Weapon':
     'Action=Free ' +
-    'Section=magic ' +
+    'Section=combat ' +
     'Note="Using a divine spell slot causes a wielded weapon to inflict +1d4 HP force or +1d6 HP alignment for the remainder of the turn once per turn"',
   'Selective Energy':
     'Section=magic ' +
@@ -4853,7 +4849,7 @@ Pathfinder2E.FEATURES = {
     'Section=magic ' +
     'Note="<i>Heal</i> cast upon undead also inflicts persistent fire damage equal to the spell level"',
   'Emblazon Energy':
-    'Section=magic ' +
+    'Section=combat ' +
     'Note="Can use Emblazon Armament to instead cause a shield to give a save bonus and Shield Block vs. a chosen energy type, and to give it resistance %{level//2} if the energy matches a known domain spell, or to cause a weapon to inflict +1d4 HP energy type damage, or +1d6 HP if the energy matches a known domain spell"',
   'Castigating Weapon':
     'Section=magic ' +
@@ -4874,7 +4870,7 @@ Pathfinder2E.FEATURES = {
     'Note="Subsequent single-target healing also gives the target +2 Armor Class and saves for 1 rd"',
   'Domain Focus':'Section=magic Note="Refocus restores 2 Focus Points"',
   'Emblazon Antimagic':
-    'Section=magic ' +
+    'Section=combat ' +
     // Errata corrects the counteract level
     'Note="Can use Emblazon Armament to instead cause a shield to give a save bonus vs. magic and Shield Block vs. spells, or to cause 1 critical hit with a weapon to allow a +%{(level+1)//2} counteract attempt vs. a spell"',
   'Shared Replenishment':
@@ -4971,7 +4967,7 @@ Pathfinder2E.FEATURES = {
 
   'Animal Companion':
     'Section=feature ' +
-    'Note="Has a young animal companion%{$\'features.Hunt Prey\'?\' that gains Hunt Prey\'+($\'features.Masterful Companion\'?\' and Flurry, Precision, and Outwit\':\'\')+\' effects\':\'\'}"',
+    'Note="Has a young animal companion%{$\'features.Hunt Prey\'?\' with Hunt Prey\'+($\'features.Masterful Companion\'?\', Flurry, Precision, and Outwit\':\'\')+\' abilities\':\'\'}"',
   // Errata adds fungus
   'Leshy Familiar':'Section=feature Note="Has a Tiny plant or fungus familiar"',
   // Reach Spell as above
@@ -5014,7 +5010,7 @@ Pathfinder2E.FEATURES = {
   'Form Control':
     'Action=1 ' +
     'Section=magic ' +
-    'Note="Subsequent <i>Wild Shape</i>, cast 2 levels lower, lasts for 1 hr"',
+    'Note="Subsequent <i>Wild Shape</i>, cast 2 levels lower, lasts %{magicNotes.perfectFormControl?\'indefinitely\':\'for 1 hr\'}"',
   'Mature Animal Companion':
     'Section=feature ' +
     'Note="Animal Companion is a mature companion and may Stride or Strike without a command"',
@@ -5108,7 +5104,7 @@ Pathfinder2E.FEATURES = {
   'Invoke Disaster':
     'Section=magic Note="Knows the Storm Lord primal spell/+1 Focus Points"',
   'Perfect Form Control':
-    'Section=magic Note="Can retain Form Control shape permanently"',
+    'Section=magic Note="Has increased Form Control effects"',
   'Primal Wellspring':'Section=magic Note="Refocus restores 3 Focus Points"',
   "Hierophant's Power":'Section=magic Note="+1 10th level spell slot"',
   'Leyline Conduit':
@@ -5139,7 +5135,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Gains a chosen fighter feat of up to 8th level%{combatNotes.improvedFlexibility?\' and one of up to 14th level\':\'\'} during daily prep"',
   // Evasion as above
-  'Fighter Expertise':'Section=feature Note="Class Expert (Fighter)"',
+  'Fighter Expertise':'Section=combat Note="Class Expert (Fighter)"',
   'Fighter Feats':'Section=feature Note="%V selections"',
   'Fighter Key Ability':'Section=feature Note="1 selection"',
   'Fighter Skills':
@@ -5333,10 +5329,12 @@ Pathfinder2E.FEATURES = {
     'Action=1 ' +
     'Section=combat ' +
     'Note="Parrying with a melee weapon in each hand gives +1 Armor Class, or +2 Armor Class if either weapon has the parry trait, until the start of the next turn"',
-  // TODO implement?
-  'Advanced Weapon Training':
-    'Section=combat ' +
-    'Note="Has proficiency with advanced weapons equal to martial weapons in a chosen weapon group"',
+  // Note: AWT should affect only advanced weapons--not both advanced and
+  // martial weapons as Weapon Familiarity indicates. But as a fighter feat,
+  // we're assured that anyone with AWT already has equal proficiency in
+  // martial and simple weapons, so the effect is harmless.
+  'Advanced Weapon Training (%weaponGroup)':
+    'Section=combat Note="Weapon Familiarity (%weaponGroup)"',
   'Advantageous Assault':
     'Action=1 ' +
     'Section=combat ' +
@@ -5491,7 +5489,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Stance allows Double Slice with an agile weapon to count as 1 attack"',
   'Improved Reflexive Shield':
-    'Section=combat ' +
+    'Section=save ' +
     'Note="Using Shield Block on a Reflex save protects both self and adjacent allies"',
   'Multishot Stance':
     'Action=1 ' +
@@ -5533,16 +5531,8 @@ Pathfinder2E.FEATURES = {
   // Greater Weapon Specialization as above
   'Incredible Movement':'Section=ability Note="+%V Speed in no armor"',
   'Ki Tradition':'Section=feature Note="1 selection"',
-  'Ki Tradition (Divine)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Divine)",' +
-      '"Can learn spells from the divine tradition"',
-  'Ki Tradition (Occult)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Occult)",' +
-      '"Can learn spells from the occult tradition"',
+  'Ki Tradition (Divine)':'Section=magic Note="Spell Trained (Divine)"',
+  'Ki Tradition (Occult)':'Section=magic Note="Spell Trained (Occult)"',
   'Master Strikes':
     'Section=combat Note="Attack Master (Simple Weapons; Unarmed Attacks)"',
   'Metal Strikes':
@@ -5611,13 +5601,12 @@ Pathfinder2E.FEATURES = {
     'Action=1 ' +
     'Section=combat ' +
     'Note="Unarmored stance allows dragon tail attacks and Strides that ignore the first square of difficult terrain"',
-  // TODO ff tradition may be divine, rather than occult
   'Ki Rush':
     'Section=magic ' +
-    'Note="Knows the Ki Rush occult spell/Has a focus pool and 1 Focus Point"',
+    'Note="Knows the Ki Rush %V spell/Has a focus pool and 1 Focus Point"',
   'Ki Strike':
     'Section=magic ' +
-    'Note="Knows the Ki Strike occult spell/Has a focus pool and 1 Focus Point"',
+    'Note="Knows the Ki Strike %V spell/Has a focus pool and 1 Focus Point"',
   'Monastic Weaponry':
     'Section=combat,combat ' +
     'Note=' +
@@ -5671,10 +5660,9 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Makes a melee Strike on an adjacent moving foe"',
   'Wholeness Of Body':
-    'Section=magic ' +
-    'Note="Knows the Wholeness Of Body occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Wholeness Of Body %V spell/+1 Focus Points"',
   'Abundant Step':
-    'Section=magic Note="Knows the Abundant Step occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Abundant Step %V spell/+1 Focus Points"',
   'Crane Flutter':
     'Action=Reaction ' +
     'Section=combat ' +
@@ -5683,8 +5671,7 @@ Pathfinder2E.FEATURES = {
     'Action=1 ' +
     'Section=combat ' +
     'Note="R15\' Bellow while in Dragon Stance inflicts frightened 1 on foes once per 1d4 rd, and affected adjacent foes cannot reduce their frightened value below 1 (<b>save Will</b> vs. Intimidation negates; critical failure inflicts frightened 2); the first successful Strike before the end of the next turn on a frightened foe inflicts +4 HP"',
-  'Ki Blast':
-    'Section=magic Note="Knows the Ki Blast occult spell/+1 Focus Points"',
+  'Ki Blast':'Section=magic Note="Knows the Ki Blast %V spell/+1 Focus Points"',
   'Mountain Stronghold':
     'Action=1 ' +
     'Section=combat ' +
@@ -5721,8 +5708,7 @@ Pathfinder2E.FEATURES = {
     'Note="Unarmored stance prevents foes from moving away (<b>save Reflex, Acrobatics, or Athletics</b> negates) and allows lashing branch attacks"',
   'Wall Run':'Action=1 Section=ability Note="Strides on vertical surfaces"',
   'Wild Winds Initiate':
-    'Section=magic ' +
-    'Note="Knows the Wild Winds Stance occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Wild Winds Stance %V spell/+1 Focus Points"',
   'Knockback Strike':
     'Action=2 ' +
     'Section=combat ' +
@@ -5732,7 +5718,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Successful grapple also inflicts clumsy 1 until the end of the target\'s next turn, or unconscious for 1 min with a critical success"',
   'Wind Jump':
-    'Section=magic Note="Knows the Wind Jump occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Wind Jump %V spell/+1 Focus Points"',
   'Winding Flow':
     'Action=1 ' +
     'Section=combat ' +
@@ -5754,7 +5740,7 @@ Pathfinder2E.FEATURES = {
   'Mountain Quake':
     'Action=1 ' +
     'Section=combat ' +
-    'Note="R20\' Stomp inflicts %{strengthModifier>?0} HP and knocked prone (<b>save basic Fortitude</b> also negates knocked prone) once per 1d4 rd"',
+    'Note="20\' emanation inflicts %{strengthModifier>?0} HP and knocked prone (<b>save basic Fortitude</b> also negates knocked prone) once per 1d4 rd"',
   'Tangled Forest Rake':
     'Action=1 ' +
     'Section=combat ' +
@@ -5768,7 +5754,7 @@ Pathfinder2E.FEATURES = {
     'Section=skill Note="Can speak and understand all spoken languages"',
   'Wild Winds Gust':
     'Action=2 ' +
-    'Section=magic ' +
+    'Section=combat ' +
     'Note="Makes a wind crash Strike against all creatures in a 30\' cone or 60\' line at the current multiple attack penalty"',
   'Enlightened Presence':
     'Section=save ' +
@@ -5777,8 +5763,7 @@ Pathfinder2E.FEATURES = {
     'Action=Free ' +
     'Section=combat Note="Enters a stance at the beginning of a turn"',
   'Quivering Palm':
-    'Section=magic ' +
-    'Note="Knows the Quivering Palm occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Quivering Palm %V spell/+1 Focus Points"',
   'Shattering Strike':
     'Action=2 ' +
     'Section=combat ' +
@@ -5787,7 +5772,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Unarmed Strikes gain the forceful trait or increase damage by 1 die step"',
   'Empty Body':
-    'Section=magic Note="Knows the Empty Body occult spell/+1 Focus Points"',
+    'Section=magic Note="Knows the Empty Body %V spell/+1 Focus Points"',
   'Meditative Wellspring':
     'Section=magic Note="Refocus restores 3 Focus Points"',
   'Swift River':
@@ -5934,7 +5919,7 @@ Pathfinder2E.FEATURES = {
     'Note="Draws a weapon and Strikes"',
   // Wild Empathy as above
   "Companion's Cry":
-    'Section=combat ' +
+    'Section=skill ' +
     'Note="Can use 2 actions for Command An Animal to give companion an additional action"',
   // Errata corrects to Action=Reaction
   'Disrupt Prey':
@@ -5953,7 +5938,7 @@ Pathfinder2E.FEATURES = {
     'Action=Free Section=combat Note="Gives allies +1 initiative"',
   'Snare Specialist':
     'Section=skill ' +
-    'Note="Knows the formulas for %{rank.Crafting*3-3} snares; may prepare %{rank.Crafting*2*(skillNotes.ubiquitousSnares?2:1)} each day without using resources"',
+    'Note="Can prepare %{rank.Crafting*2*(skillNotes.ubiquitousSnares?2:1)} snares each day without using resources"',
   // Twin Parry as above
   // Mature Animal Companion as above
   'Quick Snares':'Section=skill Note="Can prepare snares with 3 actions"',
@@ -5966,7 +5951,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat,skill ' +
     'Note=' +
       '"Can Stride toward hunted prey as a free action when using Survival for initiative",' +
-      '"Can Track at full Speed%{rank.Survival>=3?\' without hourly Survival checks\':\'\'}%{rank.Survival>=4?\'/Can perform other exploration activities while tracking\':\'\'}"',
+      '"Can Track at full Speed%{rank.Survival>=3?\' without hourly Survival checks\':\'\'}%{rank.Survival>=4?\' and can perform other exploration activities while tracking\':\'\'}"',
 
   // Blind-Fight as above
   'Deadly Aim':
@@ -5983,12 +5968,12 @@ Pathfinder2E.FEATURES = {
     'Section=skill ' +
     'Note="Created snares have a DC of at least %{classDifficultyClass.Ranger}"',
   'Terrain Master':
-    'Section=ability ' +
-    'Note="Can train for 1 hr to make current natural terrain favored until away from it for 1 day"',
+    'Section=feature ' +
+    'Note="1 hr process makes current natural terrain favored until away from it for 1 day"',
   "Warden's Boon":
     'Action=1 ' +
     'Section=combat ' +
-    'Note="Shares Hunt Prey and Hunter\'s Edge benefits with an ally until the end of its next turn"',
+    'Note="Shares Hunt Prey, Flurry, Outwit, and Precision benefits with an ally until the end of its next turn"',
   // Errata clarifies effects
   'Camouflage':
     'Section=skill ' +
@@ -6024,7 +6009,7 @@ Pathfinder2E.FEATURES = {
     'Note="Makes undetected foes hidden after a failed Seek"',
   'Shared Prey':
     'Section=combat ' +
-    'Note="Can share with an ally the benefits of Hunt Prey and Flurry, Outwit, or Precision on a single target"',
+    'Note="Can share with an ally the benefits of Hunt Prey, Flurry, Outwit, and Precision on a single target"',
   'Stealthy Companion':
     'Section=skill ' +
     'Note="Companion gains the benefits of Camouflage, and an ambusher companion gains an increase in Stealth rank"',
@@ -6145,7 +6130,7 @@ Pathfinder2E.FEATURES = {
   'Nimble Dodge':
     'Action=Reaction ' +
     'Section=combat ' +
-    'Note="Gives +2 Armor Class against the triggering attack when unencumbered"',
+    'Note="Gives +2 Armor Class against the triggering attack when unencumbered%{combatNotes.nimbleRoll?\\"; success allows a 10\' Stride\\":\'\'}"',
   'Trap Finder':
     'Section=combat,save,skill ' +
     'Note=' +
@@ -6166,25 +6151,13 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Successful Feints inflict -2 Perception and Reflex saves while the target remains flat-footed"',
   'Minor Magic (Arcane)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Arcane)",' +
-      '"Knows 2 arcane cantrips"',
+    'Section=magic Note="Spell Trained (Arcane)/Knows 2 arcane cantrips"',
   'Minor Magic (Divine)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Divine)",' +
-      '"Knows 2 divine cantrips"',
+    'Section=magic Note="Spell Trained (Divine)/Knows 2 divine cantrips"',
   'Minor Magic (Occult)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Occult)",' +
-      '"Knows 2 occult cantrips"',
+    'Section=magic Note="Spell Trained (Occult)/Knows 2 occult cantrips"',
   'Minor Magic (Primal)':
-    'Section=magic,magic ' +
-    'Note=' +
-      '"Spell Trained (Primal)",' +
-      '"Knows 2 primal cantrips"',
+    'Section=magic Note="Spell Trained (Primal)/Knows 2 primal cantrips"',
   'Mobility':
     'Section=combat ' +
     'Note="Can Stride at half Speed without triggering reactions"',
@@ -6213,7 +6186,7 @@ Pathfinder2E.FEATURES = {
     'Note="Moves to remain adjacent to a retreating foe"',
   'Sabotage':
     'Action=1 ' +
-    'Section=skill ' +
+    'Section=combat ' +
     'Note="Successful Thievery vs. Reflex inflicts %{skillModifiers.Thievery*2} HP damage, or %{skillModifiers.Thievery*4} HP on a critical success, to an item with moving parts possessed by a creature within reach"',
   // Scout's Warning as above
   'Gang Up':
@@ -6236,8 +6209,10 @@ Pathfinder2E.FEATURES = {
     'Section=combat ' +
     'Note="Poisoned weapons inflict +2d4 HP poison, and a critical miss does not waste the poison"',
   'Nimble Roll':
-    'Section=save ' +
-    'Note="Can use Nimble Dodge before a Reflex save; success allows a 10\' Stride"',
+    'Section=combat,save ' +
+    'Note=' +
+      '"Has increased Nimble Dodge effects",' +
+      '"Can use Nimble Dodge on a Reflex save"',
   'Opportune Backstab':
     'Action=Reaction ' +
     'Section=combat ' +
@@ -6317,8 +6292,8 @@ Pathfinder2E.FEATURES = {
     'Note="Previously-specified trigger invokes a prepared spell of up to level 4 on self"',
   'Hidden Paragon':
     'Action=Reaction ' +
-    'Section=magic ' +
-    'Note="Becomes invisible for 1 min when hidden from foes once per hr"',
+    'Section=skill ' +
+    'Note="Successful Hide or Sneak vs. all foes allows becoming invisible for 1 min once per hr"',
   'Impossible Striker':
     'Section=combat Note="Has increased Sly Striker effects"',
   'Reactive Distraction':
@@ -6346,7 +6321,7 @@ Pathfinder2E.FEATURES = {
   'Sorcerer Feats':'Section=feature Note="%V selections"',
   'Sorcerer Skills':'Section=skill Note="Skill Trained (Choose %V from any)"',
   'Sorcerer Spellcasting':
-    'Section=magic Note="Can learn spells from the %{sorcererTraditionsLowered} tradition"',
+    'Section=magic Note="Can learn spells from the %V tradition"',
   // Nethys changes Simple Weapon Expertise to Weapon Expertise
   // Weapon Expertise as above
   // Weapon Specialization as above
@@ -6503,8 +6478,8 @@ Pathfinder2E.FEATURES = {
       '"Skill Trained (Choose 1 from any)"',
   'Bespell Weapon':
     'Action=Free ' +
-    'Section=magic ' +
-    'Note="After casting a non-cantrip spell, causes a wielded weapon to inflict +1d6 HP until the end of the turn once per turn; the damage type depends on the spell school"',
+    'Section=combat ' +
+    'Note="Casting a non-cantrip spell causes a wielded weapon to inflict +1d6 HP until the end of the turn once per turn; the damage type depends on the spell school"',
   'Divine Evolution':
     'Section=magic Note="+1 D%V slot for <i>Heal</i> or <i>Harm</i>"',
   'Occult Evolution':
@@ -6705,7 +6680,7 @@ Pathfinder2E.FEATURES = {
   'Wizard Skills':
     'Section=skill Note="Skill Trained (Arcana; Choose %V from any)"',
   'Wizard Weapon Expertise':
-    'Section=feature ' +
+    'Section=combat ' +
     'Note="Attack Expert (Club; Crossbow; Dagger; Heavy Crossbow; Staff; Unarmed Attacks)"',
 
   'Abjuration':
@@ -6847,7 +6822,7 @@ Pathfinder2E.FEATURES = {
     'Note=' +
       '"Attack Trained (Alchemical Bombs)/Class Trained (Alchemist)",' +
       '"Has the Alchemical Crafting and Infused Reagents features",' +
-      '"Skill Trained (Crafting)"',
+      '"Skill Trained (Crafting)/Knows the formulas for 4 additional 1st-level alchemical items"',
   'Basic Concoction':
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level alchemist)"',
   // Quick Alchemy as above
@@ -6914,7 +6889,7 @@ Pathfinder2E.FEATURES = {
   'Bard Dedication':
     'Section=feature,magic,skill ' +
     'Note=' +
-      '"Has the Muses feature",' +
+      '"Has the Muse and Occult Spellcasting features",' +
       '"Spell Trained (Occult)/Knows 2 occult cantrips",' +
       '"Skill Trained (Occultism; Performance)"',
   'Basic Bard Spellcasting':
@@ -6929,8 +6904,7 @@ Pathfinder2E.FEATURES = {
     'Note="Knows the Counter Performance occult spell/Has a focus pool and at least 1 Focus Point"',
   'Inspirational Performance':
     'Section=magic Note="Knows the Inspire Courage occult cantrip"',
-  'Occult Breadth':
-    'Section=magic Note="+1 occult spell slot of each level up to %V"',
+  'Occult Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Bard Spellcasting':
     'Section=magic ' +
     'Note="Spell Expert (Occult)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} occult spell"',
@@ -6962,7 +6936,7 @@ Pathfinder2E.FEATURES = {
   'Cleric Dedication':
     'Section=feature,magic,skill ' +
     'Note=' +
-      '"Has the Deity feature",' +
+      '"Has the Deity and Divine Spellcasting features",' +
       '"Spell Trained (Divine)/Can prepare 2 divine cantrips each day",' +
       '"Skill Trained (Religion)"',
   'Basic Cleric Spellcasting':
@@ -6972,8 +6946,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level cleric)"',
   'Advanced Dogma':
     'Section=feature Note="+%V Class Feat (cleric up to level %{level//2})"',
-  'Divine Breadth':
-    'Section=magic Note="+1 divine spell slot of each level up to %V"',
+  'Divine Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Cleric Spellcasting':
     'Section=magic ' +
     'Note="Spell Expert (Divine)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} divine spell"',
@@ -6984,7 +6957,7 @@ Pathfinder2E.FEATURES = {
   'Druid Dedication':
     'Section=feature,magic,skill ' +
     'Note=' +
-      '"Has the Anathema, Druidic Language, and Druidic Order features",' +
+      '"Has the Anathema, Druidic Language, Druidic Order, and Primal Spellcasting features",' +
       '"Spell Trained (Primal)/Can prepare 2 primal cantrips each day",' +
       '"Skill Trained (Nature)"',
   'Basic Druid Spellcasting':
@@ -7006,8 +6979,7 @@ Pathfinder2E.FEATURES = {
     'Note="Knows the Wild Morph primal spell/Has a focus pool and at least 1 Focus Point"',
   'Advanced Wilding':
     'Section=feature Note="+%V Class Feat (druid up to level %{level//2})"',
-  'Primal Breadth':
-    'Section=magic Note="+1 primal spell slot of each level up to %V"',
+  'Primal Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Druid Spellcasting':
     'Section=magic ' +
     'Note="Spell Expert (Primal)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} primal spell"',
@@ -7016,9 +6988,10 @@ Pathfinder2E.FEATURES = {
     'Note="Spell Master (Primal)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} primal spell"',
 
   'Fighter Dedication':
-    'Section=combat,skill ' +
+    'Section=combat,feature,skill ' +
     'Note=' +
       '"Attack Trained (Simple Weapons; Martial Weapons)/Class Trained (Fighter)",' +
+      '"Has the Fighter Key Ability feature",' +
       '"Skill Trained (Choose 1 from Acrobatics, Athletics)"',
   'Basic Maneuver':
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level fighter)"',
@@ -7034,7 +7007,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat,feature,skill ' +
     'Note=' +
       '"Attack Trained (Unarmed Attacks)/Class Trained (Monk)",' +
-      '"Has the Powerful Fist feature",' +
+      '"Has the Powerful Fist and Monk Key Ability features",' +
       '"Skill Trained (Choose 1 from Acrobatics, Athletics)"',
   'Basic Kata':
     'Section=feature Note="+1 Class Feat (1st- or 2nd-level monk)"',
@@ -7082,7 +7055,7 @@ Pathfinder2E.FEATURES = {
   'Sorcerer Dedication':
     'Section=feature,magic ' +
     'Note=' +
-      '"Has the Bloodline feature",' +
+      '"Has the Bloodline and Sorcerer Spellcasting features",' +
       '"Spell Trained (%V)/Knows 2 %1 cantrips"',
   'Basic Sorcerer Spellcasting':
     'Section=magic ' +
@@ -7159,8 +7132,7 @@ Pathfinder2E.FEATURES = {
   'Advanced Blood Potency':
     'Section=feature Note="+%V Class Feat (sorcerer up to level %{level//2})"',
   'Bloodline Breadth':
-    'Section=magic ' +
-    'Note="+1 %{sorcererTraditionsLowered} spell slot of each level up to %V"',
+    'Section=magic Note="Has additional archetype spell slots"',
   'Expert Sorcerer Spellcasting':
     'Section=magic ' +
     'Note="Spell Expert (%{sorcererTraditions})/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} %{sorcererTraditionsLowered} spell"',
@@ -7172,7 +7144,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature,magic,magic,skill ' +
     'Note=' +
       // Errata adds Arcane School, but gaining no features from it
-      '"Has the Arcane School feature",' +
+      '"Has the Arcane School and Arcane Spellcasting features",' +
       '"Spell Trained (Arcane)/Can prepare 2 arcane cantrips each day",' +
       '"Owns a spellbook with 4 arcane cantrips",' +
       '"Skill Trained (Arcana)"',
@@ -7207,8 +7179,7 @@ Pathfinder2E.FEATURES = {
     'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} arcane spell"',
   'Advanced Arcana':
     'Section=feature Note="+%V Class Feat (wizard up to level %{level//2})"',
-  'Arcane Breadth':
-    'Section=magic Note="+1 arcane spell slot of each level up to %V"',
+  'Arcane Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Wizard Spellcasting':
     'Section=magic ' +
     'Note="Spell Expert (Arcane)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} arcane spell"',
@@ -7224,7 +7195,7 @@ Pathfinder2E.FEATURES = {
     'Section=feature,skill,skill ' +
     'Note=' +
       '"Has the Formula Book feature",' +
-      '"Knows the formulas for 4 common 1st-level alchemical items",' +
+      '"Knows the formulas for at least 4 common 1st-level alchemical items",' +
       '"Can use Crafting to create alchemical items"',
   'Ancestral Paragon':'Section=feature Note="+1 Ancestry Feat"',
   'Arcane Sense':
@@ -7337,7 +7308,7 @@ Pathfinder2E.FEATURES = {
     'Note="Successes on Specialty Crafting are critical successes"',
   'Impressive Performance':
     'Section=skill Note="Can use Performance to Make An Impression"',
-  'Incredible Initiative':'Section=skill Note="+2 on initiative rolls"',
+  'Incredible Initiative':'Section=combat Note="+2 on initiative rolls"',
   'Incredible Investiture':'Section=magic Note="Can invest 12 magic items"',
   'Intimidating Glare':'Section=combat Note="Can use a glare to Demoralize"',
   'Intimidating Prowess':
@@ -7471,7 +7442,7 @@ Pathfinder2E.FEATURES = {
     'Note="Successful Deception vs. spell DC negates spell effects that read minds, detect lies, or reveal alignment"',
   'Snare Crafting':
     'Section=skill ' +
-    'Note="Can use Crafting to create snares and knows the formulas for 4 common snares"',
+    'Note="Can use Crafting to create snares and knows the formulas for %{4+(skillNotes.snareSpecialist?rank.Crafting*3-3:0)} common snares"',
   'Specialty Crafting':
     'Section=skill ' +
     'Note="+%{rank.Crafting>=3?2:1} Crafting on selected type of item"',
@@ -7513,7 +7484,7 @@ Pathfinder2E.FEATURES = {
       '"+%{level} Hit Points",' +
       '"-1 DC on recovery checks"',
   'Train Animal':
-    'Section=feature ' +
+    'Section=skill ' +
     'Note="Can use days of training and a successful Nature check to teach an animal to perform a trick"',
   'Trick Magic Item':
     'Action=1 ' +
@@ -9793,7 +9764,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Occult ' +
     'Cast=2 ' +
     'Description=' +
-      '"R30\' Creates an impassible force sphere with Armor Class 5, Harness 10, and 40 HP around the target for 1 min or until destroyed (<b>save Reflex</b> decreases the HP to 10; critical success negates)"',
+      '"R30\' Creates around the target an impassible force field with immunity to critical hits and precision damage, Armor Class 5, Harness 10, and 40 HP for 1 min or until destroyed (<b>save Reflex</b> decreases the HP to 10; critical success negates)"',
   'Resist Energy':
     'Level=2 ' +
     'Traits=Abjuration ' +
@@ -12395,7 +12366,7 @@ Pathfinder2E.combatRules = function(rules, armors, shields, weapons) {
   rules.defineRule('abilityNotes.armorSpeedPenalty',
     'armorSpeedReduction', '=', null,
     'armorStrengthRequirement', '=', 'null', // recomputation trigger
-    'strength', '?', 'source<dict["armorStrengthRequirement"]'
+    'strength', '?', 'source<dict.armorStrengthRequirement'
   );
   rules.defineRule('armorClass',
     '', '=', '10',
@@ -12440,7 +12411,7 @@ Pathfinder2E.combatRules = function(rules, armors, shields, weapons) {
   rules.defineRule('rank.Armor', 'armorCategory', '=', '0');
   ['Unarmored Defense', 'Light Armor', 'Medium Armor', 'Heavy Armor'].forEach(a => {
     rules.defineRule('rank.Armor',
-      'rank.' + a, '=', 'dict["armorCategory"]=="' + a.replace(/\s.*/, '') + '" ? source : null'
+      'rank.' + a, '=', 'dict.armorCategory=="' + a.replace(/\s.*/, '') + '" ? source : null'
     );
     rules.defineRule('trainingLevel.' + a, '', '=', '0');
     rules.defineRule('rank.' + a, 'trainingLevel.' + a, '=', null);
@@ -12842,7 +12813,7 @@ Pathfinder2E.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Imply'),
       QuilvynUtils.getAttrValueArray(attrs, 'Traits')
     );
-    Pathfinder2E.featRulesExtra(rules, name);
+    Pathfinder2E.featRulesExtra(rules, name, attrs);
   } else if(type == 'Feature')
     Pathfinder2E.featureRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Section'),
@@ -12892,21 +12863,27 @@ Pathfinder2E.choiceRules = function(rules, type, name, attrs) {
         QuilvynUtils.getAttrValueArray(attrs, 'Traits'),
         QuilvynUtils.getAttrValue(attrs, 'Description').replaceAll('%tradition', t)
       );
+      rules.addChoice('allSpells', spellName, attrs);
       if(!isFocus)
         rules.addChoice('spells', spellName, attrs);
     });
-  } else if(type == 'Weapon')
+  } else if(type == 'Weapon') {
+    let group = QuilvynUtils.getAttrValue(attrs, 'Group');
     Pathfinder2E.weaponRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Category'),
       QuilvynUtils.getAttrValue(attrs, 'Price'),
       QuilvynUtils.getAttrValue(attrs, 'Damage'),
       QuilvynUtils.getAttrValue(attrs, 'Bulk'),
       QuilvynUtils.getAttrValue(attrs, 'Hands'),
-      QuilvynUtils.getAttrValue(attrs, 'Group'),
+      group,
       QuilvynUtils.getAttrValueArray(attrs, 'Traits'),
       QuilvynUtils.getAttrValue(attrs, 'Range')
     );
-  else {
+    group =
+      group == 'Knife' ? 'Knives' :
+      group == 'Brawling' ? 'Brawling Weapons' : (group + 's');
+    rules.addChoice('weaponGroups', group, '');
+  } else {
     console.log('Unknown choice type "' + type + '"');
     return;
   }
@@ -13149,6 +13126,7 @@ Pathfinder2E.ancestryRulesExtra = function(rules, name) {
   if(name == 'Dwarf') {
     rules.defineRule('weapons.Clan Dagger', 'features.Clan Dagger', '=', '1');
   } else if(name == 'Gnome') {
+    rules.defineRule('gnomeTradition', 'gnomeLevel', '=', '"primal"');
     rules.defineRule('selectableFeatureCount.Gnome (Wellspring)',
       'featureNotes.wellspringGnome', '=', '1'
     );
@@ -13156,6 +13134,9 @@ Pathfinder2E.ancestryRulesExtra = function(rules, name) {
       rules.defineRule('features.Wellspring Gnome (' + t + ')',
         'features.Wellspring Gnome', '?', null,
         'features.' + t + ' Wellspring', '=', '1'
+      );
+      rules.defineRule('gnomeTradition',
+        'features.Wellspring Gnome (' + t + ')', '=', '"' + t.toLowerCase() + '"'
       );
     });
   } else if(name == 'Goblin') {
@@ -13584,6 +13565,7 @@ Pathfinder2E.classRules = function(
   rules.defineRule('classDifficultyClass.' + name + '.2',
     'rank.' + name, '=', 'Pathfinder2E.RANK_NAMES[source]'
   );
+  rules.defineRule('classDC', 'classDifficultyClass.' + name, '=', null);
 
   rules.defineRule('classHitPoints', classLevel, '=', hitPoints);
   rules.defineRule('featureNotes.' + prefix + 'Feats',
@@ -13625,6 +13607,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule('advancedAlchemyLevel', classLevel, '=', null);
     rules.defineRule('skillNotes.formulaBook',
       'skillNotes.alchemicalCrafting', '=', '4',
+      'skillNotes.alchemistDedication', '+', '4',
       'levels.Alchemist', '+', 'source * 2',
       'skillNotes.bomber', '+', '2',
       'skillNotes.chirurgeon', '+', '2',
@@ -13646,6 +13629,15 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'skillNotes.perpetualPotency', '^', 'dict["features.Chirurgeon"] ? 6 : 3',
       'skillNotes.perpetualPerfection', '^', '11'
     );
+    let allSelectables = rules.getChoices('selectableFeatures');
+    let fields =
+      Object.keys(allSelectables).filter(x => allSelectables[x].includes('Research Field')).map(x => x.replace('Alchemist - ', ''));
+    fields.forEach(f => {
+      rules.defineRule('features.Greater Field Discovery (' + f + ')',
+        'features.Greater Field Discovery', '?', null,
+        'features.' + f, '=', '1'
+      );
+    });
   } else if(name == 'Barbarian') {
     rules.defineRule('combatNotes.draconicRage',
       '', '=', '"fire"',
@@ -13694,7 +13686,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule
       ('magicNotes.masterSpellcaster', classLevel, '=', '"Occult"');
     rules.defineRule
-      ('selectableFeatureCount.Bard (Muse)', 'featureNotes.muses', '=', '1');
+      ('selectableFeatureCount.Bard (Muse)', 'featureNotes.muse', '=', '1');
     rules.defineRule
       ('skillNotes.bardSkills', 'intelligenceModifier', '=', '4 + source');
     rules.defineRule
@@ -13767,6 +13759,19 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'deityFollowerAlignments', '?', null,
       'alignment', '=', 'dict.deityFollowerAlignments.split("/").includes(source.replaceAll(/[a-z ]/g, "")) ? null : 1'
     );
+    let allSelectables = rules.getChoices('selectableFeatures');
+    let causes =
+      Object.keys(allSelectables).filter(x => allSelectables[x].includes('Cause')).map(x => x.replace('Champion - ', ''));
+    causes.forEach(c => {
+      rules.defineRule('features.Divine Smite (' + c + ')',
+        'features.Divine Smite', '?', null,
+        'features.' + c, '=', '1'
+      );
+      rules.defineRule('features.Exalt (' + c + ')',
+        'features.Exalt', '?', null,
+        'features.' + c, '=', '1'
+      );
+    });
   } else if(name == 'Cleric') {
     rules.defineRule('combatNotes.cloisteredCleric',
       'level', '?', 'source>=11',
@@ -13902,12 +13907,14 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'featureNotes.secondPathToPerfection', '+', '1'
     );
     rules.defineRule('magicNotes.gracefulLegend',
-      'features.Ki Tradition (Divine)', '=', '"Divine"',
-      'features.Ki Tradition (Occult)', '=', '"Occult"'
+      'monkTradition', '=', 'source.charAt(0).toUpperCase() + source.substring(1)'
     );
     rules.defineRule('magicNotes.monkExpertise',
-      'features.Ki Tradition (Divine)', '=', '"Divine"',
-      'features.Ki Tradition (Occult)', '=', '"Occult"'
+      'monkTradition', '=', 'source.charAt(0).toUpperCase() + source.substring(1)'
+    );
+    rules.defineRule('monkTradition',
+      'features.Ki Tradition (Divine)', '=', '"divine"',
+      'features.Ki Tradition (Occult)', '=', '"occult"'
     );
     rules.defineRule('selectableFeatureCount.Monk (Ki Tradition)',
       'featureNotes.kiTradition', '=', null
@@ -14036,6 +14043,9 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     rules.defineRule
       ('magicNotes.masterSpellcaster', 'sorcererTraditions', '=', null);
     rules.defineRule('magicNotes.primalEvolution', 'maxSpellLevel', '=', null);
+    rules.defineRule('magicNotes.sorcererSpellcasting',
+      'sorcererTraditionsLowered', '=', null
+    );
     ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
       rules.defineRule('trainingLevel.' + t,
         'magicNotes.expertSpellcaster', '^=', 'source.includes("' + t + '") ? 2 : null',
@@ -14391,13 +14401,15 @@ Pathfinder2E.featRules.traits = [
  * Defines in #rules# the rules associated with feat #name# that cannot be
  * derived directly from the attributes passed to featRules.
  */
-Pathfinder2E.featRulesExtra = function(rules, name) {
+Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
 
   let matchInfo;
   let prefix =
     name.charAt(0).toLowerCase() + name.substring(1).replaceAll(' ', '');
 
-  if((matchInfo = name.match(/Additional Lore \((.*)\)/)) != null) {
+  if(name == 'Abundant Step') {
+    rules.defineRule('magicNotes.abundantStep', 'monkTradition', '=', null);
+  } else if((matchInfo = name.match(/Additional Lore \((.*)\)/)) != null) {
     rules.defineRule('skillNotes.' + prefix,
       'level', '=', 'source<3 ? "Trained" : source<7 ? "Expert" : source<15 ? "Master" : "Legendary"'
     );
@@ -14422,36 +14434,36 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('advancedAlchemyLevel', 'featureNotes.alchemistDedication', '=', '1');
   } else if((matchInfo = name.match(/^(.*) Breadth$/)) != null) {
-    // TODO homebrew
-    let attrs = rules.plugin.FEATS[name] || Pathfinder2E.FEATS[name] || '';
-    let c = attrs.match(/Basic (.*) Spellcasting/)[1] || 'Wizard';
+    let c = (attrs.match(/Basic (.*) Spellcasting/) || ['', 'Wizard'])[1];
     let trad =
-      (QuilvynUtils.getAttrValue(rules.plugin.CLASSES[c] || Pathfinder2E.CLASSES[c], 'SpellSlots') || 'A').charAt(0);
+      (QuilvynUtils.getAttrValue(rules.getChoices('levels')[c] || '', 'SpellSlots') || '0').charAt(0);
     let note = 'magicNotes.' + prefix;
-    rules.defineRule(note,
+    rules.defineRule(note + '.1',
+      note, '?', null,
       'level', '?', null, // recomputation trigger
       'magicNotes.basic' + c + 'Spellcasting', '=', '1',
       'magicNotes.expert' + c + 'Spellcasting', '^', 'dict.level>=16 ? 4 : dict.level>=14 ? 3 : 2',
       'magicNotes.master' + c + 'Spellcasting', '^', 'dict.level>=20 ? 6 : 5'
     );
-    if(trad.match(/^\d/)) {
+    if(trad.match(/^[ADOP]/)) {
+      [1, 2, 3, 4, 5, 6].forEach(l => {
+        rules.defineRule('spellSlots.' + trad + l,
+          note + '.1', '+', 'source>=' + l + ' ? 1 : null'
+        );
+      });
+    } else {
       let traditions =
         c.charAt(0).toLowerCase() + c.substring(1).replaceAll(' ', '') + 'Traditions';
       ['A', 'D', 'O', 'P'].forEach(t => {
         rules.defineRule(note + '.' + t + '.1',
           traditions, '?', 'source && source.includes("' + t + '")',
-           note, '=', null
+           note + '.1', '=', null
         );
         [1, 2, 3, 4, 5, 6].forEach(l => {
           rules.defineRule('spellSlots.' + t + l,
             note + '.' + t + '.1', '+', 'source>=' + l + ' ? 1 : null'
           );
         });
-      });
-    } else {
-      [1, 2, 3, 4, 5, 6].forEach(l => {
-        rules.defineRule
-          ('spellSlots.' + trad + l, note, '+', 'source>=' + l + ' ? 1 : null');
       });
     }
   } else if(name == 'Arcane School Spell') {
@@ -14479,15 +14491,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule('rank.Heavy Armor',
       'combatNotes.armorProficiency', '^=', 'source=="Heavy" ? 1 : null'
     );
-  } else if(name == 'Aura Of Vengeance') {
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let causes =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Champion (Cause)'))
-      .map(x => x.replace('Champion - ', ''));
-    causes.forEach(c => {
-      rules.defineRule('features.Exalt', 'features.' + c, '=', '1');
-    });
   } else if(name == 'Barbarian Dedication') {
     // Suppress validation errors for selected instinct
     let allSelectables = rules.getChoices('selectableFeatures');
@@ -14502,6 +14505,7 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       );
     });
   } else if((matchInfo = name.match(/^([\w\s]+) Resiliency$/)) != null) {
+    // TODO Count only specific class dedication feats, not all archetype feats
     let c = matchInfo[1];
     rules.defineRule('combatNotes.' + c.toLowerCase() + 'Resiliency',
       'sumArchetypeFeats', '=', 'source * 3'
@@ -14537,17 +14541,24 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       'features.Bardic Lore', '=', '1',
       'rank.Occultism', '+', 'source>=4 ? 1 : null'
     );
-  } else if((matchInfo = name.match(/^(Basic|Expert|Master) (\w+) Spellcasting$/)) != null) {
+  } else if((matchInfo = name.match(/^(Basic|Expert|Master) ([\w\s]+) Spellcasting$/)) != null) {
     let c = matchInfo[2];
     let level = matchInfo[1];
     let slots =
       level=='Basic' ? {'1':0, '2':6, '3':8} :
       level=='Expert' ? {'4':0, '5':14, '6':16} : {'7':0, '8':20};
     let trad =
-      (QuilvynUtils.getAttrValue(rules.plugin.CLASSES[c] || Pathfinder2E.CLASSES[c], 'SpellSlots') || 'A').charAt(0);
+      (QuilvynUtils.getAttrValue(rules.plugin.CLASSES[c] || Pathfinder2E.CLASSES[c] || '', 'SpellSlots') || '0').charAt(0);
     let note =
       'magicNotes.' + level.toLowerCase() + c.replaceAll(' ', '') + 'Spellcasting';
-    if(trad.match(/^\d/)) {
+    if(trad.match(/^[ADOP]/)) {
+      for(let s in slots) {
+        if(slots[s] > 0)
+          rules.defineRule(note + '.' + s, 'level', '?', 'source>' + slots[s]);
+        rules.defineRule(note + '.' + s, note, '=', '1');
+        rules.defineRule('spellSlots.' + trad + s, note + '.' + s, '+=', null);
+      }
+    } else {
       let traditions =
         c.charAt(0).toLowerCase() + c.substring(1).replaceAll(' ', '') + 'Traditions';
       ['A', 'D', 'O', 'P'].forEach(trad => {
@@ -14563,13 +14574,6 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
             ('spellSlots.' + trad + s, note + '.' + trad + '.' + s, '+=', null);
         }
       });
-    } else {
-      for(let s in slots) {
-        if(slots[s] > 0)
-          rules.defineRule(note + '.' + s, 'level', '?', 'source>' + slots[s]);
-        rules.defineRule(note + '.' + s, note, '=', '1');
-        rules.defineRule('spellSlots.' + trad + s, note + '.' + s, '+=', null);
-      }
     }
   } else if((matchInfo = name.match(/^Canny Acumen \((.*)\)$/)) != null) {
     let target = matchInfo[1];
@@ -14716,6 +14720,8 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
         'featureNotes.elfAtavism', '+', '1'
       );
     });
+  } else if(name == 'Empty Body') {
+    rules.defineRule('magicNotes.emptyBody', 'monkTradition', '=', null);
   } else if(name == 'Expert Alchemy') {
     rules.defineRule
       ('advancedAlchemyLevel', 'featureNotes.expertAlchemy', '^', null);
@@ -14756,15 +14762,15 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     let allSelectables = rules.getChoices('selectableFeatures');
     let abilities =
       Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Fighter (Key Ability)'))
+      .filter(x => allSelectables[x].includes('Fighter (Key'))
       .map(x => x.replace('Fighter - ', ''));
     abilities.forEach(a => {
       rules.defineRule('validationNotes.fighter-' + a + 'SelectableFeature',
         'features.Fighter Dedication', '+', '1'
       );
     });
-    rules.defineRule
-      ('features.Fighter Key Ability', 'features.Fighter Dedication', '=', '1');
+  } else if(name == 'First World Adept') {
+    rules.defineRule('magicNotes.' + prefix, 'gnomeTradition', '=', null);
   } else if(name == 'Gnome Obsession') {
     rules.defineRule('skillNotes.gnomeObsession',
       'level', '=', 'source<2 ? "Trained" : source<7 ? "Expert" : source<15 ? "Master" : "Legendary"'
@@ -14809,9 +14815,13 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     );
     rules.defineRule
       ('weapons.Iron Sweep', 'features.Ironblood Stance', '=', '1');
+  } else if(name == 'Ki Blast') {
+    rules.defineRule('magicNotes.kiBlast', 'monkTradition', '=', null);
   } else if(name == 'Ki Rush') {
+    rules.defineRule('magicNotes.kiRush', 'monkTradition', '=', null);
     rules.defineRule('features.Ki Spells', 'features.Ki Rush', '=', '1');
   } else if(name == 'Ki Strike') {
+    rules.defineRule('magicNotes.kiStrike', 'monkTradition', '=', null);
     rules.defineRule('features.Ki Spells', 'features.Ki Strike', '=', '1');
   } else if(name == 'Master Alchemy') {
     rules.defineRule
@@ -14828,21 +14838,19 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('spellModifier.' + trad, 'spellModifier.' + name, '=', null);
     rules.defineRule('spellAbility.' + trad, note, '=', '"charisma"');
-    rules.defineRule('spellSlots.' + trad.charAt(0) + '0', note, '+=', '2');
+    rules.defineRule('spellSlots.' + trad.charAt(0) + 'C1', note, '+=', '2');
   } else if(name == 'Monk Dedication') {
     // Suppress validation errors for selected key ability
     let allSelectables = rules.getChoices('selectableFeatures');
     let abilities =
       Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Monk (Key Ability)'))
+      .filter(x => allSelectables[x].includes('Monk (Key'))
       .map(x => x.replace('Monk - ', ''));
     abilities.forEach(a => {
       rules.defineRule('validationNotes.monk-' + a + 'SelectableFeature',
         'features.Monk Dedication', '+', '1'
       );
     });
-    rules.defineRule
-      ('features.Monk Key Ability', 'features.Monk Dedication', '=', '1');
   } else if(name == 'Monk Moves') {
     rules.defineRule('abilityNotes.monkMoves.1',
       'abilityNotes.monkMoves', '=', '10',
@@ -14893,6 +14901,8 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
         'features.' + o, '=', '1'
       );
     });
+  } else if(name == 'Quivering Palm') {
+    rules.defineRule('magicNotes.quiveringPalm', 'monkTradition', '=', null);
   } else if(name.match(/^Radiant Blade (Master|Spirit)$/)) {
     rules.defineRule('combatNotes.bladeAlly',
       'combatNotes.' + prefix, '=', 'null' // italics
@@ -14937,7 +14947,7 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
       rules.defineRule('trainingLevel.' + t,
         'magicNotes.sorcererDedication', '^=', 'source.includes("' + t + '") ? 1 : null'
       );
-      rules.defineRule('spellSlots.' + t.charAt(0) + '0',
+      rules.defineRule('spellSlots.' + t.charAt(0) + 'C1',
         'magicNotes.sorcererDedication', '+=', 'source.includes("' + t + '") ? 2 : null'
       );
       rules.defineRule('spellModifier' + t + '.' + name,
@@ -15008,13 +15018,19 @@ Pathfinder2E.featRulesExtra = function(rules, name) {
     );
     rules.defineRule
       ('features.Unconventional Weaponry', 'features.' + name, '=', '1');
+  } else if(name == 'Wholeness Of Body') {
+    rules.defineRule('magicNotes.wholenessOfBody', 'monkTradition', '=', null);
   } else if(name == 'Wild Winds Initiate') {
+    rules.defineRule
+      ('magicNotes.wildWindsInitiate', 'monkTradition', '=', null);
     Pathfinder2E.weaponRules(
       rules, 'Wind Crash', 'Unarmed', 0, '1d6 B', 0, 0, 'Brawling',
       ['Agile', 'Nonlethal', 'Propulsive', 'Unarmed'], 30
     );
     rules.defineRule
       ('weapons.Wind Crash', 'features.Wild Winds Initiate', '=', '1');
+  } else if(name == 'Wind Jump') {
+    rules.defineRule('magicNotes.windJump', 'monkTradition', '=', null);
   } else if(name == 'Wizard Dedication') {
     rules.defineRule('spellModifier.' + name,
       'magicNotes.wizardDedication', '?', null,
@@ -15245,20 +15261,19 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
             rules.defineRule('features.' + f, note, '=', '1');
         });
       }
-      matchInfo = n.match(/^Knows\s+the\s+(.*)\s+(arcane|divine|occult|primal)\s+(innate\s)?(cantrip|hex|spell)s?($|;)/);
+      matchInfo = n.match(/^Knows\s+the\s+(.*)\s+(arcane|divine|occult|primal|%V)\s+(innate\s)?(cantrip|hex|spell)s?($|;)/);
       if(matchInfo) {
         let spells = matchInfo[1].split(/\s*,\s*|\s*\band\s+/);
         spells.forEach(s => {
           s = s.replace('<i>', '').replace('</i>', '').trim();
+          let matchingSpells =
+            QuilvynUtils.getKeys(rules.getChoices('allSpells'), new RegExp('^' + s + ' \\('));
           if(s == '') {
             // empty
-          // TODO this is ugly...
-          } else if(!(s in Object.assign({}, Pathfinder2E.SPELLS, rules.plugin.SPELLS))) {
+          } else if(matchingSpells.length == 0) {
             console.log('Unknown spell "' + s + '" for feature ' + name);
           } else {
-            // TODO ... and so is this
-            let spellAttrs =
-              Object.assign({}, Pathfinder2E.SPELLS, rules.plugin.SPELLS)[s];
+            let spellAttrs = rules.getChoices('allSpells')[matchingSpells[0]];
             let spellLevel = QuilvynUtils.getAttrValue(spellAttrs, 'Level');
             let spellSchool = QuilvynUtils.getAttrValue(spellAttrs, 'School');
             let spellTraits =
@@ -15267,17 +15282,23 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
               matchInfo[2].charAt(0).toUpperCase() + matchInfo[2].substring(1);
             let isCantrip = spellTraits.includes('Cantrip');
             let isFocus = spellTraits.includes('Focus');
-            let spellName =
-              s + ' (' + spellTrad.charAt(0) + (isCantrip ? 'C' : '') + spellLevel + (isFocus ? ' Foc' : '') + (spellSchool ? ' ' + spellSchool.substring(0, 3) : '') + ')';
-            rules.defineRule('spells.' + spellName, note, '=', '1');
-            Pathfinder2E.spellRules(rules, spellName,
-              spellSchool,
-              spellLevel,
-              spellTrad,
-              QuilvynUtils.getAttrValue(spellAttrs, 'Cast'),
-              QuilvynUtils.getAttrValueArray(spellAttrs, 'Traits'),
-              QuilvynUtils.getAttrValue(spellAttrs, 'Description').replaceAll('%tradition', spellTrad)
-            );
+            for(let t in {'Arcane':'', 'Divine':'', 'Occult':'', 'Primal':''}) {
+              if(spellTrad != '%V' && spellTrad != t)
+                continue;
+              let spellName =
+                s + ' (' + t.charAt(0) + (isCantrip ? 'C' : '') + spellLevel + (isFocus ? ' Foc' : '') + (spellSchool ? ' ' + spellSchool.substring(0, 3) : '') + ')';
+              Pathfinder2E.spellRules(rules, spellName,
+                spellSchool,
+                spellLevel,
+                t,
+                QuilvynUtils.getAttrValue(spellAttrs, 'Cast'),
+                QuilvynUtils.getAttrValueArray(spellAttrs, 'Traits'),
+                QuilvynUtils.getAttrValue(spellAttrs, 'Description').replaceAll('%tradition', t)
+              );
+              rules.defineRule('spells.' + spellName,
+                note, '=', spellTrad == '%V' ? 'source=="' + t.toLowerCase() + '" ? 1 : null' : '1'
+              );
+            }
           }
         });
       }
@@ -15567,9 +15588,9 @@ Pathfinder2E.spellRules.traits = [
   'Bard', 'Composition', 'Metamagic', 'Champion', 'Litany', 'Cleric', 'Druid',
   'Monk', 'Stance', 'Sorcerer', 'Wizard', 'Arcane', 'Concentrate',
   // Renewed
-  'Hex', 'Holy', 'Manipulate', 'Metal', 'Oracle', 'Ranger', 'Sanctified',
-  'Spellshape', 'Spirit', 'Subtle', 'Summon', 'Unholy', 'Vitality', 'Void',
-  'Witch', 'Wood'
+  'Archetype', 'Hex', 'Holy', 'Manipulate', 'Metal', 'Oracle', 'Ranger',
+  'Sanctified', 'Spellshape', 'Spirit', 'Subtle', 'Summon', 'Unholy',
+  'Vitality', 'Void', 'Witch', 'Wood'
 ];
 
 /*
@@ -15671,6 +15692,11 @@ Pathfinder2E.weaponRules = function(
     'weaponFamiliarity.' + group, '^=', 'dict["rank.' + lowerCategory + '"]',
     'weaponFamiliarity.' + name, '^=', 'dict["rank.' + lowerCategory + '"]'
   );
+  if(hands == 2 || traits.filter(x => x.startsWith('Two-hand')).length > 0) {
+    rules.defineRule('weaponRank.' + name,
+      'weaponFamiliarity.Two-Handed Weapons', '^=', 'dict["rank.' + lowerCategory + '"]'
+    );
+  }
   if(group == 'Bombs') {
     rules.defineRule
       ('maxWeaponTraining', 'trainingLevel.Alchemical Bombs', '^=', null);

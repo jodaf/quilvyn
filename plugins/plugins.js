@@ -89,16 +89,23 @@ RULESETS['Midnight Campaign Setting using Pathfinder 1E rules'] = {
   group:'Pathfinder',
   require:'Pathfinder.js'
 };
-RULESETS['Pathfinder 2E (Legacy) <i>beta</i>'] = {
+RULESETS['Pathfinder 2E Legacy (<i>beta</i>)'] = {
   url:'plugins/Pathfinder2E.js',
   group:'Pathfinder'
 };
+/*
+RULESETS['Pathfinder 2E Remaster'] = {
+  url:'plugins/Pathfinder2ERemaster.js',
+  group:'Pathfinder',
+  require:'Pathfinder2E.js'
+};
+*/
 RULESETS['D&D 5E'] = {
   url:'plugins/PHB5E.js',
   group:'5E',
   require:'SRD5E.js'
 };
-RULESETS['D&D 5E (SRD only)'] = {
+RULESETS['5E (SRD only)'] = {
   url:'plugins/SRD5E.js',
   group:'5E',
   require:'SRD35.js'
@@ -138,6 +145,13 @@ RULESETS['Sword Coast Campaign Setting using D&D 5E rules'] = {
   group:'5E',
   require:'PHB5E.js'
 };
+if(window.location.href.includes('Taldorei')) {
+RULESETS['Taldorei Campaign Setting using D&D 5E rules'] = {
+  url:'plugins/Taldorei.js',
+  group:'5E',
+  require:'PHB5E.js'
+};
+}
 RULESETS['Taldorei Reborn Campaign Setting using D&D 5E rules'] = {
   url:'plugins/TaldoreiReborn.js',
   group:'5E',
@@ -167,6 +181,13 @@ RULESETS["Horror Companion supplement to SWADE rules"] = {
   group:'Savage Worlds',
   supplement:"Savage Worlds Adventurer's Edition (SWADE)"
 };
+if(window.location.href.includes('SPC')) {
+RULESETS["Super Powers Companion supplement to SWADE rules"] = {
+  url:'plugins/SWADESPC.js',
+  group:'Savage Worlds',
+  supplement:"Savage Worlds Adventurer's Edition (SWADE)"
+};
+}
 RULESETS["Deadlands - The Weird West"] = {
   url:'plugins/WeirdWest.js',
   group:'Savage Worlds',
