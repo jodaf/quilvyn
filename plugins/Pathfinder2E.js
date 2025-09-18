@@ -1051,8 +1051,12 @@ Pathfinder2E.FEATS = {
   'Illusion Sense':'Traits=Gnome',
   'Animal Elocutionist':
     'Traits=Gnome Require="level >= 5","features.Burrow Elocutionist"',
-  // TODO requires "at least one innate spell from a gnome heritage or ancestry feat that shares a tradition with at least one of your focus spells"
-  'Energized Font':'Traits=Gnome Require="level >= 5","features.Focus Pool"',
+  'Energized Font':
+    'Traits=Gnome ' +
+    'Require=' +
+      '"level >= 5",' +
+      '"features.Focus Pool",' +
+      '"gnomeSharedInnateAndFocusTradition"',
   'Gnome Weapon Innovator':
     'Traits=Gnome Require="level >= 5","features.Gnome Weapon Familiarity"',
   'First World Adept':
@@ -6892,7 +6896,7 @@ Pathfinder2E.FEATURES = {
       '"Skill Trained (Occultism; Performance)"',
   'Basic Bard Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} occult spell"',
+    'Note="Has 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} occult spell slot"',
   "Basic Muse's Whispers":
     'Section=feature Note="Class Feat (Choose 1 from any Bard up to level 2)"',
   "Advanced Muse's Whispers":
@@ -6906,10 +6910,10 @@ Pathfinder2E.FEATURES = {
   'Occult Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Bard Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (Occult)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} occult spell"',
+    'Note="Spell Expert (Occult)/Has 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} occult spell slot"',
   'Master Bard Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (Occult)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} occult spell"',
+    'Note="Spell Master (Occult)/Has 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} occult spell slot"',
 
   'Champion Dedication':
     'Section=combat,feature,skill ' +
@@ -6942,7 +6946,7 @@ Pathfinder2E.FEATURES = {
       '"Skill Trained (Religion)"',
   'Basic Cleric Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} divine spell"',
+    'Note="Has 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} divine spell slot"',
   'Basic Dogma':
     'Section=feature ' +
     'Note="Class Feat (Choose 1 from any Cleric up to level 2)"',
@@ -6952,10 +6956,10 @@ Pathfinder2E.FEATURES = {
   'Divine Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Cleric Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (Divine)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} divine spell"',
+    'Note="Spell Expert (Divine)/Has 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} divine spell slot"',
   'Master Cleric Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (Divine)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} divine spell"',
+    'Note="Spell Master (Divine)/Has 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} divine spell slot"',
 
   'Druid Dedication':
     'Section=feature,magic,skill ' +
@@ -6965,7 +6969,7 @@ Pathfinder2E.FEATURES = {
       '"Skill Trained (Nature)"',
   'Basic Druid Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} primal spell"',
+    'Note="Has 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} primal spell slot"',
   'Basic Wilding':
     'Section=feature Note="Class Feat (Choose 1 from any Druid up to level 2)"',
   'Order Spell (Animal)':
@@ -6986,10 +6990,10 @@ Pathfinder2E.FEATURES = {
   'Primal Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Druid Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (Primal)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} primal spell"',
+    'Note="Spell Expert (Primal)/Has 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} primal spell slot"',
   'Master Druid Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (Primal)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} primal spell"',
+    'Note="Spell Master (Primal)/Has 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} primal spell slot"',
 
   'Fighter Dedication':
     'Section=combat,feature,skill ' +
@@ -7069,7 +7073,7 @@ Pathfinder2E.FEATURES = {
       '"Spell Trained (%V)/Knows 2 %1 cantrips"',
   'Basic Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} %{sorcererTraditionsLowered} spell"',
+    'Note="Has 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} %{sorcererTraditionsLowered} spell slot"',
   'Basic Blood Potency':
     'Section=feature ' +
     'Note="Class Feat (Choose 1 from any Sorcerer up to level 2)"',
@@ -7147,10 +7151,10 @@ Pathfinder2E.FEATURES = {
     'Section=magic Note="Has additional archetype spell slots"',
   'Expert Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (%V)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} %{sorcererTraditionsLowered} spell"',
+    'Note="Spell Expert (%V)/Has 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} %{sorcererTraditionsLowered} spell slot"',
   'Master Sorcerer Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (%V)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} %{sorcererTraditionsLowered} spell"',
+    'Note="Spell Master (%V)/Has 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} %{sorcererTraditionsLowered} spell slot"',
 
   'Wizard Dedication':
     'Section=feature,magic,magic,skill ' +
@@ -7189,17 +7193,17 @@ Pathfinder2E.FEATURES = {
     'Note="Class Feat (Choose 1 from any Wizard up to level 2)"',
   'Basic Wizard Spellcasting':
     'Section=magic ' +
-    'Note="Knows 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} arcane spell"',
+    'Note="Has 1 1st-level%{level>=8?\', 1 2nd-level, and 1 3rd-level\':level>=6?\' and 1 2nd-level\':\'\'} arcane spell slot"',
   'Advanced Arcana':
     'Section=feature ' +
     'Note="Class Feat (Choose %V from any Wizard up to level %{level//2})"',
   'Arcane Breadth':'Section=magic Note="Has additional archetype spell slots"',
   'Expert Wizard Spellcasting':
     'Section=magic ' +
-    'Note="Spell Expert (Arcane)/Knows 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} arcane spell"',
+    'Note="Spell Expert (Arcane)/Has 1 4th-level%{level>=16?\', 1 5th-level, and 1 6th-level\':level>=14?\' and 1 5th-level\':\'\'} arcane spell slot"',
   'Master Wizard Spellcasting':
     'Section=magic ' +
-    'Note="Spell Master (Arcane)/Knows 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} arcane spell"',
+    'Note="Spell Master (Arcane)/Has 1 7th-level%{level>=20?\' and 1 8th-level\':\'\'} arcane spell slot"',
 
   // General Feats
   'Additional Lore (%lore)':'Section=skill Note="Skill %V (%lore)"',
@@ -7387,7 +7391,7 @@ Pathfinder2E.FEATURES = {
     'Note="+2 Occultism to Identify Magic with a mental, possession, prediction, or scrying trait"',
   'Pickpocket':
     'Section=skill ' +
-    'Note="Can Steal a closely-guarded object without penalty%{rank.Thievery>=3?\'/Can use 2 actions to Steal with a -5 penalty from an alert creature\':\'\'}"',
+    'Note="Can attempt to Steal a closely-guarded object without penalty%{rank.Thievery>=3?\'/Can use 2 actions to attempt to Steal with a -5 penalty from an alert creature\':\'\'}"',
   'Planar Survival':
     'Section=skill ' +
     'Note="Can use Survival to Subsist on different planes and to prevent damage from planar conditions"',
@@ -7427,7 +7431,7 @@ Pathfinder2E.FEATURES = {
     'Note="Can stand immediately after a successful Grab An Edge and use Athletics to Grab An Edge"',
   'Read Lips':
     'Section=skill ' +
-    'Note="Can read the lips of those who can be seen clearly; in difficult circumstances, this requires a Society check and can inflict fascinated and flat-footed"',
+    'Note="Can read the lips of those who can be seen clearly; in difficult circumstances, this requires a Society check and can inflict fascinated and flat-footed on self"',
   'Recognize Spell':
     'Action=Reaction ' +
     'Section=skill ' +
@@ -7453,7 +7457,7 @@ Pathfinder2E.FEATURES = {
     'Section=skill Note="Knows the sign equivalents of understood languages"',
   'Skill Training (%skill)':'Section=skill Note="Skill Trained (%skill)"',
   'Slippery Secrets':
-    'Section=skill ' +
+    'Section=save ' +
     'Note="Successful Deception vs. spell DC negates spell effects that read minds, detect lies, or reveal alignment"',
   'Snare Crafting':
     'Section=skill ' +
@@ -7793,7 +7797,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Divine,Primal ' +
     'Cast=Reaction ' +
     'Description=' +
-      '"R60\' Allows target to breathe normally in any environment for 1 min"',
+      '"R60\' Allows the target to breathe normally in any environment for 1 min or until it returns to a breathable environment"',
   'Air Walk':
     'Level=4 ' +
     'Traits=Air,Transmutation ' +
@@ -7872,7 +7876,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Divine,Occult ' +
     'Cast="10 min" ' +
     'Description=' +
-      '"Reveals whether the results of a proposed action up to 30 min in the future will be generally good or bad"',
+      '"Successful DC 6 secret flat check reveals whether the results of a proposed action up to 30 min in the future will be generally good or bad"',
   'Avatar':
     'Level=10 ' +
     'Traits=Polymorph,Transmutation ' +
@@ -7960,7 +7964,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Divine,Occult,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"R30\' Blinds the target for 1 min (<b>save Fortitude</b> effects last until next turn; critical success negates; critical failure inflicts permanent blindness)"',
+      '"R30\' Blinds the target for 1 min (<b>save Fortitude</b> effects last until the target\'s next turn; critical success negates; critical failure inflicts permanent blindness)"',
   'Blink':
     'Level=4 ' +
     'Traits=Conjuration,Teleportation ' +
@@ -8103,7 +8107,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Occult ' +
     'Cast=2 ' +
     'Description=' +
-      '"15\' cone inflicts stunned 1, blinded for 1 rd, and dazzled for 1 min (<b>save Will</b> inflicts dazzled for 1 rd only; critical success negates; critical failure extends blindness to 1 min)"',
+      '"15\' cone inflicts stunned 1, blinded for 1 rd, and dazzled for 1 min (<b>save Will</b> inflicts dazzled for 1 rd only; critical success negates; critical failure inflicts stunned for 1 rd and blinded for 1 min)"',
   'Command':
     'Level=1 ' +
     'Traits=Auditory,Enchantment,Linguistic,Mental ' +
@@ -8173,7 +8177,7 @@ Pathfinder2E.SPELLS = {
     'School=Conjuration ' +
     'Traditions=Arcane,Divine,Primal ' +
     'Cast=2 ' +
-    'Description="Creates 2 gallons of water that last for 1 day"',
+    'Description="Creates 2 gallons of water that lasts for 1 day"',
   'Creation':
     'Level=4 ' +
     'Traits=Conjuration ' +
@@ -8229,7 +8233,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Divine,Occult,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"Allows self to see in darkness for 1 hr (<b>heightened 3rd</b> affects a touched target; <b>5th</b> effects last until next daily prep)"',
+      '"Allows self to see in darkness for 1 hr (<b>heightened 3rd</b> affects a touched target; <b>5th</b> affects a touched target and effects last until next daily prep)"',
   'Daze':
     'Level=1 ' +
     'Traits=Cantrip,Enchantment,Mental,Nonlethal ' +
@@ -8293,7 +8297,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Occult ' +
     'Cast=2 ' +
     'Description=' +
-      '"30\' emanation reveals scrying effects, along with the scrying creature for lower-level effects, for 1 hr (<b>heightened 6th</b> effects last until next daily prep)"',
+      '"30\' emanation reveals scrying effects, along with the image and location of the scrying creature for lower-level effects, for 1 hr (<b>heightened 6th</b> effects last until next daily prep)"',
   'Dimension Door':
     'Level=4 ' +
     'Traits=Conjuration,Teleportation ' +
@@ -8563,7 +8567,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"R30\' Willing target becomes Large, gaining +5\' reach, +2 melee damage, and clumsy 1 for 5 min (<b>heightened 4th</b> target becomes Huge, gaining +10\' reach and +4 melee damage; <b>8th</b> affects 10 creatures)"',
+      '"R30\' Willing target becomes Large, gaining +5\' reach, +2 melee damage, and clumsy 1 for 5 min (<b>heightened 4th</b> target becomes Huge, gaining +10\' reach and +4 melee damage; <b>6th</b> affects 10 creatures)"',
   'Entangle':
     'Level=2 ' +
     'Traits=Plant,Transmutation ' +
@@ -8619,7 +8623,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Occult ' +
     'Cast="10 min" ' +
     'Description=' +
-      '"Controls the image shown by scrying within a 100\' burst until next daily prep"',
+      '"Controls the image shown by scrying within a 100\' burst until next daily prep; a successful Perception with higher-level scrying reveals the illusion but does not give a true depiction of the area"',
   'Fear':
     'Level=1 ' +
     'Traits=Emotion,Enchantment,Fear,Mental ' +
@@ -8675,7 +8679,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Divine,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"R30\' Target suffers 70 HP negative, dying at 0 HP (<b>save basic Fortitude</b) (<b>heightened +1</b> inflicts +10 HP)"',
+      '"R30\' Target suffers 70 HP negative, dying at 0 HP (<b>save basic Fortitude</b>) (<b>heightened +1</b> inflicts +10 HP)"',
   'Fire Seeds':
     'Level=6 ' +
     'Traits=Evocation,Fire,Plant ' +
@@ -8715,7 +8719,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"R30\' Movable flame inflicts 3d6 HP fire in a 15\' sq while sustained for up to 1 min (<b>save basic Reflex</b>; success negates) (<b>heightened +1</b> inflicts +1d6 HP)"',
+      '"R30\' Movable flame inflicts 3d6 HP fire in a 5\' sq while sustained for up to 1 min (<b>save basic Reflex</b>; success negates) (<b>heightened +1</b> inflicts +1d6 HP)"',
   'Fleet Step':
     'Level=1 ' +
     'Traits=Transmutation ' +
@@ -8762,7 +8766,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Divine,Occult ' +
     'Cast=2 ' +
     'Description=' +
-      '"Touched gains +2 initiative and does not suffer flat-footed vs. undetected and flanking creatures, and self can use a reaction to give the target the better of 2 rolls or its foe the worse of 2 rolls, for 1 hr"',
+      '"Touched gains +2 initiative and does not suffer flat-footed vs. undetected and flanking creatures for 1 hr; allows self to use a reaction to give the target the better of 2 rolls or its foe the worse of 2 rolls"',
   'Freedom Of Movement':
     'Level=4 ' +
     'Traits=Abjuration ' +
@@ -8962,7 +8966,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Arcane,Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"Targets in a 500\' radius suffer 10d10 HP negative (<b>save basic Fortitude</b>; plant and water creatures worsen save by 1 degree) (<b>heightened +1</b> inflicts +1d10 HP)"',
+      '"Targets in a 500\' radius suffer 10d10 HP negative (<b>save basic Fortitude</b>; plant and water creatures worsen save by 1 degree, and moisture-free creatures are immune) (<b>heightened +1</b> inflicts +1d10 HP)"',
   'Humanoid Form':
     'Level=2 ' +
     'Traits=Polymorph,Transmutation ' +
@@ -14415,6 +14419,12 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
   let prefix =
     name.charAt(0).toLowerCase() + name.substring(1).replaceAll(' ', '');
 
+  if(name.endsWith(' Dedication')) {
+    rules.defineRule(prefix.replaceAll(/[-]/g, '') + 'Level',
+      'features.' + name, '?', null,
+      'level', '=', null
+    );
+  }
   if(name == 'Abundant Step') {
     rules.defineRule('magicNotes.abundantStep', 'monkTradition', '=', null);
   } else if((matchInfo = name.match(/Additional Lore \((.*)\)/)) != null) {
@@ -14732,6 +14742,13 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     });
   } else if(name == 'Empty Body') {
     rules.defineRule('magicNotes.emptyBody', 'monkTradition', '=', null);
+  } else if(name == 'Energized Font') {
+    ['Arcane', 'Divine', 'Occult', 'Primal'].forEach(t => {
+      rules.defineRule('gnomeSharedInnateAndFocusTradition',
+        'gnomeTradition', '?', null,
+        'spellDifficultyClass.' + t, '=', 'dict.gnomeTradition=="' + t.toLowerCase() + '" ? 1 : null'
+      );
+    });
   } else if(name == 'Expert Alchemy') {
     rules.defineRule
       ('advancedAlchemyLevel', 'featureNotes.expertAlchemy', '^', null);
