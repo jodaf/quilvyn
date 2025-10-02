@@ -93,13 +93,11 @@ RULESETS['Pathfinder 2E Legacy (<i>beta</i>)'] = {
   url:'plugins/Pathfinder2E.js',
   group:'Pathfinder'
 };
-/*
-RULESETS['Pathfinder 2E Remaster'] = {
+RULESETS['Pathfinder 2E Remaster (<i>beta</i>)'] = {
   url:'plugins/Pathfinder2ERemaster.js',
   group:'Pathfinder',
   require:'Pathfinder2E.js'
 };
-*/
 RULESETS['D&D 5E'] = {
   url:'plugins/PHB5E.js',
   group:'5E',
