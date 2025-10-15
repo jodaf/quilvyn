@@ -31,6 +31,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 function Pathfinder2ERemaster(edition) {
 
+  edition = edition.replace(/\s+\S*beta\S*/, '');
   let rules = new QuilvynRules(edition, Pathfinder2ERemaster.VERSION);
   rules.plugin = Pathfinder2ERemaster;
   Pathfinder2ERemaster.rules = rules;
@@ -1334,7 +1335,8 @@ Pathfinder2ERemaster.FEATS = {
   'Animal Elocutionist':Pathfinder2E.FEATS['Burrow Elocutionist'],
   'Fey Fellowship':Pathfinder2E.FEATS['Fey Fellowship'],
   'First World Magic':Pathfinder2E.FEATS['First World Magic'],
-  'Gnome Obsession':Pathfinder2E.FEATS['Gnome Obsession'],
+  // Changed parameterization
+  'Gnome Obsession (%lore)':'Traits=Gnome',
   'Gnome Weapon Familiarity':Pathfinder2E.FEATS['Gnome Weapon Familiarity'],
   'Illusion Sense':Pathfinder2E.FEATS['Illusion Sense'],
   'Razzle-Dazzle':'Traits=Gnome',
@@ -1397,8 +1399,7 @@ Pathfinder2ERemaster.FEATS = {
   'Titan Slinger':Pathfinder2E.FEATS['Titan Slinger'],
   'Unfettered Halfling':Pathfinder2E.FEATS['Unfettered Halfling'],
   'Watchful Halfling':Pathfinder2E.FEATS['Watchful Halfling'],
-  'Cultural Adaptability (%ancestry)':
-    Pathfinder2E.FEATS['Cultural Adaptability (%ancestry)'],
+  'Cultural Adaptability':Pathfinder2E.FEATS['Cultural Adaptability'],
   'Step Lively':'Traits=Halfling Require="level >= 5"',
   'Dance Underfoot':
     'Traits=Halfling Require="level >= 9","features.Step Lively"',
@@ -5521,11 +5522,10 @@ Pathfinder2ERemaster.FEATURES = {
     Pathfinder2E.FEATURES['Rock Runner']
     .replace('flat-footed', 'off-guard'),
   // Changed from Stonecunning
-  // TODO Has Specialty Crafting (Stonemasonry) if already trained in Crafting
   "Stonemason's Eye":
     Pathfinder2E.FEATURES.Stonecunning
-    .replace('Section=', 'Section=skill,')
-    .replace('Note=', 'Note="Skill Trained (Crafting)",')
+    .replace('Section=', 'Section=feature,skill,')
+    .replace('Note=', 'Note="Has the Specialty Crafting feature for Stonemasonry","Skill Trained (Crafting)",')
     .replace('-2', '+0'),
   'Unburdened Iron':Pathfinder2E.FEATURES['Unburdened Iron'],
   'Boulder Roll':Pathfinder2E.FEATURES['Boulder Roll'],
@@ -5641,13 +5641,12 @@ Pathfinder2ERemaster.FEATURES = {
     'Note="Can speak with animals and gains +1 to Make An Impression on them"',
   'Fey Fellowship':Pathfinder2E.FEATURES['Fey Fellowship'],
   'First World Magic':Pathfinder2E.FEATURES['First World Magic'],
-  // Changed
-  'Gnome Obsession':
+  // Changed parameterization and effects
+  'Gnome Obsession (%lore)':
     'Section=feature,skill ' +
     'Note=' +
-      // TODO not quite correct
-      '"Skill Feat (Choose 1 from any Additional Lore; Choose 1 from any Assurance)",' +
-      '"Can use 1 day of downtime to change the chosen Gnome Obsession skill"',
+      '"Has the Additional Lore (%lore) and Assurance (%lore) features",' +
+      '"Can use 1 day of downtime to change to a different lore"',
   // Changed
   'Gnome Weapon Familiarity':
     'Section=combat,combat ' +
@@ -5781,8 +5780,7 @@ Pathfinder2ERemaster.FEATURES = {
   'Watchful Halfling':
     Pathfinder2E.FEATURES['Watchful Halfling']
     .replace('-2', '+0'),
-  'Cultural Adaptability (%ancestry)':
-    Pathfinder2E.FEATURES['Cultural Adaptability (%ancestry)'],
+  'Cultural Adaptability':Pathfinder2E.FEATURES['Cultural Adaptability'],
   'Step Lively':
     'Action=Reaction ' +
     'Section=combat ' +
@@ -6144,7 +6142,7 @@ Pathfinder2ERemaster.FEATURES = {
   'Nephilim Lore':
     'Section=feature,skill ' +
     'Note=' +
-      // TODO not quite correct
+      // Note: should require choosing a planar lore
       '"Skill Feat (Choose 1 from any Additional Lore)",' +
       '"Skill Trained (Choose 1 from Diplomacy, Intimidation; Religion)"',
   'Nimble Hooves':'Section=ability Note="+5 Speed"',
@@ -6162,7 +6160,6 @@ Pathfinder2ERemaster.FEATURES = {
   'Nephilim Resistance':
     'Section=save Note="Has resistance 5 to a choice of energy"',
   'Scion Of Many Planes':
-    // TODO not quite correct
     'Section=feature Note="Ancestry Feat (Choose 1 from any Nephilim Lineage)"',
   'Skillful Tail':
     'Section=feature Note="Can use tail for simple Interact actions"',
@@ -6480,11 +6477,7 @@ Pathfinder2ERemaster.FEATURES = {
       '"Weapon Familiarity (Kholo Weapons; Flail; Khopesh; Mambele; War Flail)",' +
       '"Has access to uncommon kholo weapons%{level>=5?\'/Critical hits with a kholo weapon, flail, khopesh, khopesh, mambele, or war flail inflict its critical specialization effect\':\'\'}"',
   'Pack Hunter':
-    // TODO duplicate note? put it in features? check other Aid notes
-    'Section=combat,skill ' +
-    'Note=' +
-      '"+2 to Aid and to allies\' checks to Aid self",' +
-      '"+2 to Aid and to allies\' checks to Aid self"',
+    'Section=feature Note="+2 to Aid and to allies\' checks to Aid self"',
   'Sensitive Nose':'Section=skill Note="Has 30\' imprecise scent"',
   'Absorb Strength':
     'Action=1 ' +
@@ -6700,8 +6693,7 @@ Pathfinder2ERemaster.FEATURES = {
       '"Skill Feat (Choose 1 from Additional Lore (Astrology Lore), Additional Lore (Lizardfolk Lore))",' +
       '"Skill Trained (Survival; Choose 1 from Nature, Occultism)"',
   'Marsh Runner':
-   // TODO ability or combat? check other Step notes
-    'Section=ability,skill ' +
+    'Section=combat,skill ' +
    'Note=' +
      '"Can Step in difficult terrain caused by flooding, swamps, and quicksand",' +
      '"Using Acrobatics to Balance on narrow surfaces or marshy ground does not inflict off-guard, and successes to do so are critical successes"',
@@ -6900,7 +6892,7 @@ Pathfinder2ERemaster.FEATURES = {
       '"Weapon Familiarity (Tengu Weapons; Katana; Khakkara; Temple Sword; Wakizashi)",' +
       '"Can gain familiarity with a sword during daily prep/Has access to uncommon tengu weapons%{level>=5?\'/Critical hits with a tengu weapon, katana, khakkara, temple sword, or wakizashi inflict its critical specialization effect\':\'\'}"',
   'Uncanny Agility':
-    'Section=ability,feature ' +
+    'Section=combat,feature ' +
     'Note=' +
       '"Can Step into difficult terrain caused by uneven ground",' +
       '"Has the Steady Balance feature"',
@@ -9190,7 +9182,8 @@ Pathfinder2ERemaster.FEATURES = {
     'Note="Permanently quickened; can use the additional action only to use Quick Alchemy"',
   'Advanced Alchemy':
     Pathfinder2E.FEATURES['Advanced Alchemy']
-    .replace('use a batch of infused reagents to create 2', 'create %{(skillNotes.advancedEfficientAlchemy?intelligenceModifier+(level>=16?10:8):skillNotes.efficientAlchemy?6+intelligenceModifier:levels.Alchemist?4+intelligenceModifier:4)+(skillNotes.advancedHerbalism?$$\'features.Advanced Herbalism\'*2:0)+(skillNotes.advancedPoisoncraft?$$\'features.Advanced Poisoncraft\'*2:0)} consumable'),
+    .replace('use a batch of infused reagents to create 2', 'create %{(skillNotes.advancedEfficientAlchemy?intelligenceModifier+(level>=16?10:8):skillNotes.efficientAlchemy?6+intelligenceModifier:levels.Alchemist?4+intelligenceModifier:4)+(skillNotes.advancedHerbalism?$$\'features.Advanced Herbalism\'*2:0)+(skillNotes.advancedPoisoncraft?$$\'features.Advanced Poisoncraft\'*2:0)} consumable')
+    .replace(', or 3 signature items,', ''),
   'Advanced Vials (Bomber)':
     'Section=skill Note="Can make bombs with a special material trait"',
   'Advanced Vials (Chirurgeon)':
@@ -9359,7 +9352,7 @@ Pathfinder2ERemaster.FEATURES = {
   'Improved Invigorating Elixir (Physical)':
     'Section=skill Note="Has increased Invigorating Elixir effects"',
   'Mutant Physique':
-    'Section=skill ' +
+    'Section=combat ' +
     'Note="Bestial mutagens give an Intimidation bonus and increase claws and jaws damage die by 1 step and give them the deadly d10 trait; juggernaut mutagens give resistance %{level//2} to physical damage; quicksilver mutagens give 10\' Steps and Squeezing as 1 size smaller"',
   'Pinpoint Poisoner':
     'Section=combat ' +
@@ -13692,7 +13685,7 @@ Pathfinder2ERemaster.SKILLS = {
   'Underworld Lore':Pathfinder2E.SKILLS['Underworld Lore'],
   'Warfare Lore':Pathfinder2E.SKILLS['Warfare Lore'],
   // Core 2 lores from ancestries (pg 7ff)
-  'Boneyard Lore':'Attribute=Intelligence Subcategory="Boneyard Lore"',
+  'Boneyard Lore':'Attribute=Intelligence Subcategory="Planar Lore"',
   'Catfolk Lore':'Attribute=Intelligence Subcategory="Creature Lore"',
   'Dragon Lore':'Attribute=Intelligence Subcategory="Creature Lore"',
   'Duskwalker Lore':'Attribute=Intelligence Subcategory="Creature Lore"',
@@ -18328,11 +18321,15 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
     rules.defineRule('skillNotes.' + prefix, 'feats.' + name, '=', null);
   } else if(name == 'Slag May') {
     rules.defineRule('weapons.Slag Claws', 'combatNotes.slagMay', '=', '1');
-  } else if(name == 'Tengu Feather Fan') {
-    rules.defineRule('magicNotes.waveFan',
-      'magicNotes.tenguFeatherFan', '=', '1',
-      "magicNotes.windGod'sFan", '+', '1',
-      "magicNotes.thunderGod'sFan", '+', '1'
+  } else if(name == "Stonemason's Eye") {
+    rules.defineRule("featureNotes.stonemason'sEye",
+      'trainingCount.Crafting', '?', 'source > 1'
+    );
+    rules.defineRule('features.Specialty Crafting',
+      "featureNotes.stoneMason'sEye", '=', '1'
+    );
+    rules.defineRule('skillNotes.duplicatedTraining',
+      "featureNotes.stoneMason'sEye", '+', '-1'
     );
   } else if(name == 'Stumbling Stance') {
     Pathfinder2ERemaster.weaponRules(
@@ -18363,6 +18360,12 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
         'sorcererTraditions', '=', 'source.match(/' + t + '/) ? 1 : null'
       );
     });
+  } else if(name == 'Tengu Feather Fan') {
+    rules.defineRule('magicNotes.waveFan',
+      'magicNotes.tenguFeatherFan', '=', '1',
+      "magicNotes.windGod'sFan", '+', '1',
+      "magicNotes.thunderGod'sFan", '+', '1'
+    );
   } else if(name == 'Traditional Resistances') {
     rules.defineRule('saveNotes.traditionalResistances',
       'features.Arcane Dragonblood', '=', '"arcane"',
@@ -18670,6 +18673,110 @@ Pathfinder2ERemaster.initialEditorElements = function() {
 Pathfinder2ERemaster.getPlugins = function() {
   return [Pathfinder2E];
 };
+
+Pathfinder2ERemaster.NAME_COMPONENTS = {
+  Leshy: {
+    formats: ['%{adjectives} %{noun}'],
+    adjectives: [
+      '%{adjective}',
+      '%{adjective}',
+      '%{adjective}',
+      '%{adjective} %{gerund}',
+    ],
+    adjective: [
+      'Cascading', 'Lurking', 'Masterful', 'Noon', 'Scarlet', 'Snowy', 'Verdant'
+    ],
+    gerund: [
+      'Pine', 'Sky', 'Sun'
+    ],
+    noun: [
+      'Branch', 'Drinker', 'Hunter', 'Summer', 'Song', 'Rapids', 'Taleweaver'
+    ],
+  },
+  Orc: {
+    // removed hjqvwy from trailing throughout
+    leading: 'dghjklmnrsty'.split(''),
+    trailing: 'dgklmnrst'.split(''),
+    clusters: [
+      // from sample names
+      'Gr', 'Kr', 'Th', 'ch', 'gg', 'll', 'rch', 'rk', 'rr', 'sk', 'ss'
+    ]
+  },
+  Catfolk: {
+    leading: 'dfghklnprstvwyz'.split(''),
+    trailing: 'dfgklnprstz'.split(''),
+    clusters: [
+      // from sample names
+      'Dr', 'kk', 'nt', 'rr', 'sp', 'st', 'th', 'uu'
+    ]
+  },
+  Hobgoblin: {
+    leading: 'dghklmnrstvz'.split(''),
+    trailing: 'dgklmnrstz'.split(''),
+    clusters: [
+      // from sample names
+      'Dr', 'Gh', 'Kr', 'ae', 'ng', 'th'
+    ]
+  },
+  Kholo: {
+    formats: ['%{noun}', '%{adjective} %{noun}'],
+    adjective: [
+      'Iron', 'Onyx', 'Red', 'Unbent', 'White', 'Wistful'
+    ],
+    noun: [
+      'Acacia', 'Baobab', 'Elephant', 'Jackal', 'Reed', 'Thorn', 'Tooth',
+      'Woodpecker'
+    ]
+  },
+  Kobold: {
+    leading: 'bdfghjklmnrstvz'.split(''),
+    // trailing h allowed
+    trailing: 'bdfghklmnrstz'.split(''),
+    vowels: 'aeiouy'.split(''),
+    clusters: [
+      // from sample names
+      'Dr', 'Sh', 'St', 'Vr', 'Zg', 'aa', 'kk', 'ng', 'rr'
+    ]
+  },
+  Lizardfolk: {
+    leading: 'bghklmnrstz'.split(''),
+    trailing: 'bgklmnrstz'.split(''),
+    clusters: [
+      // from sample names
+      'Sh', 'lk', 'sh', 'shk', 'ss'
+    ]
+  },
+  Ratfolk: {
+    leading: 'bcdghjklmnrstxz'.split(''),
+    trailing: 'bcdgklmnrstxz'.split(''),
+    clusters: [
+      // from sample names
+      'Ch', 'Kn', 'Sk', 'nn', 'rn', 'ss'
+    ]
+  },
+  Tengu: {
+    leading: 'cdghklmprst'.split(''),
+    // trailing h allowed
+    trailing: 'cdghklmprst'.split(''),
+    clusters: [
+      // from sample names
+      'Ch', 'Gr', 'Ts', 'kk', 'rr', 'ss'
+    ]
+  },
+  Tripkee: {
+    leading: 'bcghklmnpqrstwyz'.split(''),
+    trailing: 'bcgklmnprstz'.split(''),
+    clusters: [
+      // from sample names
+      'Ct', 'Gp', 'Gr', 'Hrr', 'Mhr', 'Zt', 'ksh', 'lk', 'nn', 'pl', 'pr',
+      'sh', 'aa', 'ii', "o'o", 'uu'
+    ]
+  }
+};
+Pathfinder2E.NAME_COMPONENTS =
+  Object.assign(
+    Pathfinder2E.NAME_COMPONENTS, Pathfinder2ERemaster.NAME_COMPONENTS
+  );
 
 /* Returns HTML body content for user notes associated with this rule set. */
 Pathfinder2ERemaster.ruleNotes = function() {
