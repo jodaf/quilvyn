@@ -3,7 +3,7 @@
 "use strict";
 
 let COPYRIGHT = 'Copyright 2023 James J. Hayes';
-let VERSION = '2.4.7';
+let VERSION = '2.4.8';
 let ABOUT_TEXT =
 'Quilvyn RPG Character Editor version ' + VERSION + '\n' +
 'The Quilvyn RPG Character Editor is ' + COPYRIGHT + '\n' +
