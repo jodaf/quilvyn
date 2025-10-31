@@ -113,11 +113,12 @@ Pathfinder2ERemaster.ANCESTRIES = {
     .replaceAll(/Heritage Human/g, 'Human'),
   'Leshy':
     'HitPoints=8 ' +
+    'Size=Small ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Constitution; Wisdom; Choose 1 from any)",' +
       '"1:Attribute Flaw (Intelligence)",' +
-      '"1:Small","1:Low-Light Vision","1:Ancestry Feats","1:Leshy Heritage",' +
+      '"1:Low-Light Vision","1:Ancestry Feats","1:Leshy Heritage",' +
       '"1:Plant Nourishment" ' +
     'Selectables=' +
       '"1:Cactus Leshy:Heritage",' +
@@ -133,6 +134,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Leshy,Plant',
   'Orc':
     'HitPoints=10 ' +
+    'Size=Medium ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Choose 2 from any)",' +
@@ -150,6 +152,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
   // Core 2
   'Catfolk':
     'HitPoints=8 ' +
+    'Size=Medium ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Dexterity; Charisma; Choose 1 from any)",' +
@@ -169,6 +172,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
   'Hobgoblin':
     'HitPoints=8 ' +
     'Speed=25 ' +
+    'Size=Medium ' +
     'Features=' +
       '"1:Attribute Boost (Constitution; Intelligence; Choose 1 from any)",' +
       '"1:Attribute Flaw (Wisdom)",' +
@@ -184,6 +188,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Hobgoblin,Humanoid',
   'Kholo':
     'HitPoints=8 ' +
+    'Size=Medium ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Strength; Intelligence; Choose 1 from any)",' +
@@ -201,11 +206,11 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Kholo,Humanoid',
   'Kobold':
     'HitPoints=6 ' +
+    'Size=Small ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Dexterity; Charisma; Choose 1 from any)",' +
       '"1:Attribute Flaw (Constitution)",' +
-      '"1:Small",' +
       '"1:Darkvision","1:Kobold Heritage" ' +
     'Selectables=' +
       '"1:Cavernstalker Kobold:Heritage",' +
@@ -219,6 +224,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Humanoid,Kobold',
   'Lizardfolk':
     'HitPoints=8 ' +
+    'Size=Medium ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Strength; Wisdom; Choose 1 from any)",' +
@@ -237,11 +243,11 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Humanoid,Lizardfolk',
   'Ratfolk':
     'HitPoints=6 ' +
+    'Size=Small ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Dexterity; Intelligence; Choose 1 from any)",' +
       '"1:Attribute Flaw (Strength)",' +
-      '"1:Small",' +
       '"1:Low-Light Vision",' +
       '"1:Sharp Teeth","1:Ratfolk Heritage" ' +
     'Selectables=' +
@@ -256,6 +262,7 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Humanoid,Ratfolk',
   'Tengu':
     'HitPoints=6 ' +
+    'Size=Medium ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Dexterity; Choose 1 from any)",' +
@@ -273,11 +280,11 @@ Pathfinder2ERemaster.ANCESTRIES = {
     'Traits=Humanoid,Tengu',
   'Tripkee':
     'HitPoints=6 ' +
+    'Size=Small ' +
     'Speed=25 ' +
     'Features=' +
       '"1:Attribute Boost (Dexterity; Wisdom; Choose 1 from any)",' +
       '"1:Attribute Flaw (Strength)",' +
-      '"1:Small",' +
       '"1:Low-Light Vision",' +
       '"1:Natural Climber","1:Tripkee Heritage" ' +
     'Selectables=' +
@@ -519,12 +526,12 @@ Pathfinder2ERemaster.CLASSES = {
       '"11:Reflex Expertise","13:Divine Defense","13:Weapon Specialization",' +
       '"19:Miraculous Spell" ' +
     'Selectables=' +
-      '"deityFont==\'Either\' ? 1:Healing Font:Divine Font",' +
-      '"deityFont==\'Either\' ? 1:Harmful Font:Divine Font",' +
+      '"deityFont==\'Harm or Heal\' ? 1:Healing Font:Divine Font",' +
+      '"deityFont==\'Harm or Heal\' ? 1:Harmful Font:Divine Font",' +
       '"1:Cloistered Cleric:Doctrine",' +
       '"1:Warpriest:Doctrine",' +
-      '"deitySanctification==\'Either\' ? 1:Holy:Sanctification",' +
-      '"deitySanctification==\'Either\' ? 1:Unholy:Sanctification" ' +
+      '"deitySanctification==\'Holy or Unholy\' ? 1:Holy:Sanctification",' +
+      '"deitySanctification==\'Holy or Unholy\' ? 1:Unholy:Sanctification" ' +
     'SpellSlots=' +
       'DC1:5@1,' +
       'D1:2@1;3@2,' +
@@ -884,14 +891,8 @@ Pathfinder2ERemaster.CLASSES = {
       '"2:Skill Feats","3:Furious Footfalls","3:General Feats",' +
       '"3:Skill Increases",5:Brutality,7:Juggernaut,' +
       '"7:Specialization Ability","7:Weapon Specialization",' +
-      '"9:Reflex Expertise",' +
-      '"features.Animal Instinct ? 9:Raging Resistance (Animal)",' +
-      '"features.Dragon Instinct ? 9:Raging Resistance (Dragon)",' +
-      '"features.Fury Instinct ? 9:Raging Resistance (Fury)",' +
-      '"features.Giant Instinct ? 9:Raging Resistance (Giant)",' +
-      '"features.Spirit Instinct ? 9:Raging Resistance (Spirit)",' +
-      '"features.Superstition Instinct ? 9:Raging Resistance (Superstition)",' +
-      '"11:Mighty Rage","13:Greater Juggernaut","13:Medium Armor Expertise",' +
+      '"9:Reflex Expertise","9:Raging Resistance","11:Mighty Rage",' +
+      '"13:Greater Juggernaut","13:Medium Armor Expertise",' +
       '"13:Weapon Mastery","15:Greater Weapon Specialization",' +
       '"15:Indomitable Will","17:Perception Mastery","17:Revitalizing Rage",' +
       '"19:Medium Armor Mastery",19:Devastator ' +
@@ -953,8 +954,8 @@ Pathfinder2ERemaster.CLASSES = {
     'Selectables=' +
       '"1:Dexterity:Key Attribute",' +
       '"1:Strength:Key Attribute",' +
-      '"deitySanctification==\'Either\' ? 1:Holy:Sanctification",' +
-      '"deitySanctification==\'Either\' ? 1:Unholy:Sanctification",' +
+      '"deitySanctification==\'Holy or Unholy\' ? 1:Holy:Sanctification",' +
+      '"deitySanctification==\'Holy or Unholy\' ? 1:Unholy:Sanctification",' +
       '"1:Shields Of The Spirit:Devotion Spell",' +
       '"deityFont != \'Harm\' ? 1:Lay On Hands:Devotion Spell",' +
       '"deityFont != \'Heal\' ? 1:Touch Of The Void:Devotion Spell",' +
@@ -1170,7 +1171,7 @@ Pathfinder2ERemaster.DEITIES = {
     .replace('Magnificent Mansion', 'Planar Palace') + ' ' +
     'AreasOfConcern=Cities,Law,Merchants,Wealth ' +
     'DivineAttribute=Constitution,Intelligence ' +
-    'DivineSanctification=Either',
+    'DivineSanctification="Holy or Unholy"',
   'Asmodeus':
     Pathfinder2E.DEITIES.Asmodeus + ' ' +
     'AreasOfConcern=Contracts,Oppression,Pride,Tyranny ' +
@@ -1180,7 +1181,7 @@ Pathfinder2ERemaster.DEITIES = {
     Pathfinder2E.DEITIES.Calistra + ' ' +
     'AreasOfConcern=Lust,Revenge,Trickery ' +
     'DivineAttribute=Charisma,Dexterity ' +
-    'DivineSanctification=Either',
+    'DivineSanctification="Holy or Unholy"',
   'Cayden Cailean':
     Pathfinder2E.DEITIES['Cayden Cailean']
     .replace('Touch Of Idiocy', 'Stupefy') + ' ' +
@@ -1202,7 +1203,7 @@ Pathfinder2ERemaster.DEITIES = {
   'Gorum':Pathfinder2E.DEITIES.Gorum + ' ' +
     'AreasOfConcern=Battle,Strength,Weapons ' +
     'DivineAttribute=Constitution,Strength ' +
-    'DivineSanctification=Either',
+    'DivineSanctification="Holy or Unholy"',
   'Gozreh':Pathfinder2E.DEITIES.Gozreh + ' ' +
     'AreasOfConcern=Nature,"The Sea",Weather ' +
     'DivineAttribute=Constitution,Wisdom ' +
@@ -1218,7 +1219,7 @@ Pathfinder2ERemaster.DEITIES = {
     .replace('4:Stoneskin', '4:Mountain Resilience') + ' ' +
     'AreasOfConcern=History,Knowledge,Self-Perfection ' +
     'DivineAttribute=Intelligence,Wisdom ' +
-    'DivineSanctification=Either',
+    'DivineSanctification="Holy or Unholy"',
   'Lamashtu':
     Pathfinder2E.DEITIES.Lamashtu
     .replace('Magic Fang', 'Spider Sting') + ' ' +
@@ -1233,7 +1234,7 @@ Pathfinder2ERemaster.DEITIES = {
       '"9:Detonate Magic" ' +
     'AreasOfConcern=Magic ' +
     'DivineAttribute=Intelligence,Wisdom ' +
-    'DivineSanctification=Either',
+    'DivineSanctification="Holy or Unholy"',
   'Norgorber':
     Pathfinder2E.DEITIES.Norgorber
     .replace('Phantasmal Killer', 'Vision Of Death') + ' ' +
@@ -3374,7 +3375,8 @@ Pathfinder2ERemaster.FEATS = {
   'Greater Security':'Traits=Champion Require="level >= 8","features.Security"',
   'Heal Mount':
     Pathfinder2E.FEATS['Heal Mount']
-    .replace('Steed Ally', 'Faithful Steed'),
+    .replace('Steed Ally', 'Faithful Steed')
+    .replace(' Nec', ''),
   // Quick Shield Block as above
   'Second Blessing':
     Pathfinder2E.FEATS['Second Ally']
@@ -3978,7 +3980,8 @@ Pathfinder2ERemaster.FEATS = {
     'Traits=Sorcerer Require="level >= 14","features.Blood Rising"',
   'Interweave Dispel':
     Pathfinder2E.FEATS['Interweave Dispel']
-    .replace('Metamagic', 'Spellshape'),
+    .replace('Metamagic', 'Spellshape')
+    .replaceAll(' Abj', ''),
   'Reflect Harm':'Traits=Sorcerer Require="level >= 14"',
   'Spell Shroud':'Traits=Sorcerer,Concentrate,Spellshape Require="level >= 14"',
   // Effortless Concentration as above
@@ -7510,7 +7513,7 @@ Pathfinder2ERemaster.FEATURES = {
       '"Successes on Will saves are critical successes"',
   'Sanctification':
     'Section=feature ' +
-    'Note="%{deitySanctification==\'Either\'?\'1 selection\':deitySanctification==\'Holy\'?\'Has the Holy feature\':deitySanctification==\'Unholy\'?\'Has the Unholy feature\':\'Has neither the Holy nor Unholy feature\'}"',
+    'Note="%{deitySanctification==\'Holy or Unholy\'?\'1 selection\':deitySanctification==\'Holy\'?\'Has the Holy feature\':deitySanctification==\'Unholy\'?\'Has the Unholy feature\':\'Has neither the Holy nor Unholy feature\'}"',
   'Unholy':'Section=feature Note="Has the unholy trait"',
   'Warpriest':Pathfinder2E.FEATURES.Warpriest
     .replace('Simple Weapons', 'Simple Weapons; Martial Weapons')
@@ -9461,23 +9464,23 @@ Pathfinder2ERemaster.FEATURES = {
    .replace('-1 Armor Class and ', "%{levels.Barbarian?'':'-1 Armor Class and '}")
    .replace('quickRage', 'revitalizingRage')
    .replace('rages', 'rages to again gain temporary Hit Points'),
-  'Raging Resistance (Animal)':
-    Pathfinder2E.FEATURES['Raging Resistance (Animal)']
+  'Raging Resistance (Animal Instinct)':
+    Pathfinder2E.FEATURES['Raging Resistance (Animal Instinct)']
     .replace('3+constitutionModifier', 'saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)'),
-  'Raging Resistance (Dragon)':
-    Pathfinder2E.FEATURES['Raging Resistance (Dragon)']
+  'Raging Resistance (Dragon Instinct)':
+    Pathfinder2E.FEATURES['Raging Resistance (Dragon Instinct)']
     .replace('3+constitutionModifier', 'saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)'),
-  'Raging Resistance (Fury)':
-    Pathfinder2E.FEATURES['Raging Resistance (Fury)']
+  'Raging Resistance (Fury Instinct)':
+    Pathfinder2E.FEATURES['Raging Resistance (Fury Instinct)']
     .replace('3+constitutionModifier', 'saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)'),
-  'Raging Resistance (Giant)':
-    Pathfinder2E.FEATURES['Raging Resistance (Giant)']
+  'Raging Resistance (Giant Instinct)':
+    Pathfinder2E.FEATURES['Raging Resistance (Giant Instinct)']
     .replace('3+constitutionModifier', 'saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)'),
-  'Raging Resistance (Spirit)':
-    Pathfinder2E.FEATURES['Raging Resistance (Spirit)']
+  'Raging Resistance (Spirit Instinct)':
+    Pathfinder2E.FEATURES['Raging Resistance (Spirit Instinct)']
     .replace('3+constitutionModifier', 'saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)')
     .replace('negative', 'void'),
-  'Raging Resistance (Superstition)':
+  'Raging Resistance (Superstition Instinct)':
     'Section=save ' +
     'Note="Has resistance %{saveNotes.unstoppableJuggernaut?12:(3+constitutionModifier)} to a choice of arcane or divine spells and a choice of occult or primal spells during rage"',
   'Revitalizing Rage':Pathfinder2E.FEATURES['Quick Rage'],
@@ -16931,57 +16934,58 @@ Pathfinder2ERemaster.combatRules = function(rules, armors, shields, weapons) {
   // between ancestries; these are modified by the individual features
   Pathfinder2ERemaster.weaponRules(
     rules, 'Beak', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling',
-    ['Finesse', 'Unarmed'], null
+    ['Finesse', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Claws', 'Unarmed', 0, '1d4 S', 0, 0, 'Brawling',
-    ['Agile', 'Finesse', 'Unarmed'], null
+    ['Agile', 'Finesse', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
-    rules, 'Fangs', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling', ['Unarmed'], null
+    rules, 'Fangs', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling', ['Unarmed'], null,
+    null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Hair', 'Unarmed', 0, '1d4 B', 0, 0, 'Brawling',
-    ['Agile', 'Disarm', 'Finesse', 'Trip', 'Unarmed'], null
+    ['Agile', 'Disarm', 'Finesse', 'Trip', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Hoof', 'Unarmed', 0, '1d6 B', 0, 0, 'Brawling',
-    ['Finesse', 'Unarmed'], null
+    ['Finesse', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Jaws', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling',
-    ['Finesse', 'Unarmed'], null
+    ['Finesse', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Nails', 'Unarmed', 0, '1d6 S', 0, 0, 'Brawling',
-    ['Agile', 'Unarmed'], null
+    ['Agile', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Slag Claws', 'Unarmed', 0, '1d6 S', 0, 0, 'Brawling',
-    ['Grapple', 'Unarmed'], null
+    ['Grapple', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Spines', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling',
-    ['Finesse', 'Unarmed'], null
+    ['Finesse', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Tail', 'Unarmed', 0, '1d6 B', 0, 0, 'Brawling',
-    ['Sweep', 'Unarmed'], null
+    ['Sweep', 'Unarmed'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Talons', 'Unarmed', 0, '1d4 S', 0, 0, 'Brawling',
-    ['Agile', 'Finesse', 'Unarmed', 'Versatile P'], null
+    ['Agile', 'Finesse', 'Unarmed', 'Versatile P'], null, null
   );
   Pathfinder2ERemaster.weaponRules(
     rules, 'Tusks', 'Unarmed', 0, '1d6 P', 0, 0, 'Brawling',
-    ['Finesse', 'Unarmed'], null
+    ['Finesse', 'Unarmed'], null, null
   );
   // Most jaws attacks have the finesse trait; the few that do not can enable
   // the jawsNonFinesseAttack attribute to undo any finesse bonus
   rules.defineRule
     ('jawsNonFinesseAttack', 'finesseAttackBonus', '+', '-source');
   rules.defineRule('attackBonus.Jaws', 'jawsNonFinesseAttack', '+', null);
-  rules.defineRule('weapons.Jaws.6', 'jawsNonFinesseAttack', '=', '"strength"');
+  rules.defineRule('weapons.Jaws.8', 'jawsNonFinesseAttack', '=', '"strength"');
 };
 
 /* Defines rules related to basic character identity. */
@@ -17033,6 +17037,7 @@ Pathfinder2ERemaster.choiceRules = function(rules, type, name, attrs) {
   if(type == 'Ancestry') {
     Pathfinder2ERemaster.ancestryRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'HitPoints'),
+      QuilvynUtils.getAttrValue(attrs, 'Size'),
       QuilvynUtils.getAttrValue(attrs, 'Speed'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
@@ -17176,7 +17181,8 @@ Pathfinder2ERemaster.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Hands'),
       group,
       QuilvynUtils.getAttrValueArray(attrs, 'Traits'),
-      QuilvynUtils.getAttrValue(attrs, 'Range')
+      QuilvynUtils.getAttrValue(attrs, 'Range'),
+      QuilvynUtils.getAttrValue(attrs, 'Reload')
     );
     group =
       group == 'Knife' ? 'Knives' :
@@ -17216,16 +17222,18 @@ Pathfinder2ERemaster.choiceRules = function(rules, type, name, attrs) {
 
 /*
  * Defines in #rules# the rules associated with ancestry #name#. #hitPoints#
- * gives the number of HP granted at level 1 and #speed# the speed, #features#
- * and #selectables# list associated automatic and selectable features,
- * #languages# lists languages automatically known by characters with the
- * ancestry, and #traits# lists any traits associated with it.
+ * gives the number of HP granted at level 1, #size# the size, and #speed# the
+ * speed. #features# and #selectables# list associated automatic and selectable
+ * features, #languages# lists languages automatically known by characters with
+ * the ancestry, and #traits# lists any traits associated with it.
  */
 Pathfinder2ERemaster.ancestryRules = function(
-  rules, name, hitPoints, speed, features, selectables, languages, traits
+  rules, name, hitPoints, size, speed, features, selectables, languages, traits
 ) {
-  Pathfinder2E.ancestryRules
-    (rules, name, hitPoints, speed, features, selectables, languages, traits);
+  Pathfinder2E.ancestryRules(
+    rules, name, hitPoints, size, speed, features, selectables, languages,
+    traits
+  );
   let prefix = name.charAt(0) + name.substring(1).replaceAll(' ', '');
   selectables = rules.getChoices('selectableFeatures');
   // This duplicates code in heritageRules; replicating it here ensures that
@@ -17252,7 +17260,7 @@ Pathfinder2ERemaster.ancestryRulesExtra = function(rules, name) {
   if(name == 'Catfolk') {
     rules.defineRule('weapons.Claws', 'combatNotes.clawedCatfolk', '=', '1');
     rules.defineRule
-      ('weaponDieSidesBonus.Claws', 'combatNotes.clawedCatfolk', '^=', '2');
+      ('weaponDieSides.Claws', 'combatNotes.clawedCatfolk', '^', '6');
   } else if(name == 'Elf') {
     rules.defineRule
       ('multiclassLevelRequirementsWaived', 'features.Ancient Elf', '=', '1');
@@ -17276,14 +17284,12 @@ Pathfinder2ERemaster.ancestryRulesExtra = function(rules, name) {
     rules.defineRule('weapons.Claws', 'combatNotes.claws', '=', '1');
   } else if(name == 'Ratfolk') {
     rules.defineRule('weapons.Jaws', 'combatNotes.sharpTeeth', '=', '1');
-    rules.defineRule('weaponDieSidesBonus.Jaws',
-      'combatNotes.sharpTeeth', '^=', '-2' // decrease to 1d4
-    );
+    rules.defineRule('weaponDieSides.Jaws', 'combatNotes.sharpTeeth', 'v', '4');
     // Note: Ignore Agile trait currently not shown on character sheet
   } else if(name == 'Tengu') {
     rules.defineRule('weapons.Beak', 'combatNotes.sharpBeak', '=', '1');
     rules.defineRule
-      ('weapons.Beak.5', 'combatNotes.dogtoothTengu', '=', '" [Crit +d8]"');
+      ('weapons.Beak.6', 'combatNotes.dogtoothTengu', '=', '" [Crit +d8]"');
     rules.defineRule('weapons.Talons', 'combatNotes.talonedTengu', '=', '1');
   }
 };
@@ -17471,7 +17477,7 @@ Pathfinder2ERemaster.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('selectableFeatureCount.Champion (Sanctification)',
       'featureNotes.sanctification', '?', null,
-      'deitySanctification', '?', 'source=="Either"',
+      'deitySanctification', '?', 'source=="Holy or Unholy"',
       'levels.Champion', '=', '1',
       'featureNotes.championDedication', '=', '1'
     );
@@ -17509,7 +17515,7 @@ Pathfinder2ERemaster.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('selectableFeatureCount.Cleric (Sanctification)',
       'featureNotes.sanctification', '?', null,
-      'deitySanctification', '?', 'source=="Either"',
+      'deitySanctification', '?', 'source=="Holy or Unholy"',
       'levels.Cleric', '=', '1',
       'featureNotes.clericDedication', '=', '1'
     );
@@ -17556,6 +17562,9 @@ Pathfinder2ERemaster.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('selectableFeatureCount.Monk (Qi Tradition)',
       'featureNotes.qiTradition', '=', null
+    );
+    rules.defineRule('trainingLevel.Martial Weapons',
+      'combatNotes.warpriest', '^=', 'dict.level>=7 ? 2 : dict.level>=3 ? 1 : null'
     );
   } else if(name == 'Oracle') {
     rules.defineRule
@@ -17797,7 +17806,7 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
       rules.defineRule
         ('weapons.Claws', 'combatNotes.bestialManifestation(Claw)', '=', '1');
       // Add Versatile P trait
-      rules.defineRule('weapons.Claws.4',
+      rules.defineRule('weapons.Claws.5',
         'combatNotes.bestialManifestation(Claw)', '=', '"S/P"'
       );
     } else if(name.includes('Hoof')) {
@@ -17809,8 +17818,8 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
     } else if(name.includes('Tail')) {
       rules.defineRule
         ('weapons.Tail', 'combatNotes.bestialManifestation(Tail)', '=', '1');
-      rules.defineRule('weaponDieSidesBonus.Tail',
-        'combatNotes.bestialManifestation(Tail)', '^=', '-2' // decrease to 1d4
+      rules.defineRule('weaponDieSides.Tail',
+        'combatNotes.bestialManifestation(Tail)', 'v', '4'
       );
       // Add Finesse trait to this derivation of the Tail weapon
       rules.defineRule('combatNotes.bestialManifestation(Tail).1',
@@ -17820,7 +17829,7 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
       rules.defineRule('attackBonus.Tail',
         'combatNotes.bestialManifestation(Tail).1', '+', null
       );
-      rules.defineRule('weapons.Tail.6',
+      rules.defineRule('weapons.Tail.8',
         'combatNotes.bestialManifestation(Tail).1', '=', 'source>0 ? "dexterity" : "strength"'
       );
     }
@@ -17951,14 +17960,14 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
   } else if(name == 'Clinging Shadows Initiate') {
     Pathfinder2E.weaponRules(
       rules, 'Shadow Grasp', 'Unarmed', 0, '1d4 V', 0, 0, 'Brawling',
-      ['Agile', 'Grapple', 'Reach', 'Unarmed'], null
+      ['Agile', 'Grapple', 'Reach', 'Unarmed'], null, null
     );
     rules.defineRule
       ('weapons.Shadow Grasp', 'features.Clinging Shadows Initiate', '=', '1');
   } else if(name == 'Cobra Stance') {
     Pathfinder2ERemaster.weaponRules(
       rules, 'Cobra Fang', 'Unarmed', 0, '1d4 P', 0, 0, 'Brawling',
-      ['Agile', 'Deadly d10', 'Finesse', 'Unarmed', 'Venomous'], null
+      ['Agile', 'Deadly d10', 'Finesse', 'Unarmed', 'Venomous'], null, null
     );
     rules.defineRule('weapons.Cobra Fang', 'features.Cobra Stance', '=', '1');
   } else if(name == 'Contortionist') {
@@ -17968,8 +17977,7 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
     rules.defineRule
       ('features.Crossblooded Evolution', 'features.' + name, '=', '1');
   } else if(name == 'Crunch') {
-    rules.defineRule
-      ('weaponDieSidesBonus.Jaws', 'combatNotes.crunch', '^=', '2');
+    rules.defineRule('weaponDieSides.Jaws', 'combatNotes.crunch', '^', '8');
     // Note: Ignore Grapple trait currently not shown on character sheet
   } else if(name == 'Deadly Aspect') {
     rules.defineRule('combatNotes.deadlyAspect.1',
@@ -17985,9 +17993,9 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
       'features.Draconic Aspect (Tail)', '=', '" [Crit +d8]"'
     );
     rules.defineRule
-      ('weapons.Claws.5', 'combatNotes.deadlyAspect.1', '=', null);
-    rules.defineRule('weapons.Jaws.5', 'combatNotes.deadlyAspect.2', '=', null);
-    rules.defineRule('weapons.Tail.5', 'combatNotes.deadlyAspect.3', '=', null);
+      ('weapons.Claws.6', 'combatNotes.deadlyAspect.1', '=', null);
+    rules.defineRule('weapons.Jaws.6', 'combatNotes.deadlyAspect.2', '=', null);
+    rules.defineRule('weapons.Tail.6', 'combatNotes.deadlyAspect.3', '=', null);
   } else if(name == 'Devout Blessing') {
     // Suppress validation errors for Blessings
     let allSelectables = rules.getChoices('selectableFeatures');
@@ -18195,13 +18203,6 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
     rules.defineRule('magicNotes.harmonizeSelf', 'monkTradition', '=', null);
   } else if(name == 'Homeward Bound') {
     rules.defineRule('magicNotes.homewardBound', 'gnomeTradition', '=', null);
-  } else if(name == 'Interweave Dispel') {
-    rules.defineRule('knowsDispelMagicSpell',
-      'spells.Dispel Magic (A2)', '=', '1',
-      'spells.Dispel Magic (D2)', '=', '1',
-      'spells.Dispel Magic (O2)', '=', '1',
-      'spells.Dispel Magic (P2)', '=', '1'
-    );
   } else if(name.startsWith('Initiate Warden')) {
     rules.defineRule('features.Initiate Warden', 'features.' + name, '=', '1');
     rules.defineRule
@@ -18217,19 +18218,17 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
     );
   } else if(name.startsWith('Iruxi Armaments')) {
     if(name == 'Iruxi Armaments (Claws)') {
-      rules.defineRule('weaponDieSidesBonus.Claws',
-        'combatNotes.iruxiArmaments(Claws)', '^=', '2' // increase to 1d6
-      );
+      rules.defineRule
+        ('weaponDieSides.Claws', 'combatNotes.iruxiArmaments(Claws)', '^', '6');
       // Add the Versatile P trait
-      rules.defineRule('weapons.Claws.4',
+      rules.defineRule('weapons.Claws.5',
         'combatNotes.iruxiArmaments(Claws)', '=', '"S/P"'
       );
     } else if(name == 'Iruxi Armaments (Fangs)') {
       rules.defineRule
         ('weapons.Fangs', 'combatNotes.iruxiArmaments(Fangs)', '=', '1');
-      rules.defineRule('weaponDieSidesBonus.Fangs',
-        'combatNotes.iruxiArmaments(Fangs)', '^=', '2' // increase to 1d8
-      );
+      rules.defineRule
+        ('weaponDieSides.Fangs', 'combatNotes.iruxiArmaments(Fangs)', '^', '8');
     } else if(name == 'Iruxi Armaments (Tail)') {
       rules.defineRule
         ('weapons.Tail', 'combatNotes.iruxiArmaments(Tail)', '=', '1');
@@ -18334,7 +18333,7 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
   } else if(name == 'Stumbling Stance') {
     Pathfinder2ERemaster.weaponRules(
       rules, 'Stumbling Swing', 'Unarmed', 0, '1d8 B', 0, 0, 'Brawling',
-      ['Agile', 'Backstabber', 'Finesse', 'Nonlethal', 'Unarmed'], null
+      ['Agile', 'Backstabber', 'Finesse', 'Nonlethal', 'Unarmed'], null, null
     );
     rules.defineRule
       ('weapons.Stumbling Swing', 'features.Stumbling Stance', '=', '1');
@@ -18383,7 +18382,7 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
       ('combatNotes.' + prefix + '-1', 'level', '?', 'source >= 5');
   } else if(name == 'Vicious Incisors') {
     rules.defineRule
-      ('weaponDieSidesBonus.Jaws', 'combatNotes.viciousIncisors', '^=', '0');
+      ('weaponDieSides.Jaws', 'combatNotes.viciousIncisors', '^', '6');
     // Note: Ignore Backstabber trait currently not shown on character sheet
   } else if(name == "Warpriest's Armor") {
     rules.defineRule("combatNotes.warpriest'sArmor",
@@ -18446,8 +18445,8 @@ Pathfinder2ERemaster.featRulesExtra = function(rules, name, attrs) {
       rules.defineRule('weapons.Jaws',
         "combatNotes.witch'sArmaments(IronTeeth)", '=', '1'
       );
-      rules.defineRule('weaponDieSidesBonus.Jaws',
-        "combatNotes.witch'sArmaments(IronTeeth)", '^=', '2' // increase to 1d8
+      rules.defineRule('weaponDieSides.Jaws',
+        "combatNotes.witch'sArmaments(IronTeeth)", '^', '8'
       );
       rules.defineRule('jawsNonFinesseAttack',
         "combatNotes.witch'sArmaments(IronTeeth)", '=', '0' // enable
@@ -18632,13 +18631,16 @@ Pathfinder2ERemaster.spellRules = function(
  * effectively, adds #bulk# to the character's encumbrance, requires #hands#
  * hands to operate, belongs to group #group#, and has weapon properties
  * #traits#. If specified, the weapon can be used as a ranged weapon with a
- * range increment of #range# feet.
+ * range increment of #range# feet, and a projectile weapon requires #reload#
+ * actions to reload.
  */
 Pathfinder2ERemaster.weaponRules = function(
-  rules, name, category, price, damage, bulk, hands, group, traits, range
+  rules, name, category, price, damage, bulk, hands, group, traits, range,
+  reload
 ) {
   Pathfinder2E.weaponRules(
-    rules, name, category, price, damage, bulk, hands, group, traits, range
+    rules, name, category, price, damage, bulk, hands, group, traits, range,
+    reload
   );
   rules.defineRule('proficiencyLevelBonus.' + name,
     'combatNotes.martialExperience', '=', '0'
