@@ -679,21 +679,21 @@ Pathfinder2E.CLASSES = {
     'Selectables=' +
       '"1:Dexterity:Key Ability",' +
       '"1:Strength:Key Ability",' +
-      '"1:Axes:Weapon Group",' +
-      '"1:Bombs:Weapon Group",' +
-      '"1:Brawling Weapons:Weapon Group",' +
-      '"1:Clubs:Weapon Group",' +
-      '"1:Crossbows:Weapon Group",' +
-      '"1:Darts:Weapon Group",' +
-      '"1:Flails:Weapon Group",' +
-      '"1:Hammers:Weapon Group",' +
-      '"1:Knives:Weapon Group",' +
-      '"1:Picks:Weapon Group",' +
-      '"1:Polearms:Weapon Group",' +
-      '"1:Slings:Weapon Group",' +
-      '"1:Shields:Weapon Group",' +
-      '"1:Spears:Weapon Group",' +
-      '"1:Swords:Weapon Group"',
+      '"5:Axes:Weapon Group",' +
+      '"5:Bombs:Weapon Group",' +
+      '"5:Brawling Weapons:Weapon Group",' +
+      '"5:Clubs:Weapon Group",' +
+      '"5:Crossbows:Weapon Group",' +
+      '"5:Darts:Weapon Group",' +
+      '"5:Flails:Weapon Group",' +
+      '"5:Hammers:Weapon Group",' +
+      '"5:Knives:Weapon Group",' +
+      '"5:Picks:Weapon Group",' +
+      '"5:Polearms:Weapon Group",' +
+      '"5:Slings:Weapon Group",' +
+      '"5:Shields:Weapon Group",' +
+      '"5:Spears:Weapon Group",' +
+      '"5:Swords:Weapon Group"',
   'Monk':
     'Ability=strength,dexterity HitPoints=10 ' +
     'Features=' +
@@ -805,28 +805,28 @@ Pathfinder2E.CLASSES = {
       '"15:Master Spellcaster","17:Resolve","19:Bloodline Paragon",' +
       '"19:Legendary Spellcaster" ' +
     'Selectables=' +
-      '"1:Aberrant:Bloodline",' +
-      '"1:Angelic:Bloodline",' +
-      '"1:Demonic:Bloodline",' +
-      '"1:Diabolic:Bloodline",' +
-      '"1:Draconic (Brass):Bloodline",' +
-      '"1:Draconic (Bronze):Bloodline",' +
-      '"1:Draconic (Copper):Bloodline",' +
-      '"1:Draconic (Gold):Bloodline",' +
-      '"1:Draconic (Silver):Bloodline",' +
-      '"1:Draconic (Black):Bloodline",' +
-      '"1:Draconic (Blue):Bloodline",' +
-      '"1:Draconic (Green):Bloodline",' +
-      '"1:Draconic (Red):Bloodline",' +
-      '"1:Draconic (White):Bloodline",' +
-      '"1:Elemental (Air):Bloodline",' +
-      '"1:Elemental (Earth):Bloodline",' +
-      '"1:Elemental (Fire):Bloodline",' +
-      '"1:Elemental (Water):Bloodline",' +
-      '"1:Fey:Bloodline",' +
-      '"1:Hag:Bloodline",' +
-      '"1:Imperial:Bloodline",' +
-      '"1:Undead:Bloodline" ' +
+      '"1:Aberrant Bloodline:Bloodline",' +
+      '"1:Angelic Bloodline:Bloodline",' +
+      '"1:Demonic Bloodline:Bloodline",' +
+      '"1:Diabolic Bloodline:Bloodline",' +
+      '"1:Draconic Bloodline (Brass):Bloodline",' +
+      '"1:Draconic Bloodline (Bronze):Bloodline",' +
+      '"1:Draconic Bloodline (Copper):Bloodline",' +
+      '"1:Draconic Bloodline (Gold):Bloodline",' +
+      '"1:Draconic Bloodline (Silver):Bloodline",' +
+      '"1:Draconic Bloodline (Black):Bloodline",' +
+      '"1:Draconic Bloodline (Blue):Bloodline",' +
+      '"1:Draconic Bloodline (Green):Bloodline",' +
+      '"1:Draconic Bloodline (Red):Bloodline",' +
+      '"1:Draconic Bloodline (White):Bloodline",' +
+      '"1:Elemental Bloodline (Air):Bloodline",' +
+      '"1:Elemental Bloodline (Earth):Bloodline",' +
+      '"1:Elemental Bloodline (Fire):Bloodline",' +
+      '"1:Elemental Bloodline (Water):Bloodline",' +
+      '"1:Fey Bloodline:Bloodline",' +
+      '"1:Hag Bloodline:Bloodline",' +
+      '"1:Imperial Bloodline:Bloodline",' +
+      '"1:Undead Bloodline:Bloodline" ' +
     // SpellSlots tradition depends on bloodline--see classRules
     'SpellSlots=' +
       'C1:5@1,' +
@@ -5531,7 +5531,7 @@ Pathfinder2E.FEATURES = {
   "Hunter's Edge":'Section=feature Note="1 selection"',
   'Flurry':
     'Section=combat ' +
-    'Note="Reduces multiple attack penalties vs. hunted prey to -3 and -6, or -2 and -4 with an agile weapon"',
+    'Note="Reduces multiple attack penalties vs. hunted prey to -3 and -6, or -2 and -4 with an agile attack"',
   'Outwit':
     'Section=combat,skill ' +
     'Note=' +
@@ -6050,133 +6050,133 @@ Pathfinder2E.FEATURES = {
   // Weapon Expertise as above
   // Weapon Specialization as above
 
-  'Aberrant':
+  'Aberrant Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Occult)/Knows the Tentacular Limbs occult spell",' +
       '"Blood magic effect gives self or a target +2 Will saves for 1 rd",' +
       '"Skill Trained (Intimidation; Occultism)"',
-  'Angelic':
+  'Angelic Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Angelic Halo divine spell",' +
       '"Blood magic effect gives self or a target +1 saves for 1 rd",' +
       '"Skill Trained (Diplomacy; Religion)"',
-  'Demonic':
+  'Demonic Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Glutton\'s Jaws divine spell",' +
       '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts -1 Armor Class on a target for 1 rd",' +
       '"Skill Trained (Intimidation; Religion)"',
-  'Diabolic':
+  'Diabolic Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Diabolic Edict divine spell",' +
       '"Blood magic effect gives self +1 Deception for 1 rd or inflicts 1 HP fire per spell level on a target",' +
       '"Skill Trained (Deception; Religion)"',
-  'Draconic (Brass)':
+  'Draconic Bloodline (Brass)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Bronze)':
+  'Draconic Bloodline (Bronze)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Copper)':
+  'Draconic Bloodline (Copper)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Gold)':
+  'Draconic Bloodline (Gold)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Silver)':
+  'Draconic Bloodline (Silver)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Black)':
+  'Draconic Bloodline (Black)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Blue)':
+  'Draconic Bloodline (Blue)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Green)':
+  'Draconic Bloodline (Green)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (Red)':
+  'Draconic Bloodline (Red)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Draconic (White)':
+  'Draconic Bloodline (White)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Dragon Claws arcane spell",' +
       '"Blood magic effect gives self or a target +1 Armor Class for 1 rd",' +
       '"Skill Trained (Arcana; Intimidation)"',
-  'Elemental (Air)':
+  'Elemental Bloodline (Air)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
       '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
-  'Elemental (Earth)':
+  'Elemental Bloodline (Earth)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
       '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
-  'Elemental (Fire)':
+  'Elemental Bloodline (Fire)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
       '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP fire per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
-  'Elemental (Water)':
+  'Elemental Bloodline (Water)':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Elemental Toss primal spell",' +
       '"Blood magic effect gives self +1 Intimidation for 1 rd or inflicts 1 HP bludgeoning per spell level on a target",' +
       '"Skill Trained (Intimidation; Nature)"',
-  'Fey':
+  'Fey Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Primal)/Knows the Faerie Dust primal spell",' +
       '"Blood magic effect gives self or a target concealment for 1 rd",' +
       '"Skill Trained (Deception; Nature)"',
-  'Hag':
+  'Hag Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Occult)/Knows the Jealous Hex occult spell",' +
       '"Blood magic effect inflicts 2 HP mental per spell level (<b>save basic Will</b>) on the first successful attacker before the end of the next turn",' +
       '"Skill Trained (Deception; Occultism)"',
-  'Imperial':
+  'Imperial Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Arcane)/Knows the Ancestral Memories arcane spell",' +
       '"Blood magic effect gives self or a target +1 skill checks for 1 rd",' +
       '"Skill Trained (Arcana; Society)"',
-  'Undead':
+  'Undead Bloodline':
     'Section=magic,magic,skill ' +
     'Note=' +
       '"Spell Trained (Divine)/Knows the Undeath\'s Blessing divine spell",' +
@@ -6213,58 +6213,58 @@ Pathfinder2E.FEATURES = {
   'Primal Evolution':
     'Section=magic ' +
     'Note="+1 P%V slot for <i>Summon Animal</i> or <i>Summon Plant Or Fungus</i>"',
-  'Advanced Bloodline (Aberrant)':
+  'Advanced Bloodline (Aberrant Bloodline)':
     'Section=magic ' +
     'Note="Knows the Aberrant Whispers occult spell/+1 Focus Points"',
-  'Advanced Bloodline (Angelic)':
+  'Advanced Bloodline (Angelic Bloodline)':
     'Section=magic Note="Knows the Angelic Wings divine spell/+1 Focus Points"',
-  'Advanced Bloodline (Demonic)':
+  'Advanced Bloodline (Demonic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Swamp Of Sloth divine spell/+1 Focus Points"',
-  'Advanced Bloodline (Diabolic)':
+  'Advanced Bloodline (Diabolic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Embrace The Pit divine spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Black))':
+  'Advanced Bloodline (Draconic Bloodline (Black))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Blue))':
+  'Advanced Bloodline (Draconic Bloodline (Blue))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Brass))':
+  'Advanced Bloodline (Draconic Bloodline (Brass))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Bronze))':
+  'Advanced Bloodline (Draconic Bloodline (Bronze))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Copper))':
+  'Advanced Bloodline (Draconic Bloodline (Copper))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Gold))':
+  'Advanced Bloodline (Draconic Bloodline (Gold))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Green))':
+  'Advanced Bloodline (Draconic Bloodline (Green))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Red))':
+  'Advanced Bloodline (Draconic Bloodline (Red))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (Silver))':
+  'Advanced Bloodline (Draconic Bloodline (Silver))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Draconic (White))':
+  'Advanced Bloodline (Draconic Bloodline (White))':
     'Section=magic Note="Knows the Dragon Breath arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Elemental (Air))':
+  'Advanced Bloodline (Elemental Bloodline (Air))':
     'Section=magic ' +
     'Note="Knows the Elemental Motion primal spell/+1 Focus Points"',
-  'Advanced Bloodline (Elemental (Earth))':
+  'Advanced Bloodline (Elemental Bloodline (Earth))':
     'Section=magic ' +
     'Note="Knows the Elemental Motion primal spell/+1 Focus Points"',
-  'Advanced Bloodline (Elemental (Fire))':
+  'Advanced Bloodline (Elemental Bloodline (Fire))':
     'Section=magic ' +
     'Note="Knows the Elemental Motion primal spell/+1 Focus Points"',
-  'Advanced Bloodline (Elemental (Water))':
+  'Advanced Bloodline (Elemental Bloodline (Water))':
     'Section=magic ' +
     'Note="Knows the Elemental Motion primal spell/+1 Focus Points"',
-  'Advanced Bloodline (Fey)':
+  'Advanced Bloodline (Fey Bloodline)':
     'Section=magic ' +
     'Note="Knows the Fey Disappearance primal spell/+1 Focus Points"',
-  'Advanced Bloodline (Hag)':
+  'Advanced Bloodline (Hag Bloodline)':
     'Section=magic ' +
     'Note="Knows the Horrific Visage occult spell/+1 Focus Points"',
-  'Advanced Bloodline (Imperial)':
+  'Advanced Bloodline (Imperial Bloodline)':
     'Section=magic Note="Knows the Extend Spell arcane spell/+1 Focus Points"',
-  'Advanced Bloodline (Undead)':
+  'Advanced Bloodline (Undead Bloodline)':
     'Section=magic Note="Knows the Drain Life divine spell/+1 Focus Points"',
   // Steady Spellcasting as above
   'Bloodline Resistance':
@@ -6272,57 +6272,57 @@ Pathfinder2E.FEATURES = {
   'Crossblooded Evolution':
     'Section=magic ' +
     'Note="Can have 1 spell from a different tradition in repertoire"',
-  'Greater Bloodline (Aberrant)':
+  'Greater Bloodline (Aberrant Bloodline)':
     'Section=magic ' +
     'Note="Knows the Unusual Anatomy occult spell/+1 Focus Points"',
-  'Greater Bloodline (Angelic)':
+  'Greater Bloodline (Angelic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Celestial Brand divine spell/+1 Focus Points"',
-  'Greater Bloodline (Demonic)':
+  'Greater Bloodline (Demonic Bloodline)':
     'Section=magic Note="Knows the Abyssal Wrath divine spell/+1 Focus Points"',
-  'Greater Bloodline (Diabolic)':
+  'Greater Bloodline (Diabolic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Hellfire Plume divine spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Black))':
+  'Greater Bloodline (Draconic Bloodline (Black))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Blue))':
+  'Greater Bloodline (Draconic Bloodline (Blue))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Brass))':
+  'Greater Bloodline (Draconic Bloodline (Brass))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Bronze))':
+  'Greater Bloodline (Draconic Bloodline (Bronze))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Copper))':
+  'Greater Bloodline (Draconic Bloodline (Copper))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Gold))':
+  'Greater Bloodline (Draconic Bloodline (Gold))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Green))':
+  'Greater Bloodline (Draconic Bloodline (Green))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Red))':
+  'Greater Bloodline (Draconic Bloodline (Red))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (Silver))':
+  'Greater Bloodline (Draconic Bloodline (Silver))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Draconic (White))':
+  'Greater Bloodline (Draconic Bloodline (White))':
     'Section=magic Note="Knows the Dragon Wings arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Elemental (Air))':
+  'Greater Bloodline (Elemental Bloodline (Air))':
     'Section=magic ' +
     'Note="Knows the Elemental Blast primal spell/+1 Focus Points"',
-  'Greater Bloodline (Elemental (Earth))':
+  'Greater Bloodline (Elemental Bloodline (Earth))':
     'Section=magic ' +
     'Note="Knows the Elemental Blast primal spell/+1 Focus Points"',
-  'Greater Bloodline (Elemental (Fire))':
+  'Greater Bloodline (Elemental Bloodline (Fire))':
     'Section=magic ' +
     'Note="Knows the Elemental Blast primal spell/+1 Focus Points"',
-  'Greater Bloodline (Elemental (Water))':
+  'Greater Bloodline (Elemental Bloodline (Water))':
     'Section=magic ' +
     'Note="Knows the Elemental Blast primal spell/+1 Focus Points"',
-  'Greater Bloodline (Fey)':
+  'Greater Bloodline (Fey Bloodline)':
     'Section=magic Note="Knows the Fey Glamour primal spell/+1 Focus Points"',
-  'Greater Bloodline (Hag)':
+  'Greater Bloodline (Hag Bloodline)':
     'Section=magic Note="Knows the You\'re Mine occult spell/+1 Focus Points"',
-  'Greater Bloodline (Imperial)':
+  'Greater Bloodline (Imperial Bloodline)':
     'Section=magic ' +
     'Note="Knows the Arcane Countermeasure arcane spell/+1 Focus Points"',
-  'Greater Bloodline (Undead)':
+  'Greater Bloodline (Undead Bloodline)':
     'Section=magic ' +
     'Note="Knows the Grasping Grave divine spell/+1 Focus Points"',
   // Overwhelming Energy as above
@@ -6758,7 +6758,7 @@ Pathfinder2E.FEATURES = {
     'Section=combat,feature,skill ' +
     'Note=' +
       '"Class Trained (Ranger)",' +
-      '"Has the Hunt Prey feature",' +
+      '"Has the Hunt Prey and Ranger Key Ability features",' +
       '"Skill Trained (Survival)"',
   "Basic Hunter's Trick":
     'Section=feature ' +
@@ -6800,70 +6800,70 @@ Pathfinder2E.FEATURES = {
   'Basic Blood Potency':
     'Section=feature ' +
     'Note="Class Feat (Choose 1 from any Sorcerer up to level 2)"',
-  'Basic Bloodline Spell (Aberrant)':
+  'Basic Bloodline Spell (Aberrant Bloodline)':
     'Section=magic ' +
     'Note="Knows the Tentacular Limbs occult spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Angelic)':
+  'Basic Bloodline Spell (Angelic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Angelic Halo divine spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Demonic)':
+  'Basic Bloodline Spell (Demonic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Glutton\'s Jaws divine spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Diabolic)':
+  'Basic Bloodline Spell (Diabolic Bloodline)':
     'Section=magic ' +
     'Note="Knows the Diabolic Edict divine spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Black))':
+  'Basic Bloodline Spell (Draconic Bloodline (Black))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Blue))':
+  'Basic Bloodline Spell (Draconic Bloodline (Blue))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Brass))':
+  'Basic Bloodline Spell (Draconic Bloodline (Brass))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Bronze))':
+  'Basic Bloodline Spell (Draconic Bloodline (Bronze))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Copper))':
+  'Basic Bloodline Spell (Draconic Bloodline (Copper))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Gold))':
+  'Basic Bloodline Spell (Draconic Bloodline (Gold))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Green))':
+  'Basic Bloodline Spell (Draconic Bloodline (Green))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Red))':
+  'Basic Bloodline Spell (Draconic Bloodline (Red))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (Silver))':
+  'Basic Bloodline Spell (Draconic Bloodline (Silver))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Draconic (White))':
+  'Basic Bloodline Spell (Draconic Bloodline (White))':
     'Section=magic ' +
     'Note="Knows the Dragon Claws arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Elemental (Air))':
+  'Basic Bloodline Spell (Elemental Bloodline (Air))':
     'Section=magic ' +
     'Note="Knows the Elemental Toss primal spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Elemental (Earth))':
+  'Basic Bloodline Spell (Elemental Bloodline (Earth))':
     'Section=magic ' +
     'Note="Knows the Elemental Toss primal spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Elemental (Fire))':
+  'Basic Bloodline Spell (Elemental Bloodline (Fire))':
     'Section=magic ' +
     'Note="Knows the Elemental Toss primal spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Elemental (Water))':
+  'Basic Bloodline Spell (Elemental Bloodline (Water))':
     'Section=magic ' +
     'Note="Knows the Elemental Toss primal spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Fey)':
+  'Basic Bloodline Spell (Fey Bloodline)':
     'Section=magic ' +
     'Note="Knows the Faerie Dust primal spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Hag)':
+  'Basic Bloodline Spell (Hag Bloodline)':
     'Section=magic ' +
     'Note="Knows the Jealous Hex occult spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Imperial)':
+  'Basic Bloodline Spell (Imperial Bloodline)':
     'Section=magic ' +
     'Note="Knows the Ancestral Memories arcane spell/Has a focus pool and at least 1 Focus Point"',
-  'Basic Bloodline Spell (Undead)':
+  'Basic Bloodline Spell (Undead Bloodline)':
     'Section=magic ' +
     'Note="Knows the Undeath\'s Blessing divine spell/Has a focus pool and at least 1 Focus Point"',
   'Advanced Blood Potency':
@@ -7262,10 +7262,16 @@ Pathfinder2E.FEATURES = {
 
 };
 Pathfinder2E.GOODIES = {
-  'Armor':
-    'Pattern="([-+]\\d+).*(?:armor(?:\\s+class)?|AC)|(?:armor(?:\\s+class)?|AC)\\s+([-+]\\d+)" ' +
+  'Ancestry Feats':
+    'Pattern="\\+?(\\d+)\\s+ancestry\\s+feats?|ancestry\\s+feats?\\s+\\+?(\\d+)" ' +
     'Effect=add ' +
     'Value="$1 || $2" ' +
+    'Attribute=featCount.Ancestry ' +
+    'Section=feature Note="Ancestry Feat (Choose %V from any)"',
+  'Armor':
+    'Pattern="([-+]\\d+)(\\s+(resilient|greater\\s+resilient|major\\s+resilient))?.*\\s+armor|armor\\s+([-+]\\d+)" ' +
+    'Effect=add ' +
+    'Value="$1 || $4" ' +
     'Attribute=armorClass ' +
     'Section=combat Note="%V Armor Class"',
   'Charisma':
@@ -7274,12 +7280,12 @@ Pathfinder2E.GOODIES = {
     'Value="$1 || $2" ' +
     'Attribute=charisma ' +
     'Section=ability Note="%V Charisma"',
-  'Class Feat Count':
-    'Pattern="([-+]\\d+)\\s+class\\s+feat|class\\s+feat\\s+([-+]\\d+)" ' +
+  'Class Feats':
+    'Pattern="\\+?(\\d+)\\s+class\\s+feats?|class\\s+feats?\\s+\\+?(\\d+)" ' +
     'Effect=add ' +
     'Value="$1 || $2" ' +
     'Attribute=featCount.Class ' +
-    'Section=feature Note="%V Class Feat"',
+    'Section=feature Note="Class Feat (Choose %V from any)"',
   'Constitution':
     'Pattern="([-+]\\d+)\\s+con(?:stitution)?|con(?:stitution)?\\s+([-+]\\d+)" ' +
     'Effect=add ' +
@@ -7298,12 +7304,24 @@ Pathfinder2E.GOODIES = {
     'Value="$1 || $2" ' +
     'Attribute=save.Fortitude ' +
     'Section=save Note="%V Fortitude"',
-  'General Feat Count':
-    'Pattern="([-+]\\d+)\\s+general\\s+feat|general\\s+feat\\s+([-+]\\d+)" ' +
+  'General Feats':
+    'Pattern="\\+?(\\d+)\\s+general\\s+feats?|general\\s+feats?\\s+\\+?(\\d+)" ' +
     'Effect=add ' +
     'Value="$1 || $2" ' +
     'Attribute=featCount.General ' +
-    'Section=feature Note="%V General Feat"',
+    'Section=feature Note="General Feat (Choose %V from any)"',
+  'Focus Maximum':
+    'Pattern="([-+]\\d+)\\s+focus\\s+max(?:imum)?|focus\\s+max(?:imum)?\\s+([-+]\\d+)" ' +
+    'Effect=add ' +
+    'Value="$1 || $2" ' +
+    'Attribute=focusPointMaximum ' +
+    'Section=ability Note="%V Maximum Focus Points"',
+  'Focus Points':
+    'Pattern="([-+]\\d+)\\s+focus\\s+points|focus\\s+points\\s+([-+]\\d+)" ' +
+    'Effect=add ' +
+    'Value="$1 || $2" ' +
+    'Attribute=focusPoints ' +
+    'Section=ability Note="%V Focus Points"',
   'Hit Points':
     'Pattern="([-+]\\d+)\\s+hit\\s+points|hit\\s+points\\s+([-+]\\d+)" ' +
     'Effect=add ' +
@@ -7334,12 +7352,24 @@ Pathfinder2E.GOODIES = {
     'Value="$1 || $2" ' +
     'Attribute=save.Reflex ' +
     'Section=save Note="%V Reflex"',
+  'Resilient Armor':
+    'Pattern="(resilient|greater\\s+resilient|major\\s+resilient).*\\s+armor" ' +
+    'Effect=add ' +
+    'Value="$1.match(/major/i) ? 3 : $1.match(/greater/i) ? 2 : 1" ' +
+    'Attribute=save.Fortitude,save.Reflex,save.Will ' +
+    'Section=save Note="%V Saves"',
   'Shield':
     'Pattern="([-+]\\d+).*\\s+shield|shield\\s+([-+]\\d+)" ' +
     'Effect=add ' +
     'Value="$1 || $2" ' +
-    'Attribute=armorClass ' +
-    'Section=combat Note="%V Armor Class"',
+    'Attribute=shieldACBonus ' +
+    'Section=combat Note="%V Shield AC Bonus"',
+  'Skill Feats':
+    'Pattern="\\+?(\\d+)\\s+skill\\s+feats?|skill\\s+feats?\\s+\\+?(\\d+)" ' +
+    'Effect=add ' +
+    'Value="$1 || $2" ' +
+    'Attribute=featCount.Skill ' +
+    'Section=feature Note="Skill Feat (Choose %V from any)"',
   'Speed':
     'Pattern="([-+]\\d+).*\\s+speed|speed\\s+([-+]\\d+)" ' +
     'Effect=add ' +
@@ -11507,7 +11537,7 @@ Pathfinder2E.SPELLS = {
     'Traditions=Primal ' +
     'Cast=2 ' +
     'Description=' +
-      '"Self gains a %{$\'features.Elemental (Earth)\'?\\"10\' burrow Speed\\":$\'features.Elemental (Water)\'?(speed+\\"\' swim Speed and water breathing\\"):(speed+\\"\' fly Speed\\")} for 1 min (<b>heightened 6th</b> gives +10 Speed; <b>9th</b> gives +20 Speed)"',
+      '"Self gains a %{$\'features.Elemental Bloodline (Earth)\'?\\"10\' burrow Speed\\":$\'features.Elemental Bloodline (Water)\'?(speed+\\"\' swim Speed and water breathing\\"):(speed+\\"\' fly Speed\\")} for 1 min (<b>heightened 6th</b> gives +10 Speed; <b>9th</b> gives +20 Speed)"',
   'Elemental Toss':
     'Level=1 ' +
     'Traits=Focus,Uncommon,Attack,Evocation,Sorcerer ' +
@@ -12111,27 +12141,27 @@ Pathfinder2E.combatRules = function(rules, armors, shields, weapons) {
     rules.choiceRules(rules, 'Shield', s, shields[s]);
   for(let w in weapons) {
     rules.choiceRules(rules, 'Weapon', w, weapons[w]);
-    if(w != 'Shield') {
-      let pattern = w.replace(/  */g, '\\s+');
-      rules.choiceRules(rules, 'Goody', w,
-        // To avoid triggering additional weapons with a common suffix (e.g.,
-        // "* punching dagger +2" also makes regular dagger +2), require that
-        // weapon goodies with a trailing value have no preceding word or be
-        // enclosed in parentheses.
-        'Pattern="([-+]\\d)\\s+' + pattern + '|(?:^\\W*|\\()' + pattern + '\\s+([-+]\\d)" ' +
-        'Effect=add ' +
-        'Attribute="weaponAttackAdjustment.' + w + '","weaponDamageAdjustment.' + w + '" ' +
-        'Value="$1 || $2" ' +
-        'Section=combat Note="%V Attack and damage"'
-      );
-      rules.choiceRules(rules, 'Goody', 'Striking ' + w,
-        'Pattern="([-+]\\d)\\s+striking\\s+' + pattern + '" ' +
-        'Attribute="weaponDieCount.' + w + '" ' +
-        'Effect=add ' +
-        'Value="$1" ' +
-        'Section=combat Note="%V Damage dice"'
-      );
-    }
+    if(w == 'Shield')
+      continue;
+    let pattern = w.replace(/  */g, '\\s+');
+    rules.choiceRules(rules, 'Goody', w,
+      // To avoid triggering additional weapons with a common suffix (e.g.,
+      // "* punching dagger +2" also makes regular dagger +2), require that
+      // weapon goodies with a trailing value have no preceding word or be
+      // enclosed in parentheses.
+      'Pattern="([-+]\\d+)(\\s+(striking|greater\\s+striking|major\\s+striking))?\\s+' + pattern + '|(?:^\\W*|\\()' + pattern + '\\s+([-+]\\d+)" ' +
+      'Effect=add ' +
+      'Attribute="weaponAttackAdjustment.' + w + '" ' +
+      'Value="$1 || $4" ' +
+      'Section=combat Note="%V Attack"'
+    );
+    rules.choiceRules(rules, 'Goody', 'Striking ' + w,
+      'Pattern="(striking|greater\\s+striking|major\\s+striking)\\s+' + pattern + '" ' +
+      'Attribute="weaponDieCount.' + w + '" ' +
+      'Effect=add ' +
+      'Value="$1.match(/major/i) ? 3 : $1.match(/greater/i) ? 2 : 1" ' +
+      'Section=combat Note="%V Damage dice"'
+    );
   }
 
   rules.defineChoice('notes',
@@ -12189,7 +12219,7 @@ Pathfinder2E.combatRules = function(rules, armors, shields, weapons) {
   rules.defineRule('rank.Armor', 'armorCategory', '=', '0');
   ['Unarmored Defense', 'Light Armor', 'Medium Armor', 'Heavy Armor'].forEach(a => {
     rules.defineRule('rank.Armor',
-      'rank.' + a, '=', 'dict.armorCategory=="' + a.replace(/\s.*/, '') + '" ? source : null'
+      'rank.' + a, '^', 'dict.armorCategory=="' + a.replace(/\s.*/, '') + '" ? source : null'
     );
     rules.defineRule('trainingLevel.' + a, '', '=', '0');
     rules.defineRule('rank.' + a, 'trainingLevel.' + a, '=', null);
@@ -12286,7 +12316,7 @@ Pathfinder2E.identityRules = function(
         '.concat(source & 1 ? ["barbarian instinct"] : [])' +
         '.concat(source & 2 || source & 4 ? [dict.deity] : [])' +
         '.concat(source & 8 ? ["druidic order"] : [])' +
-        '.concat(source & 16 ? ["background"] : [])' + // remaster
+        '.concat(source & 16 ? ["background"] : [])' + // Remaster
         '.join(", ")' +
         '.replace(/^([^,]*), ([^,]*)$/, "$1 or $2")' +
         '.replace(/,([^,]*)$/, ", or$1")'
@@ -12393,22 +12423,15 @@ Pathfinder2E.talentRules = function(
   QuilvynUtils.checkAttrTable
     (goodies, ['Pattern', 'Effect', 'Value', 'Attribute', 'Section', 'Note']);
   QuilvynUtils.checkAttrTable(languages, []);
-  // Include Attribute for remaster
+  // Include Attribute for Remaster
   QuilvynUtils.checkAttrTable(skills, ['Ability', 'Attribute', 'Subcategory']);
 
   for(let g in goodies)
     rules.choiceRules(rules, 'Goody', g, goodies[g]);
-  for(let l in languages) {
+  for(let l in languages)
     rules.choiceRules(rules, 'Language', l, languages[l]);
-    rules.defineRule('languagesSpoken', 'languages.' + l, '+=', '1');
-  }
   for(let s in skills) {
     rules.choiceRules(rules, 'Skill', s, skills[s]);
-    rules.defineRule('skillNotes.duplicatedTraining',
-      'trainingCount.' + s, '+=', 'source>1 ? source - 1 : null'
-    );
-    rules.defineRule
-      ('skillIncreasesAllocated', 'skillIncreases.' + s, '+=', null);
     let pattern =
       s.replaceAll('(', '\\(').replaceAll(')', '\\)').replace(/\s+/, '\\b\\s*');
     rules.choiceRules(rules, 'Goody', s,
@@ -12422,6 +12445,10 @@ Pathfinder2E.talentRules = function(
   // feats and features after skills because some contain %skill
   for(let f in feats) {
     if((matchInfo = f.match(/(%(\w+))/)) != null) {
+      if(!rules.getChoices(matchInfo[2] + 's')) {
+        console.log('Feat ' + f + ' uses unknown type "' + matchInfo[2] + '"');
+        continue;
+      }
       for(let c in rules.getChoices(matchInfo[2] + 's')) {
         rules.choiceRules
           (rules, 'Feat', f.replace(matchInfo[1], c), feats[f].replaceAll(matchInfo[1], c));
@@ -12432,6 +12459,10 @@ Pathfinder2E.talentRules = function(
   }
   for(let f in features) {
     if((matchInfo = f.match(/(%(\w+))/)) != null) {
+      if(!rules.getChoices(matchInfo[2] + 's')) {
+        console.log('Feature ' + f + ' uses unknown type "' + matchInfo[2] + '"');
+        continue;
+      }
       for(let c in rules.getChoices(matchInfo[2] + 's')) {
         rules.choiceRules
           (rules, 'Feature', f.replace(matchInfo[1], c), features[f].replaceAll(matchInfo[1], c));
@@ -12521,7 +12552,7 @@ Pathfinder2E.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
       QuilvynUtils.getAttrValueArray(attrs, 'Traits')
     );
-    Pathfinder2E.ancestryRulesExtra(rules, name);
+    Pathfinder2E.ancestryRulesExtra(rules, name, attrs);
   } else if(type == 'Ancestry Feature')
     Pathfinder2E.ancestryFeatureRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Ancestry'),
@@ -12547,7 +12578,7 @@ Pathfinder2E.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables')
     );
-    Pathfinder2E.backgroundRulesExtra(rules, name);
+    Pathfinder2E.backgroundRulesExtra(rules, name, attrs);
   } else if(type == 'Background Feature')
     Pathfinder2E.backgroundFeatureRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Background'),
@@ -12563,7 +12594,7 @@ Pathfinder2E.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
       QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
     );
-    Pathfinder2E.classRulesExtra(rules, name);
+    Pathfinder2E.classRulesExtra(rules, name, attrs);
   } else if(type == 'Class Feature')
     Pathfinder2E.classFeatureRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Class'),
@@ -12887,6 +12918,7 @@ Pathfinder2E.ancestryRules = function(
       rules.defineRule
         ('heritage', prefix + 'Features.' + s, '=', '"' + s + '"');
   });
+
   traits.forEach(t => {
     rules.defineRule('traits.' + t, ancestryLevel, '=', '1');
   });
@@ -12906,7 +12938,7 @@ Pathfinder2E.ancestryRules = function(
  * Defines in #rules# the rules associated with ancestry #name# that cannot be
  * derived directly from the attributes passed to ancestryRules.
  */
-Pathfinder2E.ancestryRulesExtra = function(rules, name) {
+Pathfinder2E.ancestryRulesExtra = function(rules, name, attrs) {
   if(name == 'Dwarf') {
     rules.defineRule('weapons.Clan Dagger', 'features.Clan Dagger', '=', '1');
   } else if(name == 'Gnome') {
@@ -13175,7 +13207,7 @@ Pathfinder2E.backgroundRules = function(rules, name, features, selectables) {
  * Defines in #rules# the rules associated with background #name# that cannot
  * be derived directly from the attributes passed to backgroundRules.
  */
-Pathfinder2E.backgroundRulesExtra = function(rules, name) {
+Pathfinder2E.backgroundRulesExtra = function(rules, name, attrs) {
   if(name == 'Martial Disciple') {
     rules.defineRule('selectableFeatureCount.Martial Disciple (Martial Focus)',
       'featureNotes.martialFocus', '=', '1'
@@ -13289,12 +13321,24 @@ Pathfinder2E.classRules = function(
 
   selectables.forEach(selectable => {
     let pieces = selectable.split(':');
+    let level =
+      pieces.length > 1 && pieces[0].match(/\d+$/) ? +(pieces[0].match(/(\d+)/)[0]) : 1;
     let s = pieces[pieces.length > 1 && pieces[0].match(/\d+$/) ? 1 : 0];
     let sType = s == s[pieces.length - 1] ? '' : pieces[pieces.length - 1];
     let sCount = prefix + sType.replaceAll(' ', '') + 'Count';
     rules.defineRule(sCount, prefix + 'Features.' + s, '+=', '1');
     QuilvynRules.validAllocationRules
       (rules, prefix + sType.replaceAll(' ', ''), 'selectableFeatureCount.' + name + (sType != '' ? ' (' + sType + ')' : ''), sCount);
+    if(level == 1) {
+      // Suppress validation errors to allow characters with the corresponding
+      // dedication feat to select this feature. Although this will incorrectly
+      // suppress some checks (e.g., Alchemist Dedication doesn't allow picking
+      // a research field), the allocation check will still flag these, and it
+      // cleans the code significantly to handle it here.
+      rules.defineRule('validationNotes.' + prefix + '-' + s.replaceAll(' ', '') + 'SelectableFeature',
+        'featureNotes.' + prefix + 'Dedication', '+', '1'
+      );
+    }
   });
 
   if(spellSlots.length > 0) {
@@ -13394,7 +13438,7 @@ Pathfinder2E.classRules = function(
  * Defines in #rules# the rules associated with class #name# that cannot be
  * derived directly from the attributes passed to classRules.
  */
-Pathfinder2E.classRulesExtra = function(rules, name) {
+Pathfinder2E.classRulesExtra = function(rules, name, attrs) {
 
   let classLevel = 'levels.' + name;
 
@@ -13425,6 +13469,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'skillNotes.perpetualPerfection', '^', '11'
     );
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Rerun by classFeatureRules allows this to handle homebrew fields
     let fields =
       Object.keys(allSelectables).filter(x => allSelectables[x].includes('Research Field')).map(x => x.replace('Alchemist - ', ''));
     fields.forEach(f => {
@@ -13453,6 +13498,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'combatNotes.furyInstinct', '^', null
     );
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Rerun by classFeatureRules allows this to handle homebrew instincts
     let instincts =
       Object.keys(allSelectables).filter(x => allSelectables[x].includes('Instinct')).map(x => x.replace('Barbarian - ', ''));
     instincts.forEach(i => {
@@ -13557,6 +13603,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'alignment', '=', 'dict.deityFollowerAlignments.split("/").includes(source.replaceAll(/[a-z ]/g, "")) ? null : 1'
     );
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Rerun by classFeatureRules allows this to handle homebrew causes
     let causes =
       Object.keys(allSelectables).filter(x => allSelectables[x].includes('Cause')).map(x => x.replace('Champion - ', ''));
     causes.forEach(c => {
@@ -13809,22 +13856,22 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('bloodlineDamage',
       'draconicColor', '=', '{Black:"acid", Blue:"electricity", Bronze:"electricity", Copper:"acid", Green:"poison", Silver:"cold", White:"cold"}[source] || "fire"',
-      'features.Elemental (Air)', '=', '"bludgeoning"',
-      'features.Elemental (Earth)', '=', '"bludgeoning"',
-      'features.Elemental (Fire)', '=', '"fire"',
-      'features.Elemental (Water)', '=', '"bludgeoning"'
+      'features.Elemental Bloodline (Air)', '=', '"bludgeoning"',
+      'features.Elemental Bloodline (Earth)', '=', '"bludgeoning"',
+      'features.Elemental Bloodline (Fire)', '=', '"fire"',
+      'features.Elemental Bloodline (Water)', '=', '"bludgeoning"'
     );
     rules.defineRule('draconicColor',
-      'features.Draconic (Black)', '=', '"Black"',
-      'features.Draconic (Blue)', '=', '"Blue"',
-      'features.Draconic (Brass)', '=', '"Brass"',
-      'features.Draconic (Bronze)', '=', '"Bronze"',
-      'features.Draconic (Copper)', '=', '"Copper"',
-      'features.Draconic (Gold)', '=', '"Gold"',
-      'features.Draconic (Green)', '=', '"Green"',
-      'features.Draconic (Red)', '=', '"Red"',
-      'features.Draconic (Silver)', '=', '"Silver"',
-      'features.Draconic (White)', '=', '"White"'
+      'features.Draconic Bloodline (Black)', '=', '"Black"',
+      'features.Draconic Bloodline (Blue)', '=', '"Blue"',
+      'features.Draconic Bloodline (Brass)', '=', '"Brass"',
+      'features.Draconic Bloodline (Bronze)', '=', '"Bronze"',
+      'features.Draconic Bloodline (Copper)', '=', '"Copper"',
+      'features.Draconic Bloodline (Gold)', '=', '"Gold"',
+      'features.Draconic Bloodline (Green)', '=', '"Green"',
+      'features.Draconic Bloodline (Red)', '=', '"Red"',
+      'features.Draconic Bloodline (Silver)', '=', '"Silver"',
+      'features.Draconic Bloodline (White)', '=', '"White"'
     );
     // Using '' instead of classLevel allows Simple Weapons to be the default
     // for, e.g., homebrew classes
@@ -13842,6 +13889,7 @@ Pathfinder2E.classRulesExtra = function(rules, name) {
       'sorcererTraditionsLowered', '=', null
     );
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Rerun by classFeatureRules allows this to handle homebrew bloodlines
     let bloodlines =
       Object.keys(allSelectables).filter(x => allSelectables[x].includes('Bloodline')).map(x => x.replace('Sorcerer - ', ''));
     bloodlines.forEach(b => {
@@ -13968,6 +14016,19 @@ Pathfinder2E.classFeatureRules = function(
       prefix + 'Features.' + name, '=', '0'
     );
   });
+  if(selectable) {
+    // Rerun {class,feat}RulesExtra so that code that iterates through a
+    // class's selectable features can incorporate the new selection
+    if(rules.plugin.classRulesExtra)
+      rules.plugin.classRulesExtra(rules, className, '');
+    if(rules.plugin.featRulesExtra)
+      rules.plugin.featRulesExtra(rules, className + ' Dedication', '');
+    let prefix =
+      className.charAt(0).toLowerCase() + className.substring(1).replaceAll(' ', '');
+    rules.defineRule(prefix + selectable.replaceAll(' ', '') + 'Count',
+      prefix + 'Features.' + name, '+=', '1'
+    );
+  }
 
 };
 
@@ -14102,10 +14163,12 @@ Pathfinder2E.deityRules = function(
       'combatNotes.deadlySimplicity', '+', 'dict.deityWeapon=="' + weapon + '" ? 2 : null'
     );
   }
-  rules.defineRule('trainingLevel.' + skill,
-    'skillNotes.deity', '^=', 'source=="' + skill + '" ? 1 : null',
-    'skillNotes.deityAndCause', '^=', 'source=="' + skill + '" ? 1 : null'
-  );
+  if(skill) {
+    rules.defineRule('trainingLevel.' + skill,
+      'skillNotes.deity', '^=', 'source=="' + skill + '" ? 1 : null',
+      'skillNotes.deityAndCause', '^=', 'source=="' + skill + '" ? 1 : null'
+    );
+  }
 
   domains.forEach(d => {
     rules.addChoice('domains', d, '');
@@ -14317,23 +14380,24 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     rules.defineRule('rank.Heavy Armor',
       'combatNotes.armorProficiency', '^=', 'source=="Heavy" ? 1 : null'
     );
+  } else if((matchInfo = name.match(/^([\w\s]+) Resiliency$/)) != null) {
+    rules.defineRule('combatNotes.' + prefix,
+      'sum' + matchInfo[1].replaceAll(' ', '') + 'ArchetypeFeats', '=', 'source * 3'
+    );
   } else if(name == 'Barbarian Dedication') {
-    // Suppress validation errors for selected instinct
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Rerun by classFeatureRules allows this to handle homebrew instincts
     let instincts =
       Object.keys(allSelectables)
       .filter(x => allSelectables[x].includes('Barbarian (Instinct)'))
       .map(x => x.replace('Barbarian - ', ''));
     instincts.forEach(i => {
-      let condensed = i.replaceAll(' ', '');
-      rules.defineRule('validationNotes.barbarian-' + condensed + 'SelectableFeature',
-        'featureNotes.barbarianDedication', '+', '1'
+      // Instinct Ability handled here to take advantage of classFeatureRules rerun
+      rules.defineRule('features.Instinct Ability (' + i + ')',
+        'features.Instinct Ability', '?', null,
+        'features.' + i, '=', '1'
       );
     });
-  } else if((matchInfo = name.match(/^([\w\s]+) Resiliency$/)) != null) {
-    rules.defineRule('combatNotes.' + prefix,
-      'sum' + matchInfo[1].replaceAll(' ', '') + 'ArchetypeFeats', '=', 'source * 3'
-    );
   } else if(name == 'Bard Dedication') {
     rules.defineRule('spellModifier.' + name,
       'magicNotes.bardDedication', '?', null,
@@ -14341,23 +14405,18 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     );
     rules.defineRule
       ('spellModifier.Occult', 'spellModifier.' + name, '=', null);
-    rules.defineRule('spellAbility.Occult',
-      'magicNotes.bardDedication', '=', '"charisma"'
-    );
+    rules.defineRule
+      ('spellAbility.Occult', 'magicNotes.bardDedication', '=', '"charisma"');
     rules.defineRule('spellSlots.OC1', 'magicNotes.bardDedication', '+=', '2');
-    // Suppress validation errors for selected muse and the notes for features
-    // of muse that don't come with Bard Dedication
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Suppress the muse features that don't come with Bard Dedication
+    // Rerun by classFeatureRules allows this to handle homebrew muses
     let muses =
       Object.keys(allSelectables).filter(x => allSelectables[x].includes('Bard (Muse)')).map(x => x.replace('Bard - ', ''));
     muses.forEach(m => {
-      let condensed = m.replaceAll(' ', '');
-      let noteName = condensed.charAt(0).toLowerCase() + condensed.substring(1);
-      rules.defineRule('validationNotes.bard-' + condensed + 'SelectableFeature',
-        'featureNotes.bardDedication', '+', '1'
-      );
-      rules.defineRule('featureNotes.' + noteName, 'levels.Bard', '?', null);
-      rules.defineRule('magicNotes.' + noteName, 'levels.Bard', '?', null);
+      let note = m.charAt(0).toLowerCase() + m.substring(1).replaceAll(' ', '');
+      rules.defineRule('featureNotes.' + note, 'levels.Bard', '?', null);
+      rules.defineRule('magicNotes.' + note, 'levels.Bard', '?', null);
     });
   } else if(name == 'Bardic Lore') {
     Pathfinder2E.skillRules(rules, 'Bardic Lore', 'Intelligence');
@@ -14413,32 +14472,19 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       (target == 'Perception' ? 'skill' : 'save') + 'Notes.cannyAcumen(' + target + ')';
     rules.defineRule(note, 'level', '=', 'source<17 ? "Expert" : "Master"');
   } else if(name == 'Champion Dedication') {
-    // Suppress validation errors for selected key ability and cause and the
-    // cause and deity notes that don't come with Champion Dedication
     let allSelectables = rules.getChoices('selectableFeatures');
-    let abilities =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].match(/Champion .Key/))
-      .map(x => x.replace('Champion - ', ''));
-    abilities.forEach(a => {
-      rules.defineRule('validationNotes.champion-' + a + 'SelectableFeature',
-        'features.Champion Dedication', '+', '1'
-      );
-    });
+    // Suppress cause features that don't come with Champion Dedication
+    // Rerun by classFeatureRules allows this to handle homebrew causes
     let causes =
       Object.keys(allSelectables)
       .filter(x => allSelectables[x].includes('Champion (Cause)'))
       .map(x => x.replace('Champion - ', ''));
     causes.forEach(c => {
-      let condensed = c.replaceAll(' ', '');
-      let noteName = condensed.charAt(0).toLowerCase() + condensed.substring(1);
-      rules.defineRule('validationNotes.champion-' + condensed + 'SelectableFeature',
-        'featureNotes.championDedication', '+', '1'
-      );
-      rules.defineRule('featureNotes.' + noteName + '-1',
+      let note = c.charAt(0).toLowerCase() + c.substring(1).replaceAll(' ', '');
+      rules.defineRule('featureNotes.' + note + '-1',
         "features.Champion's Reaction", '?', null
       );
-      rules.defineRule('magicNotes.' + noteName, 'levels.Champion', '?', null);
+      rules.defineRule('magicNotes.' + note, 'levels.Champion', '?', null);
     });
   } else if(name == 'Cleric Dedication') {
     rules.defineRule('spellModifier.' + name,
@@ -14452,7 +14498,7 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     );
     rules.defineRule
       ('spellSlots.DC1', 'magicNotes.clericDedication', '+=', '2');
-    // Suppress the deity notes that don't come with Cleric Dedication
+    // Suppress the deity features that don't come with Cleric Dedication
     rules.defineRule('combatNotes.deity', 'levels.Cleric', '?', null);
     rules.defineRule('magicNotes.deity', 'levels.Cleric', '?', null);
   } else if(name == 'Crane Stance') {
@@ -14461,18 +14507,6 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       ['Agile', 'Finesse', 'Nonlethal', 'Unarmed'], null, null
     );
     rules.defineRule('weapons.Crane Wing', 'features.Crane Stance', '=', '1');
-  } else if(name == 'Divine Ally') {
-    // Suppress validation errors for selected ally
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let allies =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Champion (Divine Ally)'))
-      .map(x => x.replace('Champion - ', ''));
-    allies.forEach(a => {
-      rules.defineRule('validationNotes.champion-' + a.replaceAll(' ', '') + 'SelectableFeature',
-        'feats.Divine Ally', '+', '1'
-      );
-    });
   } else if(name.startsWith('Domain Initiate')) {
     rules.defineRule('features.Domain Initiate', 'features.' + name, '=', '1');
   } else if(name == 'Dragon Stance') {
@@ -14492,21 +14526,22 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       'magicNotes.druidDedication', '=', '"wisdom"'
     );
     rules.defineRule('spellSlots.PC1', 'magicNotes.druidDedication', '+=', '2');
-    // Suppress validation errors for selected order and the notes for features
-    // of Druidic Order that don't come with Druid Dedication
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Suppress the Order features that don't come with Druid Dedication
+    // Rerun by classFeatureRules allows this to handle homebrew orders
     let orders =
       Object.keys(allSelectables)
       .filter(x => allSelectables[x].includes('Druid (Order)'))
       .map(x => x.replace('Druid - ', ''));
     orders.forEach(o => {
-      let condensed = o.replaceAll(' ', '');
-      let noteName = condensed.charAt(0).toLowerCase() + condensed.substring(1);
-      rules.defineRule('validationNotes.druid-' + condensed + 'SelectableFeature',
-        'featureNotes.druidDedication', '+', '1'
+      let note = o.charAt(0).toLowerCase() + o.substring(1).replaceAll(' ', '');
+      rules.defineRule('featureNotes.' + note, 'levels.Druid', '?', null);
+      rules.defineRule('magicNotes.' + note, 'levels.Druid', '?', null);
+      // Order Spell handled here to take advantage of classFeatureRules rerun
+      rules.defineRule('features.Order Spell (' + o + ')',
+        'features.Order Spell', '?', null,
+        'features.' + o, '=', '1'
       );
-      rules.defineRule('featureNotes.' + noteName, 'levels.Druid', '?', null);
-      rules.defineRule('magicNotes.' + noteName, 'levels.Druid', '?', null);
     });
     rules.defineRule('magicNotes.druidicOrder', 'levels.Druid', '?', null);
   } else if(name.match(/(Dwarven|Elven|Gnome|Goblin|Halfling|Orc) Weapon Expertise/)) {
@@ -14520,6 +14555,7 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       'featureNotes.elfAtavism', '=', '1'
     );
     // Suppress validation errors for selected half-elf heritages
+    // TODO homebrew heritages
     let allSelectables = rules.getChoices('selectableFeatures');
     let elfHeritages =
       Object.keys(allSelectables)
@@ -14567,18 +14603,6 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     else if(name.includes('Plains'))
       rules.defineRule
         ('abilityNotes.' + prefix + '-1', 'features.Wild Stride', '=', '10');
-  } else if(name == 'Fighter Dedication') {
-    // Suppress validation errors for selected key ability
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let abilities =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Fighter (Key'))
-      .map(x => x.replace('Fighter - ', ''));
-    abilities.forEach(a => {
-      rules.defineRule('validationNotes.fighter-' + a + 'SelectableFeature',
-        'features.Fighter Dedication', '+', '1'
-      );
-    });
   } else if(name.match(/^First World (Adept|Magic)$/)) {
     rules.defineRule('magicNotes.' + prefix, 'gnomeTradition', '=', null);
   } else if(name == 'General Training') {
@@ -14605,18 +14629,6 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
   } else if(name == "Hierophant's Power") {
     rules.defineRule
       ('spellSlots.P10', "magicNotes.hierophant'sPower", '+', '1');
-  } else if(name == 'Instinct Ability') {
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let instincts =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Barbarian (Instinct)'))
-      .map(x => x.replace('Barbarian - ', ''));
-    instincts.forEach(i => {
-      rules.defineRule('features.Instinct Ability (' + i + ')',
-        'features.Instinct Ability', '?', null,
-        'features.' + i, '=', '1'
-      );
-    });
   } else if(name == 'Ironblood Stance') {
     Pathfinder2E.weaponRules(
       rules, 'Iron Sweep', 'Unarmed', 0, '1d8 B', 0, 0, 'Brawling',
@@ -14650,18 +14662,6 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       ('spellModifier.' + trad, 'spellModifier.' + name, '=', null);
     rules.defineRule('spellAbility.' + trad, note, '=', '"charisma"');
     rules.defineRule('spellSlots.' + trad.charAt(0) + 'C1', note, '+=', '2');
-  } else if(name == 'Monk Dedication') {
-    // Suppress validation errors for selected key ability
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let abilities =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Monk (Key'))
-      .map(x => x.replace('Monk - ', ''));
-    abilities.forEach(a => {
-      rules.defineRule('validationNotes.monk-' + a + 'SelectableFeature',
-        'features.Monk Dedication', '+', '1'
-      );
-    });
   } else if(name == 'Monk Moves') {
     rules.defineRule('abilityNotes.monkMoves.1',
       'abilityNotes.monkMoves', '=', '10',
@@ -14690,36 +14690,10 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     );
   } else if(name.match(/^Order Explorer/)) {
     rules.defineRule('features.Order Explorer', 'features.' + name, '=', '1');
-  } else if(name == 'Order Spell') {
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let orders =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Druid (Order)'))
-      .map(x => x.replace('Druid - ', ''));
-    orders.forEach(o => {
-      rules.defineRule('features.Order Spell (' + o + ')',
-        'features.Order Spell', '?', null,
-        'features.' + o, '=', '1'
-      );
-    });
   } else if(name == 'Perfect Encore') {
     rules.defineRule('spellSlots.O10', 'magicNotes.perfectEncore', '+', '1');
   } else if(name == 'Quivering Palm') {
     rules.defineRule('magicNotes.quiveringPalm', 'monkTradition', '=', null);
-  } else if(name == 'Ranger Dedication') {
-    // Suppress validation errors for selected key ability
-    let allSelectables = rules.getChoices('selectableFeatures');
-    let abilities =
-      Object.keys(allSelectables)
-      .filter(x => allSelectables[x].includes('Ranger (Key Ability)'))
-      .map(x => x.replace('Ranger - ', ''));
-    abilities.forEach(a => {
-      rules.defineRule('validationNotes.ranger-' + a + 'SelectableFeature',
-        'features.Ranger Dedication', '+', '1'
-      );
-    });
-    rules.defineRule
-      ('features.Ranger Key Ability', 'features.Ranger Dedication', '=', '1');
   } else if(name == 'Rogue Dedication') {
     // Key ability for Rogue Dedication is always Dexterity--no racket.
     rules.defineRule('classDifficultyClass.Rogue',
@@ -14758,24 +14732,20 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
         'spellModifier' + t + '.' + name, '=', '"charisma"'
       );
     });
-    // Suppress validation errors for selected bloodlines and the notes for
-    // features of bloodlines that don't come with Sorcerer Dedication
     let allSelectables = rules.getChoices('selectableFeatures');
+    // Suppress features of bloodlines that don't come with Sorcerer Dedication
+    // Rerun by classFeatureRules allows this to handle homebrew bloodlines
     let bloodlines =
       Object.keys(allSelectables)
       .filter(x => allSelectables[x].includes('Bloodline'))
       .map(x => x.replace('Sorcerer - ', ''));
     bloodlines.forEach(b => {
-      let condensed = b.replaceAll(' ', '');
-      let noteName = condensed.charAt(0).toLowerCase() + condensed.substring(1);
-      rules.defineRule('validationNotes.sorcerer-' + condensed + 'SelectableFeature',
-        'featureNotes.sorcererDedication', '+', '1'
-      );
-      rules.defineRule('magicNotes.' + noteName, 'levels.Sorcerer', '?', null);
+      let note = b.charAt(0).toLowerCase() + b.substring(1).replaceAll(' ', '');
+      rules.defineRule('magicNotes.' + note, 'levels.Sorcerer', '?', null);
       rules.defineRule
-        ('magicNotes.' + noteName + '-1', 'levels.Sorcerer', '?', null);
+        ('magicNotes.' + note + '-1', 'levels.Sorcerer', '?', null);
       rules.defineRule
-        ('magicNotes.' + noteName + '-2', 'levels.Sorcerer', '?', null);
+        ('magicNotes.' + note + '-2', 'levels.Sorcerer', '?', null);
     });
     rules.defineRule('magicNotes.bloodline', 'levels.Sorcerer', '?', null);
   } else if(name == 'Tangled Forest Stance') {
@@ -14853,8 +14823,7 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
     );
     rules.defineRule
       ('spellSlots.AC1', 'magicNotes.wizardDedication', '+=', '2');
-    // Suppress validation errors for selected school and the notes for
-    // features of the school that don't come with Wizard Dedication
+    // Suppress features of schools that don't come with Wizard Dedication
     let allSelectables = rules.getChoices('selectableFeatures');
     let schools =
       Object.keys(allSelectables)
@@ -14862,14 +14831,9 @@ Pathfinder2E.featRulesExtra = function(rules, name, attrs) {
       .map(x => x.replace('Wizard - ', ''))
       .filter(x => x != 'Universalist');
     schools.forEach(s => {
-      let condensed = s.replaceAll(' ', '');
-      let noteName = condensed.charAt(0).toLowerCase() + condensed.substring(1);
-      rules.defineRule('validationNotes.wizard-' + condensed + 'SelectableFeature',
-        'featureNotes.wizardDedication', '+', '1'
-      );
-      rules.defineRule('magicNotes.' + noteName, 'levels.Wizard', '?', null);
-      rules.defineRule
-        ('magicNotes.' + noteName + '-1', 'levels.Wizard', '?', null);
+      let note = s.charAt(0).toLowerCase() + s.substring(1).replaceAll(' ', '');
+      rules.defineRule('magicNotes.' + note, 'levels.Wizard', '?', null);
+      rules.defineRule('magicNotes.' + note + '-1', 'levels.Wizard', '?', null);
     });
     rules.defineRule('magicNotes.arcaneSchool', 'levels.Wizard', '?', null);
   } else if(name == 'Wolf Stance') {
@@ -15100,7 +15064,8 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
       matchInfo = effect.match(/Weapon\sFamiliarity\s*\(([^\)]*)\)/i);
       if(matchInfo) {
         matchInfo[1].split(/;\s*/).forEach(element => {
-          rules.defineRule('weaponFamiliarity.' + element, note, '=', '1');
+          if(!element.includes('%'))
+            rules.defineRule('weaponFamiliarity.' + element, note, '=', '1');
         });
       }
 
@@ -15110,7 +15075,7 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
         let features = matchInfo[1].split(/\s*,\s*|\s*\band\s+/);
         features.forEach(f => {
           f = f.trim();
-          if(f != '')
+          if(f != '' && !f.includes('%'))
             rules.defineRule('features.' + f, note, '=', '1');
         });
       }
@@ -15169,13 +15134,13 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
           if(trad != '%V' && trad != t)
             continue;
           if(trad == '%V')
-            rules.defineRule(prefix + 'Is' + t,
-              'features.' + name, '?', 'source=="' + t +'"'
+            rules.defineRule('rank.' + t + ' Innate',
+              'features.' + name, '=', 'dict["' + note + '"]=="' + t.toLowerCase() +'" ? 1 : null'
             );
-          rules.defineRule('rank.' + trad + ' Innate',
-            trad == '%V' ? prefix + 'Is' + t : ('features.' + name), '=', '1',
-            'rank.' + trad, '^', null
-          );
+          else
+            rules.defineRule
+              ('rank.' + t + ' Innate', 'features.' + name, '=', '1');
+          rules.defineRule('rank.' + t + ' Innate', 'rank.' + t, '^', null);
         }
       }
 
@@ -15191,13 +15156,6 @@ Pathfinder2E.featureRules = function(rules, name, sections, notes, action) {
         } else {
           rules.defineRule('focusPoints', note, '^=', '0');
         }
-      }
-
-      // Can take <ancestry> ancestry feats
-      matchInfo = effect.match(/^Can take (.*) ancestry feats$/);
-      if(matchInfo) {
-        rules.defineRule
-          ('allowedFeats.' + matchInfo[1], 'features.' + name, '=', '1');
       }
 
       // Can learn spells from the <tradition> tradition
@@ -15231,6 +15189,12 @@ Pathfinder2E.goodyRules = function(
 ) {
   QuilvynRules.goodyRules
     (rules, name, pattern, effect, value, attributes, sections, notes);
+  if(name.match(/^[\w]+ Feats$/)) {
+    // Override rule to avoid an unwanted '+' in the note
+    name = name.replaceAll(' ', '');
+    rules.defineRule
+      ('featureNotes.goodies' + name, 'goodies' + name, '=', null);
+  }
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
@@ -15239,7 +15203,7 @@ Pathfinder2E.languageRules = function(rules, name) {
     console.log('Empty language name');
     return;
   }
-  // No rules pertain to language
+  rules.defineRule('languagesSpoken', 'languages.' + name, '+=', '1');
 };
 
 /*
@@ -15364,6 +15328,8 @@ Pathfinder2E.skillRules = function(rules, name, ability, subcategory) {
     'rank.' + name, '=', '2 * source',
     'proficiencyLevelBonus.' + name, '+', null
   );
+  rules.defineRule
+    ('skillIncreasesAllocated', 'skillIncreases.' + name, '+=', null);
   rules.defineRule('skillModifiers.' + name,
     'proficiencyBonus.' + name, '=', null,
     ability + 'Modifier', '+', null,
@@ -15374,6 +15340,9 @@ Pathfinder2E.skillRules = function(rules, name, ability, subcategory) {
       ('skillModifiers.' + name, 'skillNotes.armorSkillPenalty', '+', null);
   rules.defineRule('skillModifiers.' + name + '.1',
     'rank.' + name, '=', 'Pathfinder2E.RANK_NAMES[source]'
+  );
+  rules.defineRule('skillNotes.duplicatedTraining',
+    'trainingCount.' + name, '+=', 'source>1 ? source - 1 : null'
   );
 
   if(name.endsWith(' Lore'))
@@ -16587,6 +16556,7 @@ Pathfinder2E.randomizeOneAttribute = function(attributes, attribute) {
     attrs = this.applyRules(attributes);
     let allChoices = Object.assign({}, this.getChoices(attribute));
     let allNotes = this.getChoices('notes');
+    let allSkills = this.getChoices('skills');
     let debug = [];
     let subsets;
     if(attribute == 'feats') {
@@ -16700,7 +16670,8 @@ Pathfinder2E.randomizeOneAttribute = function(attributes, attribute) {
                 // ... Intelligence (skill Ability or Attribute),
                 // ... Athletics (feat Require with rank.),
                 // ... Polymath Muse (feat Require with features.),
-                // ... Settlement Lore (feat Subcategory)
+                // ... Settlement Lore (skill Subcategory)
+                // ... Additional Lore (Settlement Lore) (feat w/skill Subcategory)
                 category = category.substring(4);
                 debug.push(category);
                 choices = choices.concat(
@@ -16711,7 +16682,10 @@ Pathfinder2E.randomizeOneAttribute = function(attributes, attribute) {
                     QuilvynUtils.getAttrValue(allChoices[x], 'Ability') == category ||
                     QuilvynUtils.getAttrValue(allChoices[x], 'Attribute') == category ||
                     QuilvynUtils.getAttrValueArray(allChoices[x], 'Require').filter(x => x.match('(rank|features)\\.' + category) && !x.match(/==\s+0/)).length > 0 ||
-                    QuilvynUtils.getAttrValueArray(allChoices[x], 'Subcategory').includes(category)
+                    QuilvynUtils.getAttrValueArray(allChoices[x], 'Subcategory').includes(category) ||
+                    (category.match(/^Additional Lore \(.*\)$/) &&
+                     x.match(/^Additional Lore \(.*\)$/) &&
+                     QuilvynUtils.getAttrValueArray(allSkills[x.replaceAll(/Additional Lore \(|\)/g, '')]||'', 'Subcategory').includes(category.replaceAll(/Additional Lore \(|\)/g, '')))
                   )
                 );
               } else if(category == 'any') {
@@ -16827,6 +16801,7 @@ Pathfinder2E.randomizeOneAttribute = function(attributes, attribute) {
       choices = choices.filter(x => !x.match(/Steel|Metal/));
     attributes.shield = QuilvynUtils.randomElement(choices);
   } else if(attribute == 'spells') {
+    // TODO restrict spells with the Uncommon trait?
     let availableSpellsByGroupAndLevel = {};
     let groupAndLevel;
     let allSpells = this.getChoices('spells');
