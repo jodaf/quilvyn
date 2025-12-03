@@ -89,11 +89,11 @@ RULESETS['Midnight Campaign Setting using Pathfinder 1E rules'] = {
   group:'Pathfinder',
   require:'Pathfinder.js'
 };
-RULESETS['Pathfinder 2E Legacy (<i>beta</i>)'] = {
+RULESETS['Pathfinder 2E Legacy'] = {
   url:'plugins/Pathfinder2E.js',
   group:'Pathfinder'
 };
-RULESETS['Pathfinder 2E Remaster (<i>beta</i>)'] = {
+RULESETS['Pathfinder 2E Remaster'] = {
   url:'plugins/Pathfinder2ERemaster.js',
   group:'Pathfinder',
   require:'Pathfinder2E.js'
